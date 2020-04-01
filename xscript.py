@@ -7,7 +7,7 @@ import time
 import xscript
 
 class XscriptInterpreter():
-    
+
     def __init__(self, string='', var={}):
         self.restart(string, var)
 
@@ -16,8 +16,8 @@ class XscriptInterpreter():
            del self.var[name]
 
     def exit(self, code=0):
-        print('\nProgram raise exit code: %s' % code)
-        exit(code)
+        # exit(code)
+        pass
 
     def gets(self, prompt=''):
         return input(prompt)
@@ -33,7 +33,7 @@ class XscriptInterpreter():
                 if name not in self.var and symbol == ':=':
                     self.var[name] = value
                 elif name not in self.var and symbol != ':=':
-                    raise TypeError('Undefined name cannot use other operate')
+                    raise TypeError("Undefined name just can use ':='")
                 elif symbol == '=':
                     self.var[name] = value
                 elif symbol == '+=':
@@ -77,7 +77,6 @@ class XscriptInterpreter():
                     self.delete(*lines[1:])
                 elif lines[0] == 'exit':
                     self.exit(*lines[1:])
-                    break
                 elif lines[0] == 'gets':
                     self.gets(*lines[1:])
                 elif lines[0] == 'let':
@@ -114,7 +113,10 @@ class XscriptInterpreter():
             return obj(*args)
 
 code = '''
-puts Hell
+let a := 1
+let a = 2
+xscript.ui.window
+puts Hello
 '''
 ipr = XscriptInterpreter(code)
 ipr.run()
