@@ -8,3 +8,6 @@ def fileflush(fileobj):
 
 def fileopen(name, mode='r'):
     return open(name, mode)
+
+def filewrite(fileobj, s):
+    return fileobj.write(s)

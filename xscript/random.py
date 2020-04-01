@@ -1,6 +1,6 @@
 #xSheets/xscript/random.py
 
-import random
+import random as _random
 
 def rand():
-    return random.random()
+    return _random.random()
