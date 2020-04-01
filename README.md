@@ -1,0 +1,2 @@
+# xscript
+A tiny language
