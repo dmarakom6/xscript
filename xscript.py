@@ -1,4 +1,4 @@
-# xSheets/xscript.py
+#!/usr/bin/python3
 
 import os
 import shlex
@@ -7,7 +7,7 @@ import time
 import xscript
 
 class XscriptInterpreter():
-    'xscript interpreter.'
+    
     def __init__(self, string='', var={}):
         self.restart(string, var)
 
@@ -17,6 +17,7 @@ class XscriptInterpreter():
 
     def exit(self, code=0):
         print('\nProgram raise exit code: %s' % code)
+        exit(code)
 
     def gets(self, prompt=''):
         return input(prompt)
@@ -29,10 +30,12 @@ class XscriptInterpreter():
                 if char not in string.ascii_letters + '_':
                     raise TypeError('Invalid name: %s' % name)
             else:
-                if name not in self.var and symbol == '=':
+                if name not in self.var and symbol == ':=':
                     self.var[name] = value
-                elif name not in self.var and symbol != '=':
+                elif name not in self.var and symbol != ':=':
                     raise TypeError('Undefined name cannot use other operate')
+                elif symbol == '=':
+                    self.var[name] = value
                 elif symbol == '+=':
                     self.var[name] += value
                 elif symbol == '-=':
@@ -111,8 +114,7 @@ class XscriptInterpreter():
             return obj(*args)
 
 code = '''
-puts Hello
-xscript.ui.window
+puts Hell
 '''
 ipr = XscriptInterpreter(code)
 ipr.run()
