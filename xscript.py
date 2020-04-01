@@ -18,32 +18,10 @@ class XscriptInterpreter():
     def exit(self, code=0):
         print('\nProgram raise exit code: %s' % code)
 
-    def expr(self, string):
-        lines = shlex.split(string)
-        ret = None
-        try:
-            if lines == []:
-                pass
-            elif lines[0] == 'gets':
-                ret = self.gets(*lines[1:])
-            elif lines[0][:8] == 'xscript.':
-                ret = self.xscript(*lines)
-            else:
-                ret = 'error Unknow command: %s' % lines[0]
-        except Exception as err:
-            print('Traceback:')
-            print('line', self.now)
-            print('-> ', string)
-            print('Error: %s' % str(err))
-        else:
-            return ret
-
     def gets(self, prompt=''):
         return input(prompt)
 
     def let(self, name, symbol, value):
-        if value[0] == '[' and value[-1] == ']':
-            value = self.expr(value[1:-1])
         if name[0] not in string.ascii_letters + string.digits + '_':
             raise TypeError('Invalid name: %s' % name)
         else:
@@ -102,7 +80,7 @@ class XscriptInterpreter():
                 elif lines[0] == 'let':
                     self.let(*lines[1:])
                 elif lines[0] == 'puts':
-                    ret = self.puts(*lines[1:])
+                    self.puts(*lines[1:])
                 elif lines[0][:8] == 'xscript.':
                     self.xscript(*lines)
                 else:
@@ -116,21 +94,10 @@ class XscriptInterpreter():
                 break
             else:
                 self.now += 1
-                if ret == None:
-                    pass
-                elif ret[:6] == 'error ':
-                    print('Traceback:')
-                    print('line', self.now)
-                    print('-> ', line)
-                    print('Error: %s' % ret[6:])
-                    break
 
     def puts(self, *args):
         for item in args:
-            if item[0] == '$':
-                print(self.var[item[1:]])
-            else:
-                print(item)
+            print(item)
 
     def xscript(self, path, *args):
         path = path.split('.')
@@ -142,3 +109,10 @@ class XscriptInterpreter():
                 raise TypeError('No attribute: %s' % item)
         else:
             return obj(*args)
+
+code = '''
+puts Hello
+xscript.ui.window
+'''
+ipr = XscriptInterpreter(code)
+ipr.run()
