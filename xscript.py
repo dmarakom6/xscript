@@ -23,6 +23,12 @@ class XscriptInterpreter():
         return input(prompt)
 
     def let(self, name, symbol, value):
+        if value[0] == '[' and value[-1] == ']':
+            value = self.replacefunction(value[1:-1])
+        elif value[0] == '$':
+            value = self.var[value[1:]]
+        else:
+            pass
         if name[0] not in string.ascii_letters + string.digits + '_':
             raise TypeError('Invalid name: %s' % name)
         else:
@@ -53,6 +59,22 @@ class XscriptInterpreter():
                 else:
                     raise TypeError('Unsupported operate: %s' % symbol)
 
+    def replacefunction(self, s):
+        exp = []
+        for item in shlex.split(s):
+            if item[0] == '$':
+                exp.append(self.var[item[1:]])
+            else:
+                exp.append(item)
+        else:
+            print('>>', exp)
+            if exp[0] == 'gets':
+                return self.gets(*exp[1:])
+            elif exp[0][:8] == 'xscript.':
+                return self.xscript(*exp)
+            else:
+                raise TypeError('Unknow replace function command : %s' % ret[0])
+    
     def restart(self, string='', var={}):
         self.string = string.replace(os.sep, '\n')
         self.program = self.string.split('\n')
@@ -68,6 +90,7 @@ class XscriptInterpreter():
                 break
             lines = shlex.split(line)
             ret = None
+            print('::', lines)
             try:
                 if lines == []:
                     pass
@@ -99,24 +122,39 @@ class XscriptInterpreter():
 
     def puts(self, *args):
         for item in args:
-            print(item)
+            if item[0] == '$':
+                print(self.var[item[1:]])
+            elif item[0] == '[' and item[-1] == ']':
+                print(self.replacefunction(item[1:-1]))
+            else:
+                print(item)
 
     def xscript(self, path, *args):
-        path = path.split('.')
-        obj = xscript
-        for item in path[1:]:
-            if hasattr(obj, item):
-                obj = getattr(obj, item)
+        arg = []
+        for item in args:
+            if item[0] == '$':
+                arg.append(self.var[item[1:]])
+            elif item[0] == '[' and item[-1] == ']':
+                arg.append(self.replacefunction(item[1:-1]))
             else:
-                raise TypeError('No attribute: %s' % item)
+                arg.append(item)
         else:
-            return obj(*args)
+            path = path.split('.')
+            obj = xscript
+            for item in path[1:]:
+                if hasattr(obj, item):
+                    obj = getattr(obj, item)
+                else:
+                    raise TypeError('No attribute: %s' % item)
+            else:
+                return obj(*arg)
 
 code = '''
-let a := 1
-let a = 2
-xscript.ui.window
-puts Hello
+let w := [xscript.ui.Window]
+let l := "[xscript.ui.Label $w Hello]"
+xscript.ui.title $w Hello
+xscript.ui.pack $l
+xscript.ui.mainloop $w
 '''
 ipr = XscriptInterpreter(code)
 ipr.run()
