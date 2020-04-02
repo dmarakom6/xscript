@@ -19,6 +19,12 @@ class XscriptInterpreter():
         # exit(code)
         pass
 
+    def end_flag(self, flag):
+        if self.block[-1] == flag:
+            pass
+        else:
+            raise TypeError('Flag not find: %s' % flag)
+
     def gets(self, prompt=''):
         return input(prompt)
 
@@ -59,6 +65,50 @@ class XscriptInterpreter():
                 else:
                     raise TypeError('Unsupported operate: %s' % symbol)
 
+    def loop_flag(self, left, symbol=None, right=None):
+        if not symbol and not right:
+            if left[0] == '[' and left[-1] == ']':
+                left = self.replacefunction(left[1:-1])
+            elif left[0] == '$':
+                left = self.var[left[1:]]
+            else:
+                pass
+            if left:
+                self.block.append('loop')
+            else:
+                pass
+        else:
+            if left[0] == '[' and left[-1] == ']':
+                left = self.replacefunction(left[1:-1])
+            elif left[0] == '$':
+                left = self.var[left[1:]]
+            else:
+                pass
+            if right[0] == '[' and right[-1] == ']':
+                right = self.replacefunction(right[1:-1])
+            elif value[0] == '$':
+                right = self.var[right[1:]]
+            else:
+                pass
+            if symbol == '=':
+                ret = left == right
+            elif symbol == '>':
+                ret == left > right
+            elif symbol == '>=':
+                ret == left >= right
+            elif symbol == '<=':
+                ret == left <= right
+            elif symbol == '<=':
+                ret == left <= right
+            elif symbol == '!=':
+                ret == left != right
+            else:
+                raise TypeError('Unsupported operate: %s' % symbol)
+            if ret:
+                self.block.append('loop')
+            else:
+                pass
+
     def replacefunction(self, s):
         exp = []
         for item in shlex.split(s):
@@ -67,7 +117,6 @@ class XscriptInterpreter():
             else:
                 exp.append(item)
         else:
-            print('>>', exp)
             if exp[0] == 'gets':
                 return self.gets(*exp[1:])
             elif exp[0][:8] == 'xscript.':
@@ -82,15 +131,15 @@ class XscriptInterpreter():
 
     def run(self):
         self.now = 1
+        self.block = []
         while True:
             if self.now + 1 <= len(self.program):
-                line = self.program[self.now - 1]
+                line = self.program[self.now - 1].lstrip()
             else:
                 self.exit()
                 break
             lines = shlex.split(line)
             ret = None
-            print('::', lines)
             try:
                 if lines == []:
                     pass
@@ -98,12 +147,16 @@ class XscriptInterpreter():
                     pass
                 elif lines[0] == 'delete':
                     self.delete(*lines[1:])
+                elif lines[0] == 'end':
+                    self.end_flag(*lines[1:])
                 elif lines[0] == 'exit':
                     self.exit(*lines[1:])
                 elif lines[0] == 'gets':
                     self.gets(*lines[1:])
                 elif lines[0] == 'let':
                     self.let(*lines[1:])
+                elif lines[0] == 'loop':
+                    self.loop_flag(*lines[1:])
                 elif lines[0] == 'puts':
                     self.puts(*lines[1:])
                 elif lines[0][:8] == 'xscript.':
@@ -123,9 +176,9 @@ class XscriptInterpreter():
     def puts(self, *args):
         for item in args:
             if item[0] == '$':
-                print(self.var[item[1:]])
+                print(self.var[item[1:]], end='')
             elif item[0] == '[' and item[-1] == ']':
-                print(self.replacefunction(item[1:-1]))
+                print(self.replacefunction(item[1:-1]), end='')
             else:
                 print(item)
 
@@ -150,11 +203,8 @@ class XscriptInterpreter():
                 return obj(*arg)
 
 code = '''
-let w := [xscript.ui.Window]
-let l := "[xscript.ui.Label $w Hello]"
-xscript.ui.title $w Hello
-xscript.ui.pack $l
-xscript.ui.mainloop $w
+let name := ['gets name?']
+puts Hello: $name
 '''
 ipr = XscriptInterpreter(code)
 ipr.run()
