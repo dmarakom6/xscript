@@ -7,17 +7,23 @@ from tkinter import messagebox as _messagebox
 def askyesno(message='', title='xscript'):
     return _messagebox.askyesno(message=message, title=title)
 
+def Button(master):
+    return _ttk.Button(master)
+
+def configure(widget, item, value):
+    widget[item] = value
+
 def destroy(widget):
     widget.destroy()
 
-def Label(master, text):
-    return _ttk.Label(master, text=text)
+def Label(master):
+    return _ttk.Label(master)
 
 def mainloop(widget):
     widget.mainloop()
 
-def pack(widget, anchor='', side='center', fill=''):
-    widget.pack(widget, anchor=anchor, side=side, fill=fill)
+def pack(widget):
+    widget.pack(widget)
 
 def showinfo(message='', title='xscript'):
     return _messagebox.showinfo(message=message, title=title)
