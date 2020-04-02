@@ -20,7 +20,9 @@ class XscriptInterpreter():
         pass
 
     def end_flag(self, flag):
-        if self.block[-1] == flag:
+        if len(self.block) == 0:
+            raise TypeError('Flag not find: %s' % flag)
+        elif self.block[-1] == flag:
             pass
         else:
             raise TypeError('Flag not find: %s' % flag)
@@ -73,10 +75,18 @@ class XscriptInterpreter():
                 left = self.var[left[1:]]
             else:
                 pass
+            print(left)
             if left:
-                self.block.append('loop')
-            else:
                 pass
+            else:
+                self.block.append('loop')
+                now = self.now - 1
+                for line in self.program[self.now - 1].lstrip():
+                    if line[:4] == 'end ':
+                        self.now = now + 1
+                        return
+                    else:
+                        now += 1
         else:
             if left[0] == '[' and left[-1] == ']':
                 left = self.replacefunction(left[1:-1])
@@ -105,9 +115,16 @@ class XscriptInterpreter():
             else:
                 raise TypeError('Unsupported operate: %s' % symbol)
             if ret:
-                self.block.append('loop')
-            else:
                 pass
+            else:
+                self.block.append('loop')
+                now = self.now - 1
+                for line in self.program[self.now - 1].lstrip():
+                    if line[:4] == 'end ':
+                        self.now = now + 1
+                        return
+                    else:
+                        now += 1
 
     def replacefunction(self, s):
         exp = []
@@ -117,6 +134,7 @@ class XscriptInterpreter():
             else:
                 exp.append(item)
         else:
+            print('>>', exp)
             if exp[0] == 'gets':
                 return self.gets(*exp[1:])
             elif exp[0][:8] == 'xscript.':
@@ -140,6 +158,7 @@ class XscriptInterpreter():
                 break
             lines = shlex.split(line)
             ret = None
+            print('>', lines)
             try:
                 if lines == []:
                     pass
@@ -203,8 +222,20 @@ class XscriptInterpreter():
                 return obj(*arg)
 
 code = '''
-let name := ['gets name?']
-puts Hello: $name
+let a := ['xscript.toint 50']
+let b := ['xscript.toint 60']
+xscript.turtle.forward $a
+xscript.turtle.left $b
+xscript.turtle.forward $a
+xscript.turtle.left $b
+xscript.turtle.forward $a
+xscript.turtle.left $b
+xscript.turtle.forward $a
+xscript.turtle.left $b
+xscript.turtle.forward $a
+xscript.turtle.left $b
+xscript.turtle.forward $a
+xscript.turtle.left $b
 '''
 ipr = XscriptInterpreter(code)
 ipr.run()
