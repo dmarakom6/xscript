@@ -8,8 +8,8 @@ import xscript
 
 class XscriptInterpreter():
 
-    def __init__(self, string='', var={}):
-        self.restart(string, var)
+    def __init__(self, string='', var={}, itervar={}):
+        self.restart(string, var, itervar)
 
     def delete(self, *names):
         for name in names:
@@ -22,39 +22,48 @@ class XscriptInterpreter():
         if len(self.block) == 0:
             raise TypeError('Flag not find: %s' % flag)
         elif self.block[-1] == flag:
-            pass
+            now = self.now - 1
+            for line in self.program[self.now - 1::-1]:
+                line = line.lstrip()
+                if line.startswith(flag):
+                    self.now -= now - 2
+                    del self.block[-1]
+                    return
+                else:
+                    now += 1
         else:
             raise TypeError('Flag not find: %s' % flag)
 
-    def for_flag(name, fromnum, tonum, stepnum=None):
+    def for_flag(self, name, fromnum, tonum, stepnum=None):
         if name[0] not in string.ascii_letters + string.digits + '_':
             raise TypeError('Invalid name: %s' % name)
-        elif name not in self.itervar:
+        else:
             for char in name:
                 if char not in string.ascii_letters + '_':
                     raise TypeError('Invalid name: %s' % name)
             else:
-                if stepnum == None:
-                    fromnum = int(selfreplacevar(fromnum))
-                    tonum = int(self.replacevar(tonum))
-                    stepnum = 1
+                nextvar = None
+                if name not in self.itervar:
+                    if stepnum == None:
+                        fromnum = int(self.replacevar(fromnum))
+                        tonum = int(self.replacevar(tonum))
+                        stepnum = 1
+                    else:
+                        stepnum = int(self.replacevar(stepnum))
+                    self.itervar[name] = iter(range(fromnum, tonum, stepnum))
+                    nextvar = next(self.itervar[name], None)
+                    if nextvar:
+                        self.block.append('for')
+                        self.var[name] = nextvar
+                    else:
+                        del self.itervar[name]
                 else:
-                    stepnum = int(self.replacevar(stepnum))
-                self.itervar[name] = iter(range(fromnum, tonum, stepnum))
-                try:
-                    self.var[name] = next(self.itervar[name])
-                except:
-                    del self.itervar[name]
-                else:
-                    pass
-            else:
-                try:
-                    self.var[name] = next(self.itervar[name])
-                except:
-                    del self.itervar[name]
-                else:
-                    pass
-                    
+                    nextvar = next(self.itervar[name], None)
+                    if nextvar:
+                        self.block.append('for')
+                        self.var[name] = nextvar
+                    else:
+                        del self.itervar[name]
 
     def gets(self, prompt=''):
         return input(prompt)
@@ -115,10 +124,11 @@ class XscriptInterpreter():
         else:
             return value
     
-    def restart(self, string='', var={}):
+    def restart(self, string='', var={}, itervar={}):
         self.string = string.replace(os.sep, '\n')
         self.program = self.string.split('\n')
         self.var = var
+        self.itervar = itervar
 
     def run(self):
         self.now = 1
@@ -130,8 +140,8 @@ class XscriptInterpreter():
                 self.exit()
                 break
             lines = shlex.split(line)
+            print(self.now, '>', lines)
             ret = None
-            print('>', lines)
             try:
                 if lines == []:
                     pass
@@ -167,12 +177,7 @@ class XscriptInterpreter():
 
     def puts(self, *args):
         for item in args:
-            if item[0] == '$':
-                print(self.var[item[1:]], end='')
-            elif item[0] == '[' and item[-1] == ']':
-                print(self.replacefunction(item[1:-1]), end='')
-            else:
-                print(item)
+            print(self.replacevar(item))
 
     def xscript(self, path, *args):
         arg = []
@@ -190,30 +195,13 @@ class XscriptInterpreter():
                 return obj(*arg)
 
 code = '''
-let a := 50
-let b := 60
 xscript.turtle.color red yellow
 xscript.turtle.begin_fill
-xscript.turtle.forward $a
-xscript.turtle.left $b
-xscript.turtle.stamp
-xscript.turtle.forward $a
-xscript.turtle.left $b
-xscript.turtle.stamp
-xscript.turtle.forward $a
-xscript.turtle.left $b
-xscript.turtle.stamp
-xscript.turtle.forward $a
-xscript.turtle.left $b
-xscript.turtle.stamp
-xscript.turtle.forward $a
-xscript.turtle.left $b
-xscript.turtle.stamp
-xscript.turtle.forward $a
-xscript.turtle.left $b
-xscript.turtle.end_fill
-xscript.turtle.mainloop
-exit 1
+for i 1 6
+    xscript.turtle.forward 50
+    xscript.turtle.left 60
+    xscript.turtle.end_fill
+end for
 '''
 ipr = XscriptInterpreter(code)
 ipr.run()
