@@ -131,16 +131,15 @@ class XscriptInterpreter():
         self.itervar = itervar
 
     def run(self):
-        self.now = 1
+        self.now = 0
         self.block = []
         while True:
             if self.now + 1 <= len(self.program):
-                line = self.program[self.now - 1].lstrip()
+                line = self.program[self.now + 1].lstrip()
             else:
                 self.exit()
                 break
             lines = shlex.split(line)
-            print(self.now, '>', lines)
             ret = None
             try:
                 if lines == []:
@@ -164,10 +163,10 @@ class XscriptInterpreter():
                 elif lines[0][:8] == 'xscript.':
                     self.xscript(*lines)
                 else:
-                    ret = 'error Unknow command: %s' % lines[0]
+                    raise TypeError('error Unknow command: %s' % lines[0])
             except Exception as err:
                 print('Traceback:')
-                print('line', self.now)
+                print('line', self.now + 1)
                 print('-> ', line)
                 print('Error: %s' % str(err))
                 self.exit(1)
@@ -200,8 +199,8 @@ xscript.turtle.begin_fill
 for i 1 6
     xscript.turtle.forward 50
     xscript.turtle.left 60
-    xscript.turtle.end_fill
 end for
+xscript.turtle.end_fill
 '''
 ipr = XscriptInterpreter(code)
 ipr.run()
