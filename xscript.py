@@ -16,8 +16,7 @@ class XscriptInterpreter():
            del self.var[name]
 
     def exit(self, code=0):
-        # exit(code)
-        pass
+        exit(int(code))
 
     def end_flag(self, flag):
         if len(self.block) == 0:
@@ -27,16 +26,33 @@ class XscriptInterpreter():
         else:
             raise TypeError('Flag not find: %s' % flag)
 
+    def for_flag(name, fromnum, tonum, stepnum=None):
+         if name[0] not in string.ascii_letters + string.digits + '_':
+            raise TypeError('Invalid name: %s' % name)
+        else:
+            for char in name:
+                if char not in string.ascii_letters + '_':
+                    raise TypeError('Invalid name: %s' % name)
+            else:
+                if stepnum == None:
+                    fromnum = int(selfreplacevar(fromnum))
+                    tonum = int(self.replacevar(tonum))
+                    stepnum = 1
+                else:
+                    stepnum = int(self.replacevar(stepnum))
+                self.itervar[name] = iter(range(fromnum, tonum, stepnum))
+                try:
+                    self.var[name] = next(self.itervar[name])
+                except:
+                    pass
+                else:
+                    pass
+
     def gets(self, prompt=''):
         return input(prompt)
 
     def let(self, name, symbol, value):
-        if value[0] == '[' and value[-1] == ']':
-            value = self.replacefunction(value[1:-1])
-        elif value[0] == '$':
-            value = self.var[value[1:]]
-        else:
-            pass
+        value = self.replacevar(value)
         if name[0] not in string.ascii_letters + string.digits + '_':
             raise TypeError('Invalid name: %s' % name)
         else:
@@ -67,65 +83,6 @@ class XscriptInterpreter():
                 else:
                     raise TypeError('Unsupported operate: %s' % symbol)
 
-    def loop_flag(self, left, symbol=None, right=None):
-        if not symbol and not right:
-            if left[0] == '[' and left[-1] == ']':
-                left = self.replacefunction(left[1:-1])
-            elif left[0] == '$':
-                left = self.var[left[1:]]
-            else:
-                pass
-            print(left)
-            if left:
-                pass
-            else:
-                self.block.append('loop')
-                now = self.now - 1
-                for line in self.program[self.now - 1].lstrip():
-                    if line[:4] == 'end ':
-                        self.now = now + 1
-                        return
-                    else:
-                        now += 1
-        else:
-            if left[0] == '[' and left[-1] == ']':
-                left = self.replacefunction(left[1:-1])
-            elif left[0] == '$':
-                left = self.var[left[1:]]
-            else:
-                pass
-            if right[0] == '[' and right[-1] == ']':
-                right = self.replacefunction(right[1:-1])
-            elif value[0] == '$':
-                right = self.var[right[1:]]
-            else:
-                pass
-            if symbol == '=':
-                ret = left == right
-            elif symbol == '>':
-                ret == left > right
-            elif symbol == '>=':
-                ret == left >= right
-            elif symbol == '<=':
-                ret == left <= right
-            elif symbol == '<=':
-                ret == left <= right
-            elif symbol == '!=':
-                ret == left != right
-            else:
-                raise TypeError('Unsupported operate: %s' % symbol)
-            if ret:
-                pass
-            else:
-                self.block.append('loop')
-                now = self.now - 1
-                for line in self.program[self.now - 1].lstrip():
-                    if line[:4] == 'end ':
-                        self.now = now + 1
-                        return
-                    else:
-                        now += 1
-
     def replacefunction(self, s):
         exp = []
         for item in shlex.split(s):
@@ -141,6 +98,14 @@ class XscriptInterpreter():
                 return self.xscript(*exp)
             else:
                 raise TypeError('Unknow replace function command : %s' % ret[0])
+
+    def replacevar(self, value):
+        if value[0] == '[' and value[-1] == ']':
+            return self.replacefunction(value[1:-1])
+        elif value[0] == '$':
+            return self.var[value[1:]]
+        else:
+            return value
     
     def restart(self, string='', var={}):
         self.string = string.replace(os.sep, '\n')
@@ -170,12 +135,12 @@ class XscriptInterpreter():
                     self.end_flag(*lines[1:])
                 elif lines[0] == 'exit':
                     self.exit(*lines[1:])
+                elif lines[0] == 'for':
+                    self.for_flag(*lines[1:])
                 elif lines[0] == 'gets':
                     self.gets(*lines[1:])
                 elif lines[0] == 'let':
                     self.let(*lines[1:])
-                elif lines[0] == 'loop':
-                    self.loop_flag(*lines[1:])
                 elif lines[0] == 'puts':
                     self.puts(*lines[1:])
                 elif lines[0][:8] == 'xscript.':
@@ -204,12 +169,7 @@ class XscriptInterpreter():
     def xscript(self, path, *args):
         arg = []
         for item in args:
-            if item[0] == '$':
-                arg.append(self.var[item[1:]])
-            elif item[0] == '[' and item[-1] == ']':
-                arg.append(self.replacefunction(item[1:-1]))
-            else:
-                arg.append(item)
+            arg.append(self.replacevar(item))
         else:
             path = path.split('.')
             obj = xscript
@@ -222,20 +182,30 @@ class XscriptInterpreter():
                 return obj(*arg)
 
 code = '''
-let a := ['xscript.toint 50']
-let b := ['xscript.toint 60']
+let a := 50
+let b := 60
+xscript.turtle.color red yellow
+xscript.turtle.begin_fill
 xscript.turtle.forward $a
 xscript.turtle.left $b
+xscript.turtle.stamp
 xscript.turtle.forward $a
 xscript.turtle.left $b
+xscript.turtle.stamp
 xscript.turtle.forward $a
 xscript.turtle.left $b
+xscript.turtle.stamp
 xscript.turtle.forward $a
 xscript.turtle.left $b
+xscript.turtle.stamp
 xscript.turtle.forward $a
 xscript.turtle.left $b
+xscript.turtle.stamp
 xscript.turtle.forward $a
 xscript.turtle.left $b
+xscript.turtle.end_fill
+xscript.turtle.mainloop
+exit 1
 '''
 ipr = XscriptInterpreter(code)
 ipr.run()
