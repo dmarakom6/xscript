@@ -61,7 +61,7 @@ def reset():
     _turtle.reset()
 
 def right(n):
-    turtle.right(int(n))
+    _turtle.right(int(n))
 
 def show():
     _turtle.showturtle()
