@@ -22,15 +22,14 @@ class XscriptInterpreter():
         if len(self.block) == 0:
             raise TypeError('Flag not find: %s' % flag)
         elif self.block[-1] == flag:
-            now = self.now - 1
-            for line in self.program[self.now - 1::-1]:
+            for line in self.program[self.now::-1]:
                 line = line.lstrip()
                 if line.startswith(flag):
-                    self.now -= now - 2
+                    self.now -= 1
                     del self.block[-1]
                     return
                 else:
-                    now += 1
+                    self.now -= 1
         else:
             raise TypeError('Flag not find: %s' % flag)
 
@@ -49,6 +48,8 @@ class XscriptInterpreter():
                         tonum = int(self.replacevar(tonum))
                         stepnum = 1
                     else:
+                        fromnum = int(self.replacevar(fromnum))
+                        tonum = int(self.replacevar(tonum))
                         stepnum = int(self.replacevar(stepnum))
                     self.itervar[name] = iter(range(fromnum, tonum, stepnum))
                     nextvar = next(self.itervar[name], None)
