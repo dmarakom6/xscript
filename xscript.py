@@ -27,9 +27,9 @@ class XscriptInterpreter():
             raise TypeError('Flag not find: %s' % flag)
 
     def for_flag(name, fromnum, tonum, stepnum=None):
-         if name[0] not in string.ascii_letters + string.digits + '_':
+        if name[0] not in string.ascii_letters + string.digits + '_':
             raise TypeError('Invalid name: %s' % name)
-        else:
+        elif name not in self.itervar:
             for char in name:
                 if char not in string.ascii_letters + '_':
                     raise TypeError('Invalid name: %s' % name)
@@ -44,9 +44,17 @@ class XscriptInterpreter():
                 try:
                     self.var[name] = next(self.itervar[name])
                 except:
-                    pass
+                    del self.itervar[name]
                 else:
                     pass
+            else:
+                try:
+                    self.var[name] = next(self.itervar[name])
+                except:
+                    del self.itervar[name]
+                else:
+                    pass
+                    
 
     def gets(self, prompt=''):
         return input(prompt)
