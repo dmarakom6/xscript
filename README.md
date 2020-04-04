@@ -20,5 +20,7 @@ The python version is like this:
   print(time.time() - start)
   ```
 The result is:
+
 python:  average 10.29742s
+
 xscript: average 10.90012s
