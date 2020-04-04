@@ -32,4 +32,4 @@ The result is:
 | xscript  | 10.90012s |
 
 Also, you can read ```debug.txt``` for debug detail.
-> It's too lang, I suggest you don't read it!
+> It's too long, I suggest you don't read it!
