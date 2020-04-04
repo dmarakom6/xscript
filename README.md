@@ -3,6 +3,7 @@ A tiny language
 
 # How far is it?
 We use a little program to calculate it, you can find it in ```xscript.py```.
+
 The python version is like this:
   ```python
   import turtle
@@ -16,7 +17,8 @@ The python version is like this:
       turtle.forward(1)
       turtle.left(1)
   turtle.end_fill()
-  print(time.time() - start)```
+  print(time.time() - start)
+  ```
 The result is:
 python:  average 10.29742s
 xscript: average 10.90012s
