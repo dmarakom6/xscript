@@ -6,7 +6,7 @@ Don't imitate this, It's too easy!!!
 I don't like to add comments, so would you help me?
 
 # How does it work?
-(Click here)[HOWTO.md]
+[HOWTO.md](Click here!)
 
 # How fast is it?
 Like lightning! No, no, it's a lie. Just a bit slow.
