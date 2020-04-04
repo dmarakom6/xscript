@@ -22,5 +22,6 @@ The python version is like this:
 The result is:
 | language | average   |
 | -------- | --------- |
-| python   | 10.29742  |
+| python   | 10.29742s |
 | xscript  | 10.90012s |
+Also, you can read ```debug.txt``` for debug detail.
