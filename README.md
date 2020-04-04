@@ -7,6 +7,7 @@ I don't like to add comments, so would you help me?
 
 # How fast is it?
 > ~~Like lightning!~~Just a bit slow.
+
 We use a little program to calculate it, you can find it in ```xscript.py```.
 
 The python version is like this:
