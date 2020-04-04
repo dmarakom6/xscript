@@ -216,6 +216,7 @@ class XscriptInterpreter():
                 return obj(*arg)
 
 code = '''
+let start := [xscript.time.time]
 xscript.turtle.color red yellow
 xscript.turtle.begin_fill
 xscript.turtle.speed 15
@@ -224,6 +225,9 @@ for i 0 360
     xscript.turtle.left 1
 end for
 xscript.turtle.end_fill
+let end := [xscript.time.time]
+let end -= $start
+puts $end
 '''
 ipr = XscriptInterpreter(code)
 ipr.run()
