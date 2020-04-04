@@ -1,5 +1,3 @@
-# xscript/turtle.py
-
 import turtle as _turtle
 
 def back(n):

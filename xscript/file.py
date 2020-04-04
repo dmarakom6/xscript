@@ -1,5 +1,3 @@
-# xSheets/xscript/file.py
-
 def fileclose(fileobj):
     fileobj.close()
 
