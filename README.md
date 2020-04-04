@@ -1,7 +1,7 @@
 # xscript
 A tiny language
 
-# How far is it?
+# How fast is it?
 We use a little program to calculate it, you can find it in ```xscript.py```.
 
 The python version is like this:
@@ -20,7 +20,7 @@ The python version is like this:
   print(time.time() - start)
   ```
 The result is:
-
-python:  average 10.29742s
-
-xscript: average 10.90012s
+| language | average   |
+| -------- | --------- |
+| python   | 10.29742  |
+| xscript  | 10.90012s |
