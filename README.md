@@ -1,6 +1,10 @@
 # xscript
 A tiny language
 
+Don't imitate this, It's too easy!!!
+
+I don't like to add comments, so would you help me?
+
 # How fast is it?
 We use a little program to calculate it, you can find it in ```xscript.py```.
 
@@ -26,3 +30,4 @@ The result is:
 | xscript  | 10.90012s |
 
 Also, you can read ```debug.txt``` for debug detail.
+> It's too lang, I suggest you don't read it!
