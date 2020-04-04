@@ -6,7 +6,7 @@ Don't imitate this, It's too easy!!!
 I don't like to add comments, so would you help me?
 
 # How fast is it?
-~~Like lightning!~~Just a bit slow.
+Like lightning! No, no, it's a lie. Just a bit slow.
 
 We use a little program to calculate it, you can find it in ```xscript.py```.
 
