@@ -6,7 +6,7 @@ Don't imitate this, It's too easy!!!
 I don't like to add comments, so would you help me?
 
 # How does it work?
-[HOWTO.md](Click here!)
+[https://github.com/jason-bowen-zheng/xscript/howto.md](Click here!)
 
 # How fast is it?
 Like lightning! No, no, it's a lie. Just a bit slow.
