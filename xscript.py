@@ -236,5 +236,5 @@ let end := [xscript.time.time]
 let end -= $start
 puts $end
 '''
-ipr = XscriptInterpreter(code, True)
+ipr = XscriptInterpreter(code)
 ipr.run()
