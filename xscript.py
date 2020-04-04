@@ -8,8 +8,8 @@ import xscript
 
 class XscriptInterpreter():
 
-    def __init__(self, string='', var={}, itervar={}):
-        self.restart(string, var, itervar)
+    def __init__(self, string='', debug=False, var={}, itervar={}):
+        self.restart(string, debug, var, itervar)
 
     def delete(self, *names):
         for name in names:
@@ -24,7 +24,8 @@ class XscriptInterpreter():
         elif self.block[-1] == flag:
             for line in self.program[self.now::-1]:
                 line = line.lstrip()
-                ## print('end-', line)
+                if self.debug:
+                    print('end-', line)
                 if line.startswith(flag):
                     self.now -= 1
                     del self.block[-1]
@@ -54,7 +55,8 @@ class XscriptInterpreter():
                         stepnum = int(self.replacevar(stepnum))
                     self.itervar[name] = iter(range(fromnum, tonum, stepnum))
                     nextvar = next(self.itervar[name], None)
-                    ## print('for<', nextvar)
+                    if self.debug:
+                        print('for<', nextvar)
                     if nextvar != None:
                         self.block.append('for')
                         self.var[name] = nextvar
@@ -62,7 +64,8 @@ class XscriptInterpreter():
                         del self.itervar[name]
                         for line in self.program[self.now:]:
                             line = line.lstrip()
-                            ## print('for-', line)
+                            if self.debug:
+                                print('for-', line)
                             if line == 'end for':
                                 return
                             else:
@@ -71,7 +74,8 @@ class XscriptInterpreter():
                             raise TypeError('Loop without end')
                 else:
                     nextvar = next(self.itervar[name], None)
-                    ## print('for<', nextvar)
+                    if self.debug:
+                        print('for<', nextvar)
                     if nextvar != None:
                         self.block.append('for')
                         self.var[name] = nextvar
@@ -79,7 +83,8 @@ class XscriptInterpreter():
                         del self.itervar[name]
                         for line in self.program[self.now:]:
                             line = line.lstrip()
-                            ## print('for-', line)
+                            if self.debug:
+                                print('for-', line)
                             if line == 'end for':
                                 return
                             else:
@@ -145,9 +150,10 @@ class XscriptInterpreter():
         else:
             return value
     
-    def restart(self, string='', var={}, itervar={}):
+    def restart(self, string='', debug=False, var={}, itervar={}):
         self.string = string.replace(os.sep, '\n')
         self.program = self.string.split('\n')
+        self.debug = debug
         self.var = var
         self.itervar = itervar
 
@@ -162,7 +168,8 @@ class XscriptInterpreter():
                 break
             lines = shlex.split(line)
             ret = None
-            ## print(self.now, 'run>', lines)
+            if self.debug:
+                print(self.now, 'run>', lines)
             try:
                 if lines == []:
                     pass
@@ -229,5 +236,5 @@ let end := [xscript.time.time]
 let end -= $start
 puts $end
 '''
-ipr = XscriptInterpreter(code)
+ipr = XscriptInterpreter(code, True)
 ipr.run()
