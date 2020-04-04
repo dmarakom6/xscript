@@ -24,6 +24,7 @@ class XscriptInterpreter():
         elif self.block[-1] == flag:
             for line in self.program[self.now::-1]:
                 line = line.lstrip()
+                ## print('end-', line)
                 if line.startswith(flag):
                     self.now -= 1
                     del self.block[-1]
@@ -53,18 +54,38 @@ class XscriptInterpreter():
                         stepnum = int(self.replacevar(stepnum))
                     self.itervar[name] = iter(range(fromnum, tonum, stepnum))
                     nextvar = next(self.itervar[name], None)
-                    if nextvar:
+                    ## print('for<', nextvar)
+                    if nextvar != None:
                         self.block.append('for')
                         self.var[name] = nextvar
                     else:
                         del self.itervar[name]
+                        for line in self.program[self.now:]:
+                            line = line.lstrip()
+                            ## print('for-', line)
+                            if line == 'end for':
+                                return
+                            else:
+                                self.now += 1
+                        else:
+                            raise TypeError('Loop without end')
                 else:
                     nextvar = next(self.itervar[name], None)
-                    if nextvar:
+                    ## print('for<', nextvar)
+                    if nextvar != None:
                         self.block.append('for')
                         self.var[name] = nextvar
                     else:
                         del self.itervar[name]
+                        for line in self.program[self.now:]:
+                            line = line.lstrip()
+                            ## print('for-', line)
+                            if line == 'end for':
+                                return
+                            else:
+                                self.now += 1
+                        else:
+                            raise TypeError('Loop without end')
 
     def gets(self, prompt=''):
         return input(prompt)
@@ -109,7 +130,6 @@ class XscriptInterpreter():
             else:
                 exp.append(item)
         else:
-            print('>>', exp)
             if exp[0] == 'gets':
                 return self.gets(*exp[1:])
             elif exp[0][:8] == 'xscript.':
@@ -136,12 +156,13 @@ class XscriptInterpreter():
         self.block = []
         while True:
             if self.now + 1 <= len(self.program):
-                line = self.program[self.now + 1].lstrip()
+                line = self.program[self.now].lstrip()
             else:
                 self.exit()
                 break
             lines = shlex.split(line)
             ret = None
+            ## print(self.now, 'run>', lines)
             try:
                 if lines == []:
                     pass
@@ -197,9 +218,10 @@ class XscriptInterpreter():
 code = '''
 xscript.turtle.color red yellow
 xscript.turtle.begin_fill
-for i 1 6
-    xscript.turtle.forward 50
-    xscript.turtle.left 60
+xscript.turtle.speed 15
+for i 0 360
+    xscript.turtle.forward 1
+    xscript.turtle.left 1
 end for
 xscript.turtle.end_fill
 '''
