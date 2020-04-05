@@ -192,7 +192,7 @@ class XscriptInterpreter():
                 elif lines[0][:8] == 'xscript.':
                     self.xscript(*lines)
                 else:
-                    raise TypeError('error Unknow command: %s' % lines[0])
+                    raise TypeError('Unknow command: %s' % lines[0])
             except Exception as err:
                 print('Traceback:')
                 print('line', self.now + 1)
