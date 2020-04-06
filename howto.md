@@ -20,4 +20,5 @@ self.var[name] = nextvar
 
 The other thing is: if `nextvar` equal `None`, loop will end. So `for_flag` will find `end for`, **skip it.**
 
-# xscript
+# xscript.
+First thing: don't missing **.**!
