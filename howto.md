@@ -6,8 +6,8 @@
 
 `for <variable> <from> <to> [<step>]`
 
-`variable` will store in `self.itervar`, not `self.var`. So dont use `let` to change it, **Nothing meaningful!**
-It's a range_iterator object. `for_flag` will manage it.
+`variable` will store in `self.itervar`, not `self.var`. So don't use `let` to change it, **Nothing meaningful!**
+It's a range_iterator object. `for_flag` will manage it, not `let`!
 
 ## Next is important, take careful!
 
@@ -17,5 +17,7 @@ It's a range_iterator object. `for_flag` will manage it.
 nextvar = next(self.itervar[name], None)
 self.var[name] = nextvar
 ```
+
+The other thing is: if `nextvar` equal `None`, loop will end. So `for_flag` will find `end for`, **skip it.**
 
 # xscript
