@@ -6,3 +6,4 @@ import xscript.time as time
 import xscript.turtle as turtle
 import xscript.ui as ui
 import xscript.util as util
+import xscript.vartype as vartype
