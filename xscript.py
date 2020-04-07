@@ -205,7 +205,9 @@ class XscriptInterpreter():
 
     def puts(self, *args):
         for item in args:
-            print(self.replacevar(item))
+            print(self.replacevar(item), sep=' ', end='')
+        else:
+            print()
 
     def xscript(self, path, *args):
         arg = []
@@ -227,14 +229,15 @@ let start := [xscript.time.time]
 xscript.turtle.color red yellow
 xscript.turtle.begin_fill
 xscript.turtle.speed 15
-for i 0 360
+for i 0 ['xscript.var.Int 360']
     xscript.turtle.forward 1
     xscript.turtle.left 1
+    puts degrees: $i
 end for
 xscript.turtle.end_fill
 let end := [xscript.time.time]
 let end -= $start
 puts $end
 '''
-ipr = XscriptInterpreter(code)
+ipr = XscriptInterpreter(code, True)
 ipr.run()
