@@ -11,14 +11,13 @@ I don't like to add comments, so would you help me?
 # How fast is it?
 Like lightning! No, no, it's a lie. Just a bit slow.
 
-We use a little program to calculate it, you can find it in ```xscript.py```.
+We use a little program to calculate it, you can find it in `script/circle.xs`.
 
 The python version is like this:
   ```python
   import turtle
   import time
   
-  start = time.time()
   turtle.color('red', 'yellow')
   turtle.begin_fill()
   turtle.speed(15)
@@ -26,7 +25,6 @@ The python version is like this:
       turtle.forward(1)
       turtle.left(1)
   turtle.end_fill()
-  print(time.time() - start)
   ```
 The result is:
 | language | average   |
