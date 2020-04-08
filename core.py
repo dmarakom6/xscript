@@ -175,6 +175,12 @@ class XScriptInterpreter():
                 else:
                     raise TypeError('Unsupported operate: %s' % symbol)
 
+    def puts(self, *args):
+        for item in args:
+            print(self.replacevar(item), sep=' ', end='')
+        else:
+            print()
+
     def replacefunction(self, s):
         exp = []
         for item in shlex.split(s):
@@ -215,7 +221,6 @@ class XScriptInterpreter():
                 self.exit()
                 break
             lines = shlex.split(line)
-            ret = None
             if self.debug:
                 print(self.now, 'run>', lines)
             try:
@@ -254,13 +259,7 @@ class XScriptInterpreter():
                 break
             else:
                 self.now += 1
-
-    def puts(self, *args):
-        for item in args:
-            print(self.replacevar(item), sep=' ', end='')
-        else:
-            print()
-
+            
     def while_flag(self, left, symbol, right):
         left = self.replacevar(left)
         right = self.replacevar(right)

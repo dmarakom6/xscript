@@ -8,8 +8,8 @@ def main():
     if len(sys.argv) > 2:
         print('Error: Too many arguments')
         exit(1)
-    elif len(sys.argv) <= 1:
-        print('Error: xscript takes 1 xscript file argument')
+    elif len(sys.argv) == 1:
+        print('Error: xscript takes one xscript file argument')
         exit(1)
     elif not path.isfile(sys.argv[1]):
         print('Error: No such file or directory: %s' % sys.argv[1])
