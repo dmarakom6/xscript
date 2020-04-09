@@ -1,5 +1,7 @@
 # end
-`end` is a block end flag. `if`, `for` and `while` flag use `end` flag.
+`end` is a block end flag. `if`, `for`, `foreach`and `while` flag use `end` flag.
+
+**But**, if don't really use it.
 
 # for
 `for` is a loop flag, it takes 3 or 4 arguments:
@@ -21,4 +23,4 @@ self.var[name] = nextvar
 The other thing is: if `nextvar` equal `None`, loop will end. So `for_flag` will find `end for`, **skip it.**
 
 # xscript.
-First thing: don't missing **.**!
+First thing: don't missing `.`!
