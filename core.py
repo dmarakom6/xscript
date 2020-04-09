@@ -21,14 +21,20 @@ class XScriptInterpreter():
         if len(self.block) == 0:
             raise TypeError('Flag not find: %s' % flag)
         elif self.block[-1] == flag:
+            inblock = 0
             for line in self.program[self.now::-1]:
                 line = line.lstrip()
                 if self.debug:
                     print('end-', line)
-                if line.startswith(flag):
-                    self.now -= 1
-                    del self.block[-1]
-                    return
+                if line == 'end ' + flag:
+                    inblock += 1
+                if line.startswith(flag + ' '):
+                    if inblock == 0:
+                        self.now -= 1
+                        del self.block[-1]
+                        return
+                    else:
+                        inblock -= 1
                 else:
                     self.now -= 1
         else:
@@ -61,12 +67,18 @@ class XScriptInterpreter():
                         self.var[name] = nextvar
                     else:
                         del self.itervar[name]
+                        infor = 0
                         for line in self.program[self.now:]:
                             line = line.lstrip()
                             if self.debug:
                                 print('for-', line)
+                            if line.startswith('for '):
+                                infor += 1
                             if line == 'end for':
-                                return
+                                if infor == 0:
+                                    return
+                                else:
+                                    infor -= 1
                             else:
                                 self.now += 1
                         else:
@@ -80,12 +92,18 @@ class XScriptInterpreter():
                         self.var[name] = nextvar
                     else:
                         del self.itervar[name]
+                        infor = 0
                         for line in self.program[self.now:]:
                             line = line.lstrip()
                             if self.debug:
                                 print('for-', line)
+                            if line.startswith('for '):
+                                infor += 1
                             if line == 'end for':
-                                return
+                                if infor == 0:
+                                    return
+                                else:
+                                    infor -= 1
                             else:
                                 self.now += 1
                         else:
@@ -110,12 +128,18 @@ class XScriptInterpreter():
                         self.var[name] = nextvar
                     else:
                         del self.itervar[name]
+                        inforeach = 0
                         for line in self.program[self.now:]:
                             line = line.lstrip()
                             if self.debug:
                                 print('foreach-', line)
+                            if line.startswitch('foreach '):
+                                inforeach += 1
                             if line == 'end foreach':
-                                return
+                                if inforeach == 0:
+                                    return
+                                else:
+                                    inforeach -= 1
                             else:
                                 self.now += 1
                         else:
@@ -129,12 +153,18 @@ class XScriptInterpreter():
                         self.var[name] = nextvar
                     else:
                         del self.itervar[name]
+                        inforeach = 0
                         for line in self.program[self.now:]:
                             line = line.lstrip()
                             if self.debug:
                                 print('foreach-', line)
+                            if line.startswitch('foreach '):
+                                inforeach += 1
                             if line == 'end foreach':
-                                return
+                                if inforeach == 0:
+                                    return
+                                else:
+                                    inforeach -= 1
                             else:
                                 self.now += 1
                         else:
@@ -177,7 +207,7 @@ class XScriptInterpreter():
 
     def puts(self, *args):
         for item in args:
-            print(self.replacevar(item), sep=' ', end='')
+            print(self.replacevar(item), end=' ')
         else:
             print()
 
@@ -280,12 +310,18 @@ class XScriptInterpreter():
         if relation:
             self.block.append('while')
         else:
+            inwhile = 0
             for line in self.program[self.now:]:
                 line = line.lstrip()
                 if self.debug:
                     print('while-', line)
+                if line.startswith('while '):
+                    inwhile += 1
                 if line == 'end while':
-                    return
+                    if inwhile == 0:
+                        return
+                    else:
+                        inwhile -= 1
                 else:
                     self.now += 1
             else:
