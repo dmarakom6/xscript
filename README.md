@@ -1,7 +1,7 @@
 # xscript
 A tiny language
 
-Don't imitate this, It's too easy!!!
+**Don't** imitate this, It's too easy!!!
 
 I don't like to add comments, so would you help me?
 
@@ -21,12 +21,7 @@ interpreter = core.XScriptInterpreter(source, debug=True)
 Like lightning! No, no, it's a lie. Just a bit slow.
 
 We use a little program to calculate it, you can find it in `script/circle.xs`.
+You can run it by yourself.
 
-The result is:
-| language | average   |
-| -------- | --------- |
-| python   | 10.29742s |
-| xscript  | 10.90012s |
-
-Also, you can read ```debug.txt``` for debug detail.
-> It's too long, I suggest you don't read it!
+Also, you can read `debug.txt` for debug detail.
+> It's too long!
