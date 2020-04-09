@@ -1,7 +1,7 @@
 # end
 `end` is a block end flag. `if`, `for`, `foreach`and `while` flag use `end` flag.
 
-**But**, if don't really use it.
+**But**, `if` don't really use it.
 
 # for
 `for` is a loop flag, it takes 3 or 4 arguments:
