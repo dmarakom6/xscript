@@ -20,7 +20,7 @@ nextvar = next(self.itervar[name], None)
 self.var[name] = nextvar
 ```
 
-The other thing is: if `nextvar` equal `None`, loop will end. So `for_flag` will find `end for`, **skip it.**
+The other thing is: if `nextvar` equal to `None`, loop will end. So `for_flag` will find `end for`, **and skip it.**
 
 # xscript.
 First thing: don't missing `.`!
