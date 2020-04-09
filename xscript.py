@@ -16,7 +16,7 @@ def main():
         exit(1)
     else:
         source = open(sys.argv[1], 'r+').read()
-        interpreter = core.XScriptInterpreter(source, debug=1)
+        interpreter = core.XScriptInterpreter(source, debug=False)
         interpreter.run()
 
 if __name__ == '__main__':
