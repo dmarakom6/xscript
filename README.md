@@ -8,24 +8,20 @@ I don't like to add comments, so would you help me?
 # How does it work?
 [Click here!](howto.md)
 
+# How to run code?
+Type `xscript.py *.xs` to run xscript file.
+
+## Debug your code
+Change `xscript.py` line 19 to
+```python
+interpreter = core.XScriptInterpreter(source, debug=True)
+```
+
 # How fast is it?
 Like lightning! No, no, it's a lie. Just a bit slow.
 
 We use a little program to calculate it, you can find it in `script/circle.xs`.
 
-The python version is like this:
-  ```python
-  import turtle
-  import time
-  
-  turtle.color('red', 'yellow')
-  turtle.begin_fill()
-  turtle.speed(15)
-  for i in range(0, 360, 1):
-      turtle.forward(1)
-      turtle.left(1)
-  turtle.end_fill()
-  ```
 The result is:
 | language | average   |
 | -------- | --------- |
