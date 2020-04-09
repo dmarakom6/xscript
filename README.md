@@ -16,6 +16,7 @@ Change `xscript.py` line 19 to
 ```python
 interpreter = core.XScriptInterpreter(source, debug=True)
 ```
+Or you can rewrite `xscript.py` to add a debug option.
 
 # How fast is it?
 Like lightning! No, no, it's a lie. Just a bit slow.
