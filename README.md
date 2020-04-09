@@ -19,10 +19,9 @@ interpreter = core.XScriptInterpreter(source, debug=True)
 Or you can rewrite `xscript.py` to add a debug option.
 
 # How fast is it?
-Like lightning! No, no, it's a lie. Just a bit slow.
+**Like lightning!** No, no, it's impossible. Just a bit slowly than python!
 
-We use a little program to calculate it, you can find it in `script/circle.xs`.
-You can run it by yourself.
+* * *
 
 Also, you can read `debug.txt` for debug detail.
 > It's too long!
