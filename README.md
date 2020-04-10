@@ -7,7 +7,7 @@ xscript是用python编写的一个非常小巧的编程语言, 它的核心(`cor
 > 你可以使用 `import xscript` 来导入该库, 函数定义和用法都和python差不多.
 
 # 它是怎么运作的?
-[howto.md](点击这里!)
+[点击这里!](howto.md)
 
 # 如何运行我的代码?
 你可以在xscript目录下, 通过终端输入 `xscript.py [你的文件名]` 来运行.
