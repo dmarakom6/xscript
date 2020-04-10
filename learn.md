@@ -20,6 +20,7 @@ puts "Hello, World!"
 
 xscript支持的命令动词有:
 
+|      |         |      |         |
 | ---- | ------- | ---- | ------- |
 | \#   | delete  | elif | else    |
 | end  | exit    | for  | foreach |
