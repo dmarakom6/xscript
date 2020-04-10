@@ -2,7 +2,7 @@
 
 # 什么是xscript?
 xscript是用python编写的一个非常小巧的编程语言, 它的核心(`core.py`)不会超过1000行(到现在为止还没有到400行).
-> 所以xscript的核心可以缩减很小, 所有主要的功能都在库`xscript`中.
+> xscript的核心可以缩减很小, 因为所有主要的功能都在库`xscript`中.
 
 > 你可以使用 `import xscript` 来导入该库, 函数定义和用法都和python差不多.
 
