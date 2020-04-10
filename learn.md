@@ -19,10 +19,12 @@ puts "Hello, World!"
 其中, puts是命令动词, `Hello, World!`是其参数.
 
 xscript支持的命令动词有:
+
 | \#   | delete  | elif | else    |
 | end  | exit    | for  | foreach |
 | gets | if      | lets | puts    |
 |while | xscript.|      |         |
+
 > 注意, `xscript.`是一个单独的命令动词, 点后不允许有空格, 如`xscript.ui.Window`是正确的, `xscript. ui.Window`是错误的.
 
 接下来, 我们将要一个一个解释着张表格中的命令动词.
