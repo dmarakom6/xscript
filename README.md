@@ -26,3 +26,4 @@ interpreter = core.XScriptInterpreter(source, debug=True)
 就像闪电一样快!!
 
 不对, 不对, 这绝对不可能.只比python慢了一点.
+> 你当然可以直接试一试!
