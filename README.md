@@ -6,6 +6,8 @@ xscript是用python编写的一个非常小巧的编程语言, 它的核心(`cor
 
 > 你可以使用 `import xscript` 来导入该库, 函数定义和用法都和python差不多.
 
+> 这门语言是设计为嵌入式的, 这样也可以保证安全.
+
 # 它是怎么运作的?
 我写了一个解释xscript如何运行的Markdown, 请[点击这里](howto.md)!
 
