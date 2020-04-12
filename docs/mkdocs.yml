@@ -1,1 +1,12 @@
+site_name: xscript
 
+nav:
+        - 主页: index.md
+        - 学习xscript: learn.md
+        - xscript如何工作: howto.md
+
+theme: readthedocs
+
+repo_name: Github
+
+copyright: Copyright &copy 2020 jason-bowen-zheng<br>All Right Reserved.
