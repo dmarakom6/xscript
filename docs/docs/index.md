@@ -26,7 +26,7 @@ interpreter = core.XScriptInterpreter(source, debug=True)
 
 如果你想更多地了解xscript, 请[点击这里](./learn.md).
 
-#许可证
+# 许可证
 该程序使用GNU通用许可证第3版(GPLv3).
 
 你可以任意复制之.
