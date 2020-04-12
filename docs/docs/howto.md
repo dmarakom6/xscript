@@ -7,14 +7,15 @@ xscript是一门类似于tcl的命令语言
 
 下面的一些词在xscript中有特定的意思.
 
-> 以下所有的函数和变量都在`core.XScriptInterpreter`中`
+> 以下所有的函数和变量都在`core.XScriptInterpreter`中
 
 ## 块(block)
+块是一组代码, 以块开始符(如`for`)开始,以`end`命令结束.
 
 ## 变量代换符($)
 `$`号是命令替换符, 使用`replacevar`函数来替换在`var`中的变量.
 
-## 命令替换符([...])
+## 命令替换符(\[...\])
 `[`和`]`是成对的命令替换符,使用`replacefunction`来替换.
 
 命令替换符支持如下命令:
