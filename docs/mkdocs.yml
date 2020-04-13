@@ -4,6 +4,7 @@ nav:
         - 主页: index.md
         - 学习xscript: learn.md
         - xscript如何工作: howto.md
+        - xscript标准库: lib/index.md
         - 报告BUG: bug.md
 
 theme: readthedocs
