@@ -68,7 +68,7 @@ class XScriptInterpreter():
                     else:
                         del self.itervar[name]
                         infor = 0
-                        for line in self.program[self.now:]:
+                        for line in self.program[self.now + 1:]:
                             line = line.lstrip()
                             if self.debug:
                                 print('for-', line)
@@ -76,6 +76,7 @@ class XScriptInterpreter():
                                 infor += 1
                             if line == 'end for':
                                 if infor == 0:
+                                    self.now += 1
                                     return
                                 else:
                                     infor -= 1
@@ -93,7 +94,7 @@ class XScriptInterpreter():
                     else:
                         del self.itervar[name]
                         infor = 0
-                        for line in self.program[self.now:]:
+                        for line in self.program[self.now + 1:]:
                             line = line.lstrip()
                             if self.debug:
                                 print('for-', line)
@@ -101,6 +102,7 @@ class XScriptInterpreter():
                                 infor += 1
                             if line == 'end for':
                                 if infor == 0:
+                                    self.now += 1
                                     return
                                 else:
                                     infor -= 1
@@ -129,7 +131,7 @@ class XScriptInterpreter():
                     else:
                         del self.itervar[name]
                         inforeach = 0
-                        for line in self.program[self.now:]:
+                        for line in self.program[self.now + 1:]:
                             line = line.lstrip()
                             if self.debug:
                                 print('foreach-', line)
@@ -137,6 +139,7 @@ class XScriptInterpreter():
                                 inforeach += 1
                             if line == 'end foreach':
                                 if inforeach == 0:
+                                    self.now += 1
                                     return
                                 else:
                                     inforeach -= 1
@@ -162,6 +165,7 @@ class XScriptInterpreter():
                                 inforeach += 1
                             if line == 'end foreach':
                                 if inforeach == 0:
+                                    self.now += 1
                                     return
                                 else:
                                     inforeach -= 1
@@ -311,14 +315,15 @@ class XScriptInterpreter():
             self.block.append('while')
         else:
             inwhile = 0
-            for line in self.program[self.now:]:
+            for line in self.program[self.now + 1:]:
                 line = line.lstrip()
                 if self.debug:
-                    print('while-', line)
+                    print('while-', self.now, line)
                 if line.startswith('while '):
                     inwhile += 1
                 if line == 'end while':
                     if inwhile == 0:
+                        self.now += 1
                         return
                     else:
                         inwhile -= 1
