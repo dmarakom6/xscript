@@ -26,6 +26,8 @@ interpreter = core.XScriptInterpreter(source, debug=True)
 
 如果你想更多地了解xscript, 请[点击这里](./learn.md).
 
+xscript有一堆内置函数库, 和python**有点儿**不相同, 你可以[点击这里](lib/index.md)了解标准库.
+
 # 许可证
 该程序使用GNU通用许可证第3版(GPLv3).
 
