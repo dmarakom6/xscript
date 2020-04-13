@@ -8,16 +8,23 @@
   
   
   
-  <link rel="shortcut icon" href="/img/favicon.ico">
-  <title>xscript</title>
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>file - 文件的打开, 关闭, 写入和其他操作 - xscript</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
-  <link rel="stylesheet" href="/css/theme.css" />
-  <link rel="stylesheet" href="/css/theme_extra.css" />
+  <link rel="stylesheet" href="../../css/theme.css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
   
-  <script src="/js/jquery-2.1.1.min.js" defer></script>
-  <script src="/js/modernizr-2.8.3.min.js" defer></script>
+  <script>
+    // Current page data
+    var mkdocs_page_name = "file - \u6587\u4ef6\u7684\u6253\u5f00, \u5173\u95ed, \u5199\u5165\u548c\u5176\u4ed6\u64cd\u4f5c";
+    var mkdocs_page_input_path = "lib\\file.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script> 
   
@@ -31,9 +38,9 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
     <div class="wy-side-scroll">
       <div class="wy-side-nav-search">
-        <a href="/." class="icon icon-home"> xscript</a>
+        <a href="../.." class="icon icon-home"> xscript</a>
         <div role="search">
-  <form id ="rtd-search-form" class="wy-form" action="//search.html" method="get">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
   </form>
 </div>
@@ -41,23 +48,23 @@
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
                 <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="/.">主页</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../..">主页</a>
                     </li>
                 </ul>
                 <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="/learn/">学习xscript</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../../learn/">学习xscript</a>
                     </li>
                 </ul>
                 <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="/howto/">xscript如何工作</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../../howto/">xscript如何工作</a>
                     </li>
                 </ul>
                 <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="/lib/">xscript标准库</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../">xscript标准库</a>
                     </li>
                 </ul>
                 <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="/bug/">报告BUG</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../../bug/">报告BUG</a>
                     </li>
                 </ul>
       </div>
@@ -69,7 +76,7 @@
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="/.">xscript</a>
+        <a href="../..">xscript</a>
       </nav>
 
       
@@ -77,9 +84,11 @@
         <div class="rst-content">
           <div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
-    <li><a href="/.">Docs</a> &raquo;</li>
+    <li><a href="../..">Docs</a> &raquo;</li>
     
+      
     
+    <li>file - 文件的打开, 关闭, 写入和其他操作</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -90,12 +99,51 @@
           <div role="main">
             <div class="section">
               
-
-  <h1 id="404-page-not-found">404</h1>
-
-  <p><strong>Page not found</strong></p>
-
-
+                <h1 id="file-">file - 文件的打开, 关闭, 写入和其他操作</h1>
+<p><em>fileclose #fileobj#</em></p>
+<ul>
+<li><em>fileobj</em> - 一个文件对象</li>
+</ul>
+<blockquote>
+<p>关闭一个文件</p>
+</blockquote>
+<hr />
+<p><em>fileflush #fileobj#</em></p>
+<ul>
+<li><em>fileobj</em> - 一个文件对象</li>
+</ul>
+<blockquote>
+<p>刷新一个文件</p>
+</blockquote>
+<hr />
+<p><em>fileopen #name# #mode=r#</em></p>
+<ul>
+<li><em>name</em> - 一个文件名</li>
+<li><em>mode</em> - 文件的打开模式</li>
+</ul>
+<blockquote>
+<p>打开一个文件, 返回打开的文件对象.</p>
+<p>如果文件不存在, 返回-1.</p>
+</blockquote>
+<hr />
+<p><em>fileread #fileobj# #size=-1#</em></p>
+<ul>
+<li><em>fileobj</em> - 一个文件对象</li>
+<li><em>size</em> - 要读取的数量[默认为全部(-1)]</li>
+</ul>
+<blockquote>
+<p>读取文件内容.</p>
+</blockquote>
+<hr />
+<p><em>filewrite #fileobj# #s#</em></p>
+<ul>
+<li><em>fileobj</em> - 一个文件对象</li>
+<li><em>s</em> - 要写入的字符(串)</li>
+</ul>
+<blockquote>
+<p>写入文件, 返回写入字符数</p>
+</blockquote>
+              
             </div>
           </div>
           <footer>
@@ -127,9 +175,9 @@
       
     </span>
 </div>
-    <script>var base_url = '/';</script>
-    <script src="/js/theme.js" defer></script>
-      <script src="/search/main.js" defer></script>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
     <script defer>
         window.onload = function () {
             SphinxRtdTheme.Navigation.enable(true);
