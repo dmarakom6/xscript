@@ -8,11 +8,6 @@ xscript是用python编写的一个非常小巧的编程语言, 它的核心(`cor
 
 > 这门语言是设计为嵌入式的, 这样也可以保证安全.
 
-# 它是怎么运作的?
-我写了一个解释xscript如何运行的Markdown, 请[点击这里](howto.md)!
-
-你也可以[点击这里](learn.md)学习xscript.
-
 # 如何运行我的代码?
 你可以在xscript目录下, 通过终端输入 `xscript.py [你的文件名]` 来运行.
 
