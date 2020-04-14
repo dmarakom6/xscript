@@ -14,6 +14,8 @@ class XScriptInterpreter():
         for name in names:
             if name not in self.const:
                 del self.var[name]
+            else:
+                raise TypeError('%s is a const variable.' % name)
 
     def exit(self, code=0):
         exit(int(code))
