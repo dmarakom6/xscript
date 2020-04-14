@@ -4,7 +4,12 @@ nav:
         - 主页: index.md
         - 学习xscript: learn.md
         - xscript如何工作: howto.md
-        - xscript标准库: lib/index.md
+        - xscript标准库:
+          - 索引: lib.index.md
+          - file: lib/file.md
+          - random: lib/random.md
+          - turtle: lib/turtle.md
+          - ui: lib/ui.md
         - 报告BUG: bug.md
 
 theme: readthedocs
