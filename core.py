@@ -7,12 +7,13 @@ import xscript
 
 class XScriptInterpreter():
 
-    def __init__(self, string='', debug=False, var={}, itervar={}):
-        self.restart(string, debug, var, itervar)
+    def __init__(self, string='', debug=False, var={}, itervar={}, argv=[]):
+        self.restart(string, debug, var, itervar, argv)
 
     def delete(self, *names):
         for name in names:
-           del self.var[name]
+            if name not in self.const:
+                del self.var[name]
 
     def exit(self, code=0):
         exit(int(code))
@@ -238,11 +239,15 @@ class XScriptInterpreter():
         else:
             return value
     
-    def restart(self, string='', debug=False, var={}, itervar={}):
+    def restart(self, string='', debug=False, var={}, itervar={}, argv=[]):
         self.string = string.replace(os.sep, '\n')
         self.program = self.string.split('\n')
         self.debug = debug
         self.var = var
+        self.var['TRUE$'] = True
+        self.var['FALSE$'] = False
+        self.var['ARGV$']= argv
+        self.const = ['TRUE$', 'FALSE$', 'ARGV$']
         self.itervar = itervar
 
     def run(self):
