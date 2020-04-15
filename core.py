@@ -1,7 +1,6 @@
 import os
 import shlex
 import string
-import time
 import xscript
 
 
@@ -248,8 +247,9 @@ class XScriptInterpreter():
         self.var = var
         self.var['TRUE$'] = True
         self.var['FALSE$'] = False
+        self.var['NULL$'] = None
         self.var['ARGV$']= argv
-        self.const = ['TRUE$', 'FALSE$', 'ARGV$']
+        self.const = ['TRUE$', 'FALSE$', 'ARGV$', 'NULL$']
         self.itervar = itervar
 
     def run(self):
