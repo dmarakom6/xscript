@@ -5,7 +5,10 @@ def fileflush(fileobj):
     fileobj.flush()
 
 def fileopen(name, mode='r'):
-    return open(name, mode)
+    try:
+        return open(name, mode)
+    except:
+        return None
 
 def fileread(fileobj, size=-1):
     return fileobj.read(int(size))
