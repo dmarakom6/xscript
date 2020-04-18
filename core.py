@@ -352,4 +352,9 @@ class XScriptInterpreter():
                 else:
                     raise TypeError('No attribute: %s' % item)
             else:
-                return obj(*arg)
+                if type(obj) == type(lambda x: x):
+                    return obj(*arg)
+                elif len(arg) == 0:
+                    return obj
+                else:
+                    raise TypeError("'%s' is not callable" % path)
