@@ -22,7 +22,7 @@ xscript是用python编写的一个非常小巧的编程语言, 它的核心(`cor
 ```python
 interpreter = core.XScriptInterpreter(source, debug=True)
 ```
-
+> 我建议不要改, 那样会很混乱.
 当然, 你也可以改写该文件添加一个debug开关.
 
 # 它有多快?
