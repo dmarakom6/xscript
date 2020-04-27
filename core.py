@@ -4,12 +4,13 @@ import string
 import xscript
 
 
-class XScriptInterpreter():
-
+class XScriptInterpreter(object):
+	# xscript interpreter core
     def __init__(self, string='', debug=False, var={}, itervar={}, argv=[]):
         self.restart(string, debug, var, itervar, argv)
 
     def delete(self, *names):
+		# delete the name in self.var
         for name in names:
             if name not in self.const:
                 del self.var[name]
@@ -17,9 +18,12 @@ class XScriptInterpreter():
                 raise TypeError('%s is a const variable.' % name)
 
     def exit(self, code=0):
+		# raise exit code and exit
         exit(int(code))
 
     def end_flag(self, flag):
+		# end is a flag, not function, it's very complex
+		# BUG:  on flag nesting like double for
         if len(self.block) == 0:
             raise TypeError('Flag not find: %s' % flag)
         elif self.block[-1] == flag:
@@ -43,6 +47,8 @@ class XScriptInterpreter():
             raise TypeError('Flag not find: %s' % flag)
 
     def for_flag(self, name, fromnum, tonum, stepnum=None):
+		# for is a flag, not function, it's more complex than end_flag
+		# for use built-in function iter() to start a loop
         if name[0] not in string.ascii_letters + string.digits + '_':
             raise TypeError('Invalid name: %s' % name)
         else:
@@ -114,6 +120,7 @@ class XScriptInterpreter():
                             raise TypeError('Loop without end')
 
     def foreach_flag(self, name, iterator):
+		# foreach is a flag, not function, it's easier than for
         if name[0] not in string.ascii_letters + string.digits + '_':
             raise TypeError('Invalid name: %s' % name)
         else:
@@ -177,9 +184,11 @@ class XScriptInterpreter():
                             raise TypeError('Loop without end')
 
     def gets(self, prompt=''):
+		# gets is very easy, read it!
         return input(prompt)
 
     def let(self, name, symbol, value):
+		# let is just a assignment statement, it support 8 operators.
         value = self.replacevar(value)
         if name[0] not in string.ascii_letters + string.digits + '_':
             raise TypeError('Invalid name: %s' % name)
@@ -212,12 +221,15 @@ class XScriptInterpreter():
                     raise TypeError('Unsupported operate: %s' % symbol)
 
     def puts(self, *args):
+		# puts just print something to the console
         for item in args:
             print(self.replacevar(item), end=' ')
         else:
             print()
 
     def replacefunction(self, s):
+		# you cannot call it in your script
+		# you just can call 2 functions in []
         exp = []
         for item in shlex.split(s):
             if item[0] == '$':
@@ -233,6 +245,8 @@ class XScriptInterpreter():
                 raise TypeError('Unknow replace function command : %s' % ret[0])
 
     def replacevar(self, value):
+		# you cannot call it in your script
+		# it just replace name of variable to its value
         if value[0] == '[' and value[-1] == ']':
             return self.replacefunction(value[1:-1])
         elif value[0] == '$':
@@ -241,6 +255,8 @@ class XScriptInterpreter():
             return value
     
     def restart(self, string='', debug=False, var={}, itervar={}, argv=[]):
+		# you cannot call it in your script
+		# it just set some global variable like debugable
         self.string = string.replace(os.sep, '\n')
         self.program = self.string.split('\n')
         self.debug = debug
@@ -253,6 +269,7 @@ class XScriptInterpreter():
         self.itervar = itervar
 
     def run(self):
+		# run is a very import function, you understand
         self.now = 0
         self.block = []
         while True:
@@ -302,6 +319,7 @@ class XScriptInterpreter():
                 self.now += 1
             
     def while_flag(self, left, symbol, right):
+		# while is a flag, not function
         left = self.replacevar(left)
         right = self.replacevar(right)
         if symbol == '=':
@@ -340,6 +358,7 @@ class XScriptInterpreter():
                 raise TypeError('Loop without end')
 
     def xscript(self, path, *args):
+		# xscript is an important function that it can call outer function
         arg = []
         for item in args:
             arg.append(self.replacevar(item))
