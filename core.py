@@ -1,3 +1,6 @@
+# xscript/core.py
+# xscript core
+
 import os
 import shlex
 import string
@@ -5,12 +8,12 @@ import xscript
 
 
 class XScriptInterpreter(object):
-	# xscript interpreter core
-    def __init__(self, string='', debug=False, var={}, itervar={}, argv=[]):
-        self.restart(string, debug, var, itervar, argv)
+    # xscript interpreter core
+    def __init__(self, string='', debug=False, var={}, argv=[]):
+        self.restart(string, debug, var, argv)
 
     def delete(self, *names):
-		# delete the name in self.var
+	# delete the name in self.var
         for name in names:
             if name not in self.const:
                 del self.var[name]
@@ -18,12 +21,12 @@ class XScriptInterpreter(object):
                 raise TypeError('%s is a const variable.' % name)
 
     def exit(self, code=0):
-		# raise exit code and exit
+	# raise exit code and exit
         exit(int(code))
 
     def end_flag(self, flag):
-		# end is a flag, not function, it's very complex
-		# BUG:  on flag nesting like double for
+	# end is a flag, not function, it's very complex
+	# BUG:  on flag nesting like double for
         if len(self.block) == 0:
             raise TypeError('Flag not find: %s' % flag)
         elif self.block[-1] == flag:
@@ -47,8 +50,8 @@ class XScriptInterpreter(object):
             raise TypeError('Flag not find: %s' % flag)
 
     def for_flag(self, name, fromnum, tonum, stepnum=None):
-		# for is a flag, not function, it's more complex than end_flag
-		# for use built-in function iter() to start a loop
+	# for is a flag, not function, it's more complex than end_flag
+	# for use built-in function iter() to start a loop
         if name[0] not in string.ascii_letters + string.digits + '_':
             raise TypeError('Invalid name: %s' % name)
         else:
@@ -120,7 +123,7 @@ class XScriptInterpreter(object):
                             raise TypeError('Loop without end')
 
     def foreach_flag(self, name, iterator):
-		# foreach is a flag, not function, it's easier than for
+	# foreach is a flag, not function, it's easier than for
         if name[0] not in string.ascii_letters + string.digits + '_':
             raise TypeError('Invalid name: %s' % name)
         else:
@@ -184,11 +187,11 @@ class XScriptInterpreter(object):
                             raise TypeError('Loop without end')
 
     def gets(self, prompt=''):
-		# gets is very easy, read it!
+	# gets is very easy, read it!
         return input(prompt)
 
     def let(self, name, symbol, value):
-		# let is just a assignment statement, it support 8 operators.
+	# let is just a assignment statement, it support 8 operators.
         value = self.replacevar(value)
         if name[0] not in string.ascii_letters + string.digits + '_':
             raise TypeError('Invalid name: %s' % name)
@@ -221,15 +224,15 @@ class XScriptInterpreter(object):
                     raise TypeError('Unsupported operate: %s' % symbol)
 
     def puts(self, *args):
-		# puts just print something to the console
+	# puts just print something to the console
         for item in args:
             print(self.replacevar(item), end=' ')
         else:
             print()
 
     def replacefunction(self, s):
-		# you cannot call it in your script
-		# you just can call 2 functions in []
+        # you cannot call it in your script
+        # you just can call 2 functions in []
         exp = []
         for item in shlex.split(s):
             if item[0] == '$':
@@ -254,9 +257,9 @@ class XScriptInterpreter(object):
         else:
             return value
     
-    def restart(self, string='', debug=False, var={}, itervar={}, argv=[]):
-		# you cannot call it in your script
-		# it just set some global variable like debugable
+    def restart(self, string='', debug=False, var={}, argv=[]):
+        # you cannot call it in your script
+        # it just set some global variable like debugable
         self.string = string.replace(os.sep, '\n')
         self.program = self.string.split('\n')
         self.debug = debug
@@ -266,10 +269,9 @@ class XScriptInterpreter(object):
         self.var['NULL$'] = None
         self.var['ARGV$']= argv
         self.const = ['TRUE$', 'FALSE$', 'ARGV$', 'NULL$']
-        self.itervar = itervar
 
     def run(self):
-		# run is a very import function, you understand
+        # run is a very import function, you understand
         self.now = 0
         self.block = []
         while True:
@@ -319,7 +321,7 @@ class XScriptInterpreter(object):
                 self.now += 1
             
     def while_flag(self, left, symbol, right):
-		# while is a flag, not function
+        # while is a flag, not function
         left = self.replacevar(left)
         right = self.replacevar(right)
         if symbol == '=':
@@ -358,7 +360,7 @@ class XScriptInterpreter(object):
                 raise TypeError('Loop without end')
 
     def xscript(self, path, *args):
-		# xscript is an important function that it can call outer function
+        # xscript is an important function that it can call outer function
         arg = []
         for item in args:
             arg.append(self.replacevar(item))
