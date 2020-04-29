@@ -1,3 +1,5 @@
+# xscript/script/hello-gui.xs
+
 let win := [xscript.ui.Window]
 let l := '[xscript.ui.Label $win]'
 xscript.ui.configure $l text Hello
