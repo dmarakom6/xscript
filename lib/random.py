@@ -1,3 +1,5 @@
+# xscript/lib/random.py
+
 import random as _random
 
 def rand():
