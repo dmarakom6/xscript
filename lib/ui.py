@@ -1,3 +1,5 @@
+# xscript/lib/ui.py
+
 import tkinter as _tk
 import tkinter.ttk as _ttk
 from tkinter import messagebox as _messagebox
