@@ -1,3 +1,4 @@
+# xscript/lib/var.py
 
 def Bool(n):
   if n == 'True':
