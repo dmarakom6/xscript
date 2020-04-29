@@ -26,7 +26,7 @@ class XScriptInterpreter(object):
 
     def end_flag(self, flag):
 	# end is a flag, not function, it's very complex
-	# BUG:  on flag nesting like double for
+	# BUG: on flag nesting like double for
         if len(self.block) == 0:
             raise TypeError('Flag not find: %s' % flag)
         elif self.block[-1] == flag:
