@@ -4,7 +4,7 @@
 import os
 import shlex
 import string
-import xscript
+import lib
 
 
 class XScriptInterpreter(object):
@@ -264,6 +264,7 @@ class XScriptInterpreter(object):
         self.program = self.string.split('\n')
         self.debug = debug
         self.var = var
+        self.itervar = {}
         self.var['TRUE$'] = True
         self.var['FALSE$'] = False
         self.var['NULL$'] = None
@@ -366,7 +367,7 @@ class XScriptInterpreter(object):
             arg.append(self.replacevar(item))
         else:
             path = path.split('.')
-            obj = xscript
+            obj = lib
             for item in path[1:]:
                 if hasattr(obj, item):
                     obj = getattr(obj, item)
