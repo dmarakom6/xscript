@@ -1,5 +1,3 @@
-# xscript/lib/util.py
-
 def getattr(obj , name):
     return getattr(obj, name)
 

@@ -1,5 +1,3 @@
-# xscript/lib/file.py
-
 def fileclose(fileobj):
     fileobj.close()
 

@@ -1,5 +1,3 @@
-# xscript/lib/var.py
-
 def Bool(n):
   if n == 'True':
     return True
@@ -9,6 +7,9 @@ def Bool(n):
     return True
   else:
     return False
+
+def Complex(n):
+  return complex(n)
 
 def Float(n):
   return float(n)
