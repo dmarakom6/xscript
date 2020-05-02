@@ -7,13 +7,16 @@ nav:
         - xscript标准库:
           - 索引: lib.index.md
           - file: lib/file.md
+          - math: lib/math.md
           - random: lib/random.md
+          - string: lib/string.md
+          - time: lib/time.md
           - turtle: lib/turtle.md
           - ui: lib/ui.md
+          - util: lib/util.md
+          - var: lib/var.md
         - 报告BUG: bug.md
 
 theme: readthedocs
-
-repo_name: Github
 
 copyright: Copyright &copy 2020 jason-bowen-zheng<br>All Right Reserved.
