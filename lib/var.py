@@ -8,9 +8,6 @@ def Bool(n):
   else:
     return False
 
-def Complex(n):
-  return complex(n)
-
 def Float(n):
   return float(n)
 
