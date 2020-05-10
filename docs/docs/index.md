@@ -9,13 +9,7 @@ xscript是一个使用python编写的微型语言. 其源代码(`core.py`)绝对
 你可以在xscript目录下, 在终端中输入`xscript.py [你的文件]`就可以运行了.
 
 ## 如何调试我的代码?
-很抱歉, 解释器有简单的调试功能(主要是开发期间), 但并没有命令行选项来打开调试功能.
-
-但, 请打开`xscript.py`, 将第19行改为:
-```python
-interpreter = core.XScriptInterpreter(source, debug=True)
-```
-你自己也可以重写这个文件以添加debug功能.
+你可以在代码中的单独一行加入`debug`代码来开启交互式的debug, 使用`exit`以退出.
 
 # xscript有多快?
 我迄今为止只做了一个测试,取平均值得知, 运行差不多(将xscript翻译成python)的代码,
