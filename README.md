@@ -18,12 +18,7 @@ xscript是用python编写的一个非常小巧的编程语言, 它的核心(`cor
 当然, 你可以看看`xscript/xscript`目录下的例子.
 
 ## 如何调试我的代码?
-很遗憾, 源代码中并没有关于`-debug`开关的处理, 你可以把`xscript.py`的第19行改为:
-```python
-interpreter = core.XScriptInterpreter(source, debug=True)
-```
-> 我建议不要改, 那样会很混乱.
-当然, 你也可以改写该文件添加一个debug开关.
+请在你的代码中加入`debug`, 并且保持`XScriptInterpreter`中的debug为`True`
 
 # 它有多快?
 就像闪电一样快!!
