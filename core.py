@@ -3,43 +3,49 @@
 
 import lib
 import os
-import readline
+try:
+    import readline
+except:
+    print("xscript: No 'readline'")
 import shlex
 import string
 
 
 class XScriptInterpreter(object):
     # xscript interpreter core
-    def __init__(self, string='', debug=False, var={}, argv=[]):
-        self.restart(string, debug, var, argv)
+    def __init__(self, string='', var={}, argv=[]):
+        self.restart(string, var, argv)
 
-    def debug_(self):
+    def debug(self):
         # debug
-        if not self.debug:
-            pass
-        else:
+        try:
             print('start debug'.center(os.get_terminal_size()[0], '='))
-            cmd = ''
-            while cmd != 'exit':
-                cmd = input('debug> ')
-                if cmd == '':
-                    pass
-                elif cmd == 'exit':
-                    pass
-                elif cmd == 'now':
-                    print('.'.join(self.block))
-                elif cmd.startswith('show '):
-                    if cmd[5:] in self.var:
-                        print('%s: %s' % (cmd[5:], self.var[cmd[5:]]))
-                    else:
-                        print('ERROR: No %s variable' % cmd[5:])
-                elif cmd == 'vars':
-                    for k, v in self.var.items():
-                        print('%s: %s' % (k, v))
+        except:
+            print('xscript: start debug')
+        cmd = ''
+        while cmd != 'exit':
+            cmd = input('debug> ')
+            if cmd == '':
+                pass
+            elif cmd == 'exit':
+                pass
+            elif cmd == 'now':
+                print('.'.join(self.block))
+            elif cmd.startswith('show '):
+                if cmd[5:] in self.var:
+                    print('%s: %s' % (cmd[5:], self.var[cmd[5:]]))
                 else:
-                    print("ERROR: No debug command: '%s'" % cmd)
+                    print("ERROR: '%s' not found" % cmd[5:])
+            elif cmd == 'vars':
+                for k, v in self.var.items():
+                    print('%s: %s' % (k, v))
             else:
+                print("ERROR: No debug command: '%s'" % cmd)
+        else:
+            try:
                 print('end debug'.center(os.get_terminal_size()[0], '='))
+            except:
+                print('xscript: end debug')
 
     def delete(self, *names):
 	# delete the name in self.var
@@ -270,11 +276,10 @@ class XScriptInterpreter(object):
         else:
             return value
     
-    def restart(self, string='', debug=False, var={}, argv=[]):
+    def restart(self, string='', var={}, argv=[]):
         # you cannot call it in your script
         # it just set some global variable like debugable
         self.program = string
-        self.debug = bool(debug)
         self.var = var
         self.itervar = {}
         self.var['TRUE$'] = True
@@ -300,7 +305,7 @@ class XScriptInterpreter(object):
                 elif lines[0][0] == '#':
                     pass
                 elif lines[0] == 'debug':
-                    self.debug_()
+                    self.debug(*lines[1:])
                 elif lines[0] == 'delete':
                     self.delete(*lines[1:])
                 elif lines[0] == 'end':

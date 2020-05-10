@@ -20,14 +20,14 @@ import sys
 
 def main():
     if len(sys.argv) < 2:
-        print('ERROR: Not enough argument')
+        print('xscript: Not enough argument')
         exit(1)
     elif not path.isfile(sys.argv[1]):
-        print('Error: No such file or directory: %s' % sys.argv[1])
+        print('xscript: No such file or directory: %s' % sys.argv[1])
         exit(1)
     else:
         source = open(sys.argv[1], 'r+').readlines()
-        interpreter = core.XScriptInterpreter(source, argv=sys.argv[1:],debug=True)
+        interpreter = core.XScriptInterpreter(source, argv=sys.argv[1:])
         interpreter.run()
 
 if __name__ == '__main__':
