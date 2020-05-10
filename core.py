@@ -1,16 +1,45 @@
 # xscript/core.py
 # xscript core
 
+import lib
 import os
+import readline
 import shlex
 import string
-import lib
 
 
 class XScriptInterpreter(object):
     # xscript interpreter core
     def __init__(self, string='', debug=False, var={}, argv=[]):
         self.restart(string, debug, var, argv)
+
+    def debug_(self):
+        # debug
+        if not self.debug:
+            pass
+        else:
+            print('start debug'.center(os.get_terminal_size()[0], '='))
+            cmd = ''
+            while cmd != 'exit':
+                cmd = input('debug> ')
+                if cmd == '':
+                    pass
+                elif cmd == 'exit':
+                    pass
+                elif cmd == 'now':
+                    print('.'.join(self.block))
+                elif cmd.startswith('show '):
+                    if cmd[5:] in self.var:
+                        print('%s: %s' % (cmd[5:], self.var[cmd[5:]]))
+                    else:
+                        print('ERROR: No %s variable' % cmd[5:])
+                elif cmd == 'vars':
+                    for k, v in self.var.items():
+                        print('%s: %s' % (k, v))
+                else:
+                    print("ERROR: No debug command: '%s'" % cmd)
+            else:
+                print('end debug'.center(os.get_terminal_size()[0], '='))
 
     def delete(self, *names):
 	# delete the name in self.var
@@ -33,8 +62,6 @@ class XScriptInterpreter(object):
             inblock = 0
             for line in self.program[self.now::-1]:
                 line = line.lstrip()
-                if self.debug:
-                    print('end-', line)
                 if line == 'end ' + flag:
                     inblock += 1
                 if line.startswith(flag + ' '):
@@ -71,18 +98,14 @@ class XScriptInterpreter(object):
                         stepnum = int(self.replacevar(stepnum))
                     self.itervar[name] = iter(range(fromnum, tonum, stepnum))
                     nextvar = next(self.itervar[name], None)
-                    if self.debug:
-                        print('for<', nextvar)
                     if nextvar != None:
                         self.block.append('for')
                         self.var[name] = nextvar
                     else:
                         del self.itervar[name]
                         infor = 0
-                        for line in self.program[self.now + 1:]:
+                        for line in self.program[self.now:]:
                             line = line.lstrip()
-                            if self.debug:
-                                print('for-', line)
                             if line.startswith('for '):
                                 infor += 1
                             if line == 'end for':
@@ -97,18 +120,14 @@ class XScriptInterpreter(object):
                             raise TypeError('Loop without end')
                 else:
                     nextvar = next(self.itervar[name], None)
-                    if self.debug:
-                        print('for<', nextvar)
                     if nextvar != None:
                         self.block.append('for')
                         self.var[name] = nextvar
                     else:
                         del self.itervar[name]
                         infor = 0
-                        for line in self.program[self.now + 1:]:
+                        for line in self.program[self.now:]:
                             line = line.lstrip()
-                            if self.debug:
-                                print('for-', line)
                             if line.startswith('for '):
                                 infor += 1
                             if line == 'end for':
@@ -135,15 +154,13 @@ class XScriptInterpreter(object):
                 if name not in self.itervar:
                     self.itervar[name] = iter(self.replacevar(iterator))
                     nextvar = next(self.itervar[name])
-                    if self.debug:
-                        print('foreach<', nextvar)
                     if nextvar != None:
                         self.block.append('foreach')
                         self.var[name] = nextvar
                     else:
                         del self.itervar[name]
                         inforeach = 0
-                        for line in self.program[self.now + 1:]:
+                        for line in self.program[self.now:]:
                             line = line.lstrip()
                             if self.debug:
                                 print('foreach-', line)
@@ -161,8 +178,6 @@ class XScriptInterpreter(object):
                             raise TypeError('Loop without end')
                 else:
                     nextvar = next(self.itervar[name], None)
-                    if self.debug:
-                        print('forach<', nextvar)
                     if nextvar != None:
                         self.block.append('foreach')
                         self.var[name] = nextvar
@@ -171,8 +186,6 @@ class XScriptInterpreter(object):
                         inforeach = 0
                         for line in self.program[self.now:]:
                             line = line.lstrip()
-                            if self.debug:
-                                print('foreach-', line)
                             if line.startswitch('foreach '):
                                 inforeach += 1
                             if line == 'end foreach':
@@ -260,9 +273,8 @@ class XScriptInterpreter(object):
     def restart(self, string='', debug=False, var={}, argv=[]):
         # you cannot call it in your script
         # it just set some global variable like debugable
-        self.string = string.replace(os.sep, '\n')
-        self.program = self.string.split('\n')
-        self.debug = debug
+        self.program = string
+        self.debug = bool(debug)
         self.var = var
         self.itervar = {}
         self.var['TRUE$'] = True
@@ -282,13 +294,13 @@ class XScriptInterpreter(object):
                 self.exit()
                 break
             lines = shlex.split(line)
-            if self.debug:
-                print(self.now, 'run>', lines)
             try:
                 if lines == []:
                     pass
                 elif lines[0][0] == '#':
                     pass
+                elif lines[0] == 'debug':
+                    self.debug_()
                 elif lines[0] == 'delete':
                     self.delete(*lines[1:])
                 elif lines[0] == 'end':
@@ -343,10 +355,8 @@ class XScriptInterpreter(object):
             self.block.append('while')
         else:
             inwhile = 0
-            for line in self.program[self.now + 1:]:
+            for line in self.program[self.now:]:
                 line = line.lstrip()
-                if self.debug:
-                    print('while-', self.now, line)
                 if line.startswith('while '):
                     inwhile += 1
                 if line == 'end while':
