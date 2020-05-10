@@ -13,7 +13,7 @@ xscript是一个使用python编写的微型语言. 其源代码(`core.py`)绝对
 
 # xscript有多快?
 我迄今为止只做了一个测试,取平均值得知, 运行差不多(将xscript翻译成python)的代码,
-比xscript比python慢了一点(大约零点几秒).
+xscript比python慢了一点(大约零点几秒).
 
 # 更多
 我特地写了一个[文档](howto.md)来解释其工作原理.
