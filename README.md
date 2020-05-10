@@ -18,7 +18,9 @@ xscript是用python编写的一个非常小巧的编程语言, 它的核心(`cor
 当然, 你可以看看`xscript/xscript`目录下的例子.
 
 ## 如何调试我的代码?
-请在你的代码中加入`debug`, 并且保持`XScriptInterpreter`中的debug为`True`
+`2020-5-10`次提交更新了debug的用法, 默认开启了debug.
+
+现在你只需要把代码中的某行换成`debug`就可以了.
 
 # 它有多快?
 就像闪电一样快!!
