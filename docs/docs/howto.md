@@ -1,7 +1,7 @@
 # xscript如何工作
 
 # 定义
-xscript是一门类似于tcl的命令语言
+xscript是一门类似于TCL的命令语言.
 
 - - -
 
