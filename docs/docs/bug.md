@@ -21,5 +21,3 @@
   ->  let l := ['xscript.ui.Label $win']
   Error: can only concatenate str (not "int") to str
   ```
-  
-  - - -
