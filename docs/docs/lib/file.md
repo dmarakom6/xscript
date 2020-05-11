@@ -1,4 +1,4 @@
-# file - 文件的打开, 关闭, 写入和其他操作
+# file - 文件相关操作
 
 *fileclose \#fileobj\#*
 
