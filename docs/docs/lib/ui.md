@@ -1,4 +1,4 @@
-# 基于tk的UI库
+# 基于tk的GUI库
 
 该标准库使用python的tkinter库编写, 去除了一些复杂的选项.
 
