@@ -119,21 +119,16 @@
 <h1 id="_1">如何运行我的代码?</h1>
 <p>你可以在xscript目录下, 在终端中输入<code>xscript.py [你的文件]</code>就可以运行了.</p>
 <h2 id="_2">如何调试我的代码?</h2>
-<p>很抱歉, 解释器有简单的调试功能(主要是开发期间), 但并没有命令行选项来打开调试功能.</p>
-<p>但, 请打开<code>xscript.py</code>, 将第19行改为:</p>
-<pre><code class="python">interpreter = core.XScriptInterpreter(source, debug=True)
-</code></pre>
-
-<p>你自己也可以重写这个文件以添加debug功能.</p>
+<p>你可以在代码中的单独一行加入<code>debug</code>代码来开启交互式的debug, 使用<code>exit</code>以退出.</p>
 <h1 id="xscript_1">xscript有多快?</h1>
 <p>我迄今为止只做了一个测试,取平均值得知, 运行差不多(将xscript翻译成python)的代码,
 xscript比python慢了一点(大约零点几秒).</p>
 <h1 id="_3">更多</h1>
 <p>我特地写了一个<a href="howto/">文档</a>来解释其工作原理.</p>
 <p>如果你想更多地了解xscript, 请<a href="learn/">点击这里</a>.</p>
-<p>xscript有一堆内置函数库, 和python<strong>有点儿</strong>不相同, 你可以<a href="lib/">点击这里</a>了解标准库.</p>
-<h1 id="_4">许可证</h1>
-<p>该程序使用GNU通用公共许可证第3版(GPLv3).</p>
+<p>xscript有一个使用Python写的内置函数库, 和python<strong>有点儿</strong>不相同, 你可以<a href="lib/">点击这里</a>了解标准库.</p>
+<h1 id="license">LICENSE</h1>
+<p>该程序使用GPLv3.</p>
 <p>你可以任意复制之.</p>
               
             </div>
@@ -190,5 +185,5 @@ xscript比python慢了一点(大约零点几秒).</p>
 
 <!--
 MkDocs version : 1.1
-Build Date UTC : 2020-04-14 08:04:28
+Build Date UTC : 2020-05-18 15:46:08
 -->
