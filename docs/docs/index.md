@@ -1,7 +1,7 @@
 # xscript
 xscript是一个使用python编写的微型语言. 其源代码(`core.py`)绝对不会超过1000行.
 
-> 有一部分原因是我将大部分的内容都写进了xscript库(`xscript/xscript`)
+> 有一部分原因是我将大部分的内容都写进了xscript库(`xscript/lib`)
 
 > 这门语言是设计为嵌入到一个软件里的, 当然是越小巧越好了!
 
