@@ -110,18 +110,18 @@ class XScriptInterpreter(object):
                     else:
                         del self.itervar[name]
                         infor = 0
-                        for line in self.program[self.now:]:
+                        for line in self.program[self.now - 1:]:
+                            self.now += 1
                             line = line.lstrip()
                             if line.startswith('for '):
                                 infor += 1
                             if line == 'end for':
                                 if infor == 0:
-                                    self.now += 1
                                     return
                                 else:
                                     infor -= 1
                             else:
-                                self.now += 1
+                                pass
                         else:
                             raise TypeError('Loop without end')
                 else:
@@ -132,18 +132,18 @@ class XScriptInterpreter(object):
                     else:
                         del self.itervar[name]
                         infor = 0
-                        for line in self.program[self.now:]:
+                        for line in self.program[self.now - 1:]:
+                            self.now += 1
                             line = line.lstrip()
                             if line.startswith('for '):
                                 infor += 1
-                            if line == 'end for':
+                            elif line == 'end for':
                                 if infor == 0:
-                                    self.now += 1
                                     return
                                 else:
                                     infor -= 1
                             else:
-                                self.now += 1
+                                pass
                         else:
                             raise TypeError('Loop without end')
 
@@ -166,20 +166,18 @@ class XScriptInterpreter(object):
                     else:
                         del self.itervar[name]
                         inforeach = 0
-                        for line in self.program[self.now:]:
+                        for line in self.program[self.now - 1:]:
+                            self.now += 1
                             line = line.lstrip()
-                            if self.debug:
-                                print('foreach-', line)
                             if line.startswitch('foreach '):
                                 inforeach += 1
-                            if line == 'end foreach':
+                            elif line == 'end foreach':
                                 if inforeach == 0:
-                                    self.now += 1
                                     return
                                 else:
                                     inforeach -= 1
                             else:
-                                self.now += 1
+                                pass
                         else:
                             raise TypeError('Loop without end')
                 else:
@@ -190,22 +188,22 @@ class XScriptInterpreter(object):
                     else:
                         del self.itervar[name]
                         inforeach = 0
-                        for line in self.program[self.now:]:
+                        for line in self.program[self.now - 1:]:
+                            self.now += 1
                             line = line.lstrip()
                             if line.startswitch('foreach '):
                                 inforeach += 1
-                            if line == 'end foreach':
+                            elif line == 'end foreach':
                                 if inforeach == 0:
-                                    self.now += 1
                                     return
                                 else:
                                     inforeach -= 1
                             else:
-                                self.now += 1
+                                pass
                         else:
                             raise TypeError('Loop without end')
 
-    def gets(self, prompt=''):
+    def gets(self, prompt='?'):
 	# gets is very easy, read it!
         return input(prompt)
 
@@ -360,18 +358,15 @@ class XScriptInterpreter(object):
             self.block.append('while')
         else:
             inwhile = 0
-            for line in self.program[self.now:]:
+            for line in self.program[self.now - 1:]:
+                self.now += 1
                 line = line.lstrip()
                 if line.startswith('while '):
                     inwhile += 1
-                if line == 'end while':
-                    if inwhile == 0:
-                        self.now += 1
-                        return
-                    else:
-                        inwhile -= 1
+                elif line == 'end while':
+                    inwhile -= 1
                 else:
-                    self.now += 1
+                    pass
             else:
                 raise TypeError('Loop without end')
 
@@ -390,6 +385,13 @@ class XScriptInterpreter(object):
                     raise TypeError('No attribute: %s' % item)
             else:
                 if type(obj) == type(lambda x: x):
+                    # >>> type(abs)
+                    # <class 'builtin_function_or_method'>
+                    # >>> type(lambda: 1)
+                    # <class 'function'>
+                    # >>> type(abs) == type(lambda: 1)
+                    # False
+                    # >>> # so we use `type(obj) == type(lambda x: x)` to compare function and variable
                     return obj(*arg)
                 elif len(arg) == 0:
                     return obj

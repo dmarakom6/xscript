@@ -5,16 +5,11 @@ nav:
         - 学习xscript: learn.md
         - xscript如何工作: howto.md
         - xscript标准库:
-          - 索引: lib.index.md
+          - 索引: lib/index.md
           - file: lib/file.md
-          - math: lib/math.md
           - random: lib/random.md
-          - string: lib/string.md
-          - time: lib/time.md
           - turtle: lib/turtle.md
           - ui: lib/ui.md
-          - util: lib/util.md
-          - var: lib/var.md
         - 报告BUG: bug.md
 
 theme: readthedocs

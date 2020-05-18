@@ -1,5 +1,27 @@
-def getattr(obj , name):
-    return getattr(obj, name)
+def gets(prompt='? '):
+    return input(prompt)
 
-def len(obj):
-    return len(obj)
+def getsint(prompt='int? '):
+    try:
+        return int(input(prompt))
+    except:
+        return None
+
+def getfile(prompt='file? ', mode='r'):
+    try:
+        return open(input(prompt), mode)
+    except:
+        return None
+
+def getsfloat(prompt='float? '):
+    try:
+        return float(input(prompt))
+    except:
+        return None
+
+def puts(*args):
+    for item in args:
+        print(item, end=' ')
+    else:
+        print()
+
