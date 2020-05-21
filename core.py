@@ -208,7 +208,7 @@ class XScriptInterpreter(object):
         return input(prompt)
 
     def let(self, name, symbol, value):
-	# let is just a assignment statement, it support10 operators.
+	# let is just a assignment statement, it support 10 operators.
         value = self.replacevar(value)
         if name[0] not in string.ascii_letters + string.digits + '_':
             raise TypeError('Invalid name: %s' % name)
