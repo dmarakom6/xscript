@@ -110,26 +110,32 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="xscript">xscript</h1>
-<p>xscript是一个使用python编写的微型语言. 其源代码(<code>core.py</code>)绝对不会超过1000行.</p>
+                <h1 id="xscript">什么是xscript?</h1>
+<p>xscript是用python编写的一个非常小巧的编程语言, 它的核心(<code>core.py</code>)不会超过1000行.</p>
+<p>没有函数, 没有判断结构. 它只有最基本的变量管理, 所有类型的循环结构, 可调用的外部函数(python实现), 没了!</p>
 <blockquote>
-<p>有一部分原因是我将大部分的内容都写进了xscript库(<code>xscript/lib</code>)</p>
-<p>这门语言是设计为嵌入到一个软件里的, 当然是越小巧越好了!</p>
+<p>xscript的核心可以缩减很小, 因为所有主要的功能都在库<code>lib</code>中.</p>
+<p>你可以使用 <code>import lib</code> 来导入该库, 函数定义和用法都和python差不多.</p>
+<p>这门语言是设计为嵌入式的, 这样也可以保证安全以及运行时的效果.</p>
 </blockquote>
 <h1 id="_1">如何运行我的代码?</h1>
-<p>你可以在xscript目录下, 在终端中输入<code>xscript.py [你的文件]</code>就可以运行了.</p>
+<p>你可以在xscript目录下, 通过终端输入<code>xscript.py [你的文件名]</code>来运行.</p>
+<p>当然, 你可以看看<code>xscript/script</code>目录下的例子.</p>
 <h2 id="_2">如何调试我的代码?</h2>
-<p>你可以在代码中的单独一行加入<code>debug</code>代码来开启交互式的debug, 使用<code>exit</code>以退出.</p>
-<h1 id="xscript_1">xscript有多快?</h1>
-<p>我迄今为止只做了一个测试,取平均值得知, 运行差不多(将xscript翻译成python)的代码,
-xscript比python慢了一点(大约零点几秒).</p>
-<h1 id="_3">更多</h1>
-<p>我特地写了一个<a href="howto/">文档</a>来解释其工作原理.</p>
-<p>如果你想更多地了解xscript, 请<a href="learn/">点击这里</a>.</p>
-<p>xscript有一个使用Python写的内置函数库, 和python<strong>有点儿</strong>不相同, 你可以<a href="lib/">点击这里</a>了解标准库.</p>
-<h1 id="license">LICENSE</h1>
-<p>该程序使用GPLv3.</p>
-<p>你可以任意复制之.</p>
+<p>在<code>2020-5-10</code>次提交中更新了debug的用法.</p>
+<p>现在允许你与debug交互.</p>
+<h1 id="_3">它有多快?</h1>
+<p>求xscript运行时有多快是一件麻烦的事情, 我们不高兴做这些没有意义的事情.</p>
+<blockquote>
+<p>经过对比: python比xscript快了一秒左右(<code>script/circle.xs</code>).</p>
+</blockquote>
+<h1 id="xscript_1">学习, 改进xscript</h1>
+<p>xscript是一门开源编程语言, 它现在还处于开发阶段, 希望你能帮助改进xscript.</p>
+<ul>
+<li><a href="bug/">报告一个BUG</a></li>
+<li><a href="learn/">学习xscript</a></li>
+<li><a href="howto/">xscript如何工作</a></li>
+</ul>
               
             </div>
           </div>
@@ -185,5 +191,5 @@ xscript比python慢了一点(大约零点几秒).</p>
 
 <!--
 MkDocs version : 1.1
-Build Date UTC : 2020-05-18 15:52:04
+Build Date UTC : 2020-05-21 15:58:20
 -->
