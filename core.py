@@ -208,7 +208,7 @@ class XScriptInterpreter(object):
         return input(prompt)
 
     def let(self, name, symbol, value):
-	# let is just a assignment statement, it support 8 operators.
+	# let is just a assignment statement, it support10 operators.
         value = self.replacevar(value)
         if name[0] not in string.ascii_letters + string.digits + '_':
             raise TypeError('Invalid name: %s' % name)
@@ -217,12 +217,14 @@ class XScriptInterpreter(object):
                 if char not in string.ascii_letters + '_':
                     raise TypeError('Invalid name: %s' % name)
             else:
-                if name not in self.var and symbol == ':=':
+                if name not in self.var and symbol not in ['=', '#=', '.=']:
+                    raise TypeError("Undefined name cannot use '%s'" % symbol)
+                if symbol == '=':
                     self.var[name] = value
-                elif name not in self.var and symbol != ':=':
-                    raise TypeError("Undefined name just can use ':='")
-                elif symbol == '=':
-                    self.var[name] = value
+                elif symbol == '#=':
+                    self.var[name] = int(value)
+                elif symbol == '.=':
+                    self.var[name] = float(value)
                 elif symbol == '+=':
                     self.var[name] += value
                 elif symbol == '-=':
@@ -254,6 +256,16 @@ class XScriptInterpreter(object):
         for item in shlex.split(s):
             if item[0] == '$':
                 exp.append(self.var[item[1:]])
+            elif item[0] == '#':
+                try:
+                    exp.append(int(self.var[item[1:]]))
+                except:
+                    exp.append(None)
+            elif item[0] == '.':
+                try:
+                    exp.append(float(self.var[item[1:]]))
+                except:
+                    exp.append(None)
             else:
                 exp.append(item)
         else:
@@ -271,12 +283,22 @@ class XScriptInterpreter(object):
             return self.replacefunction(value[1:-1])
         elif value[0] == '$':
             return self.var[value[1:]]
+        elif value[0] == '#':
+            try:
+                return int(self.var[value[1:]])
+            except:
+                return None
+        elif value[0] == '.':
+            try:
+                return float(self.var[value[1:]])
+            except:
+                return None
         else:
             return value
     
     def restart(self, string='', var={}, argv=[]):
         # you cannot call it in your script
-        # it just set some global variable like debugable
+        # it just set some global variable like variable
         self.program = string
         self.var = var
         self.itervar = {}
