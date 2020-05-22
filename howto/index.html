@@ -124,10 +124,14 @@
 <h2 id="_2">变量代换符($, #, .)</h2>
 <p>美元符号(<code>$</code>), 井号(<code>#</code>), 和英文句号(<code>.</code>)都是变量代换符, 分别将变量转换为各种数据类型. 使用<code>replacevar</code>函数来替换在<code>var</code>中的变量.</p>
 <ul>
-<li><code>$</code>: 保持原意</li>
+<li><code>&amp;</code>: 保持原来变量类型</li>
+<li><code>$</code>: 转换为str类型</li>
 <li><code>#</code>: 转换为int类型</li>
 <li><code>.</code>: 转换为float类型</li>
 </ul>
+<blockquote>
+<p>当转换失败, 会返回<code>$NULL$</code>.</p>
+</blockquote>
 <h2 id="_3">命令替换符([...])</h2>
 <p><code>[</code>和<code>]</code>是成对的命令替换符,使用<code>replacefunction</code>来替换.</p>
 <p>命令替换符<strong>仅仅</strong>支持如下命令:</p>
@@ -135,6 +139,12 @@
 <li>gets</li>
 <li>xscript.</li>
 </ul>
+<h2 id="xscript_1">xscript.</h2>
+<p><code>xscript.</code>命令使用xscript函数来支持函数通过路径获取的功能, 支持获得函数和变量.</p>
+<p>其间使用了一个<code>for</code>循环来遍历<code>lib</code>库的应用位置.</p>
+<blockquote>
+<p>在获取变量值的时候不能向<code>xscript</code>传递参数, 以免引起<code>... is not callable</code>错误</p>
+</blockquote>
               
             </div>
           </div>
