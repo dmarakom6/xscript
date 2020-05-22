@@ -208,8 +208,7 @@ class XScriptInterpreter(object):
         return input(prompt)
 
     def let(self, name, symbol, value):
-	# let is just a assignment statement, it support 10 operators.
-        value = self.replacevar(value)
+        # let is just a assignment statement, it support 10 operators.
         if name[0] not in string.ascii_letters + string.digits + '_':
             raise TypeError('Invalid name: %s' % name)
         else:
@@ -219,6 +218,7 @@ class XScriptInterpreter(object):
             else:
                 if name not in self.var and symbol not in ['=', '#=', '.=']:
                     raise TypeError("Undefined name cannot use '%s'" % symbol)
+                value = self.replacevar(value)
                 if symbol == '=':
                     self.var[name] = value
                 elif symbol == '#=':
@@ -254,8 +254,10 @@ class XScriptInterpreter(object):
         # you just can call 2 functions in []
         exp = []
         for item in shlex.split(s):
-            if item[0] == '$':
+            if item[0] == '&':
                 exp.append(self.var[item[1:]])
+            elif item[0] == '$':
+                exp.append(str(self.var[item[1:]]))
             elif item[0] == '#':
                 try:
                     exp.append(int(self.var[item[1:]]))
@@ -277,12 +279,14 @@ class XScriptInterpreter(object):
                 raise TypeError('Unknow replace function command : %s' % ret[0])
 
     def replacevar(self, value):
-		# you cannot call it in your script
-		# it just replace name of variable to its value
+	# you cannot call it in your script
+	# it just replace name of variable to its value
         if value[0] == '[' and value[-1] == ']':
             return self.replacefunction(value[1:-1])
-        elif value[0] == '$':
+        elif value[0] == '&':
             return self.var[value[1:]]
+        elif value[0] == '$':
+            return str(self.var[value[1:]])
         elif value[0] == '#':
             try:
                 return int(self.var[value[1:]])
@@ -321,7 +325,7 @@ class XScriptInterpreter(object):
             lines = shlex.split(line)
             try:
                 if lines == []:
-                    pass
+                        pass
                 elif lines[0][0] == '#':
                     pass
                 elif lines[0] == 'debug':
