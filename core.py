@@ -3,12 +3,14 @@
 
 import lib
 import os
+from prettytable import PrettyTable
 try:
     import readline
 except:
     print("xscript: No 'readline'")
 import shlex
 import string
+import textwrap
 
 
 class XScriptInterpreter(object):
@@ -33,12 +35,25 @@ class XScriptInterpreter(object):
                 print('.'.join(self.block))
             elif cmd.startswith('show '):
                 if cmd[5:] in self.var:
-                    print('%s: %s' % (cmd[5:], self.var[cmd[5:]]))
+                    table = PrettyTable(['name', 'value', 'type'])
+                    name = cmd[5:]
+                    value = self.var[name]
+                    if len(str(value)) >= 50:
+                        table.add_row([name, textwrap.shorten(str(value), 50, placeholder='...'), type(value)])
+                    else:
+                        table.add_row([name, str(value), type(value)])
+                    print(table)
                 else:
-                    print("ERROR: '%s' not found" % cmd[5:])
+                    print("ERROR: name '%s' is not defined" % cmd[5:])
             elif cmd == 'vars':
+                table = PrettyTable(['name', 'value', 'type'])
                 for k, v in self.var.items():
-                    print('%s: %s' % (k, v))
+                    if len(str(v)) >= 50:
+                        table.add_row([k, textwrap.shorten(str(v), 50, placeholder='...'), type(v)])
+                    else:
+                        table.add_row([k, str(v), type(v)])
+                else:
+                    print(table)
             else:
                 print("ERROR: No debug command: '%s'" % cmd)
         else:
