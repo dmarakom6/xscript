@@ -39,9 +39,9 @@ class XScriptInterpreter(object):
                     name = cmd[5:]
                     value = self.var[name]
                     if len(str(value)) >= 50:
-                        table.add_row([name, textwrap.shorten(str(value), 50, placeholder='...'), type(value)])
+                        table.add_row([name, textwrap.shorten(str(value), 50, placeholder='...'), str(type(value))[8:-2]])
                     else:
-                        table.add_row([name, str(value), type(value)])
+                        table.add_row([name, str(value), str(type(value))[8:-2]])
                     print(table)
                 else:
                     print("ERROR: name '%s' is not defined" % cmd[5:])
@@ -49,9 +49,9 @@ class XScriptInterpreter(object):
                 table = PrettyTable(['name', 'value', 'type'])
                 for k, v in self.var.items():
                     if len(str(v)) >= 50:
-                        table.add_row([k, textwrap.shorten(str(v), 50, placeholder='...'), type(v)])
+                        table.add_row([k, textwrap.shorten(str(v), 50, placeholder='...'), str(type(v))[8:-2]])
                     else:
-                        table.add_row([k, str(v), type(v)])
+                        table.add_row([k, str(v), str(type(v))[8:-2]])
                 else:
                     print(table)
             else:

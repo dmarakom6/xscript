@@ -8,6 +8,11 @@ xscript是用python编写的一个非常小巧的编程语言, 它的核心(`cor
 
 > 这门语言是设计为嵌入式的, 这样也可以保证安全以及运行时的效果.
 
+# 准备工作
+请安装`prettytable`的python模块:
+```pip install -U prettytable```
+这样才能确保使用xscript时不报错.
+
 # 如何运行我的代码?
 你可以在xscript目录下, 通过终端输入`xscript.py [你的文件名]`来运行.
 
