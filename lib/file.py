@@ -1,17 +1,17 @@
-def fileclose(fileobj):
+def fileClose(fileobj):
     fileobj.close()
 
-def fileflush(fileobj):
+def fileFlush(fileobj):
     fileobj.flush()
 
-def fileopen(name, mode='r'):
+def fileOpen(name, mode='r'):
     try:
         return open(name, mode)
     except:
         return None
 
-def fileread(fileobj, size=-1):
-    return fileobj.read(int(size))
+def fileRead(fileobj, size=-1):
+    return fileobj.read(size)
 
-def filewrite(fileobj, s):
+def fileWrite(fileobj, s):
     return fileobj.write(s)

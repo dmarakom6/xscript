@@ -224,38 +224,34 @@ class XScriptInterpreter(object):
 
     def let(self, name, symbol, value):
         # let is just a assignment statement, it support 10 operators.
-        if name[0] not in string.ascii_letters + string.digits + '_':
-            raise TypeError('Invalid name: %s' % name)
-        else:
-            for char in name[1:]:
-                if char not in string.ascii_letters + '_':
-                    raise TypeError('Invalid name: %s' % name)
+        if testname(name):
+            if name not in self.var and symbol not in ['=', '#=', '.=']:
+                raise TypeError("Undefined name cannot use '%s'" % symbol)
+            value = self.replacevar(value)
+            if symbol == '=':
+                self.var[name] = value
+            elif symbol == '#=':
+                self.var[name] = int(value)
+            elif symbol == '.=':
+                self.var[name] = float(value)
+            elif symbol == '+=':
+                self.var[name] += value
+            elif symbol == '-=':
+                self.var[name] -= value
+            elif symbol == '*=':
+                self.var[name] *= value
+            elif symbol == '/=':
+                self.var[name] /= value
+            elif symbol == '**=':
+                self.var[name] **= value
+            elif symbol == '>>=':
+                self.var[name] >>= value
+            elif symbol == '<<=':
+                self.var[name] <<= value
             else:
-                if name not in self.var and symbol not in ['=', '#=', '.=']:
-                    raise TypeError("Undefined name cannot use '%s'" % symbol)
-                value = self.replacevar(value)
-                if symbol == '=':
-                    self.var[name] = value
-                elif symbol == '#=':
-                    self.var[name] = int(value)
-                elif symbol == '.=':
-                    self.var[name] = float(value)
-                elif symbol == '+=':
-                    self.var[name] += value
-                elif symbol == '-=':
-                    self.var[name] -= value
-                elif symbol == '*=':
-                    self.var[name] *= value
-                elif symbol == '/=':
-                    self.var[name] /= value
-                elif symbol == '**=':
-                    self.var[name] **= value
-                elif symbol == '>>=':
-                    self.var[name] >>= value
-                elif symbol == '<<=':
-                    self.var[name] <<= value
-                else:
-                    raise TypeError('Unsupported operate: %s' % symbol)
+                raise TypeError('Unsupported operate: %s' % symbol)
+        else:
+            raise TypeError("Invalid name: '%s'"% name)
 
     def puts(self, *args):
 	# puts just print something to the console
@@ -438,3 +434,14 @@ class XScriptInterpreter(object):
                     return obj
                 else:
                     raise TypeError("'%s' is not callable" % path)
+
+
+def testname(name):
+    if name[0] not in string.ascii_letters + string.digits + '_':
+        return False
+    else:
+        for char in name[1:]:
+            if char not in string.ascii_letters + '_':
+                return True
+        else:
+            return True

@@ -10,7 +10,10 @@ xscript是用python编写的一个非常小巧的编程语言, 它的核心(`cor
 
 # 准备工作
 请安装`prettytable`的python模块:
-```pip install -U prettytable```
+```shell
+pip install -U prettytable
+```
+
 这样才能确保使用xscript时不报错.
 
 # 如何运行我的代码?

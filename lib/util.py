@@ -1,19 +1,19 @@
 def gets(prompt='? '):
     return input(prompt)
 
-def getsint(prompt='int? '):
+def getsInt(prompt='int? '):
     try:
         return int(input(prompt))
     except:
         return None
 
-def getfile(prompt='file? ', mode='r'):
+def getFile(prompt='file? ', mode='r'):
     try:
         return open(input(prompt), mode)
     except:
         return None
 
-def getsfloat(prompt='float? '):
+def getsFloat(prompt='float? '):
     try:
         return float(input(prompt))
     except:

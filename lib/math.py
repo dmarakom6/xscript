@@ -1,13 +1,13 @@
 import math as _math
 
 def abs(x):
-    return abs(float(x))
+    return abs(x)
 
 def cos(x):
-    return _math.cos(float(x))
+    return _math.cos(x)
 
 def sin(x):
-    return _math.sin(float(x))
+    return _math.sin(x)
 
 def tan(x):
-    return _math.tan(float(x))
+    return _math.tan(x)

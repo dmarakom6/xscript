@@ -4,4 +4,4 @@ def rand():
     return _random.random()
 
 def randint(a, b):
-    return _random.randint(int(a), int(b))
+    return _random.randint(a, b)
