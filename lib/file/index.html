@@ -69,9 +69,15 @@
                     </li>
                     <li class="toctree-l1"><a class="reference internal" href="../random/">random</a>
                     </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../table/">table</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../time/">time</a>
+                    </li>
                     <li class="toctree-l1"><a class="reference internal" href="../turtle/">turtle</a>
                     </li>
                     <li class="toctree-l1"><a class="reference internal" href="../ui/">ui</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../util/">util</a>
                     </li>
                 </ul>
                 <ul>
@@ -115,7 +121,7 @@
             <div class="section">
               
                 <h1 id="file-">file - 文件相关操作</h1>
-<p><em>fileclose #fileobj#</em></p>
+<p><em>fileClose &amp;fileobj</em></p>
 <ul>
 <li><em>fileobj</em> - 一个文件对象</li>
 </ul>
@@ -123,7 +129,7 @@
 <p>关闭一个文件</p>
 </blockquote>
 <hr />
-<p><em>fileflush #fileobj#</em></p>
+<p><em>fileFlush &amp;fileobj</em></p>
 <ul>
 <li><em>fileobj</em> - 一个文件对象</li>
 </ul>
@@ -131,7 +137,7 @@
 <p>刷新一个文件</p>
 </blockquote>
 <hr />
-<p><em>fileopen #name# #mode=r#</em></p>
+<p><em>fileOpen &amp;name $mode=r</em></p>
 <ul>
 <li><em>name</em> - 一个文件名</li>
 <li><em>mode</em> - 文件的打开模式</li>
@@ -141,7 +147,7 @@
 <p>如果文件不存在, 返回-1.</p>
 </blockquote>
 <hr />
-<p><em>fileread #fileobj# #size=-1#</em></p>
+<p><em>fileRead &amp;fileobj #size=-1</em></p>
 <ul>
 <li><em>fileobj</em> - 一个文件对象</li>
 <li><em>size</em> - 要读取的数量[默认为全部(-1)]</li>
@@ -150,7 +156,7 @@
 <p>读取文件内容.</p>
 </blockquote>
 <hr />
-<p><em>filewrite #fileobj# #s#</em></p>
+<p><em>fileWrite &amp;fileobj $s</em></p>
 <ul>
 <li><em>fileobj</em> - 一个文件对象</li>
 <li><em>s</em> - 要写入的字符(串)</li>

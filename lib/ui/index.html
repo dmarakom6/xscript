@@ -67,11 +67,17 @@
                     </li>
                     <li class="toctree-l1"><a class="reference internal" href="../random/">random</a>
                     </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../table/">table</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../time/">time</a>
+                    </li>
                     <li class="toctree-l1"><a class="reference internal" href="../turtle/">turtle</a>
                     </li>
                     <li class="toctree-l1 current"><a class="reference internal current" href="./">ui</a>
     <ul class="current">
     </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../util/">util</a>
                     </li>
                 </ul>
                 <ul>
@@ -116,7 +122,7 @@
               
                 <h1 id="tkgui">基于tk的GUI库</h1>
 <p>该标准库使用python的tkinter库编写, 去除了一些复杂的选项.</p>
-<p><em>askyesno #mesage# #title=xscript#</em></p>
+<p><em>askyesno $mesage $title=xscript</em></p>
 <ul>
 <li><em>message</em> - 要显示的信息</li>
 <li><em>title</em> - 消息框的标题</li>
@@ -125,7 +131,7 @@
 <p>显示一个消息框</p>
 </blockquote>
 <hr />
-<p><em>Button #master#</em></p>
+<p><em>Button &amp;master</em></p>
 <ul>
 <li><em>master</em> - 小部件要显示的窗口</li>
 </ul>
@@ -133,7 +139,7 @@
 <p>返回一个在master上的按钮</p>
 </blockquote>
 <hr />
-<p><em>configure #widget# #item# #value#</em></p>
+<p><em>configure &amp;widget $item &amp;value</em></p>
 <ul>
 <li><em>widget</em> - 要配置的小部件</li>
 <li><em>item</em> - 要配置的项目</li>
@@ -143,7 +149,7 @@
 <p>设置widget, 相当于<code>widget[item] = value</code></p>
 </blockquote>
 <hr />
-<p><em>destroy #widget#</em></p>
+<p><em>destroy &amp;widget</em></p>
 <ul>
 <li><em>widhet</em> - 一个小部件</li>
 </ul>
@@ -151,7 +157,7 @@
 <p>从窗口删除一个小部件</p>
 </blockquote>
 <hr />
-<p><em>grid #widget# #col# #row#</em></p>
+<p><em>grid &amp;widget #col #row</em></p>
 <ul>
 <li><em>widget</em> - 要显示的小部件</li>
 <li><em>col</em> - 要显示的列</li>
@@ -161,7 +167,7 @@
 <p>以网格形式来管理小部件</p>
 </blockquote>
 <hr />
-<p><em>Label #master#</em></p>
+<p><em>Label &amp;master</em></p>
 <ul>
 <li><em>master</em> - 小部件要显示的窗口</li>
 </ul>
@@ -169,7 +175,7 @@
 <p>返回一个在master上的标签</p>
 </blockquote>
 <hr />
-<p><em>mainloop #master#</em></p>
+<p><em>mainloop &amp;master</em></p>
 <ul>
 <li><em>master</em> - 一个窗口对象</li>
 </ul>
@@ -177,7 +183,7 @@
 <p>让master进入主循环</p>
 </blockquote>
 <hr />
-<p><em>showinfo #message# #title=xscript#</em></p>
+<p><em>showinfo $message $title=xscript</em></p>
 <ul>
 <li><em>message</em> - 要显示的信息</li>
 <li><em>title</em> - 窗口的标题</li>
@@ -186,7 +192,7 @@
 <p>显示一个消息框</p>
 </blockquote>
 <hr />
-<p><em>title #widget# #title#</em></p>
+<p><em>title &amp;widget $title</em></p>
 <ul>
 <li><em>widget</em> - 一个窗口对象</li>
 <li><em>title</em> - 窗口的标题</li>
@@ -209,7 +215,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../../bug/" class="btn btn-neutral float-right" title="报告BUG">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../util/" class="btn btn-neutral float-right" title="util">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href="../turtle/" class="btn btn-neutral" title="turtle"><span class="icon icon-circle-arrow-left"></span> Previous</a>
@@ -243,7 +249,7 @@
         <span><a href="../turtle/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../../bug/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../util/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
