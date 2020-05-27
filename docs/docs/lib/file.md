@@ -1,6 +1,6 @@
 # file - 文件相关操作
 
-*fileclose \#fileobj\#*
+*fileClose &fileobj*
 
   - *fileobj* - 一个文件对象
 
@@ -8,7 +8,7 @@
 
 - - -
 
-*fileflush \#fileobj\#*
+*fileFlush &fileobj*
 
   - *fileobj* - 一个文件对象
 
@@ -16,7 +16,7 @@
 
 - - -
 
-*fileopen \#name\# \#mode=r\#*
+*fileOpen &name $mode=r*
 
   - *name* - 一个文件名
   - *mode* - 文件的打开模式
@@ -27,7 +27,7 @@
 
 - - -
 
-*fileread \#fileobj\# \#size=-1\#*
+*fileRead &fileobj \#size=-1*
 
   - *fileobj* - 一个文件对象
   - *size* - 要读取的数量[默认为全部(-1)]
@@ -36,7 +36,7 @@
 
 - - -
 
-*filewrite \#fileobj\# \#s\#*
+*fileWrite &fileobj $s*
 
   - *fileobj* - 一个文件对象
   - *s* - 要写入的字符(串)

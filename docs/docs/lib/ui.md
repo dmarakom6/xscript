@@ -2,7 +2,7 @@
 
 该标准库使用python的tkinter库编写, 去除了一些复杂的选项.
 
-*askyesno \#mesage\# \#title=xscript\#*
+*askyesno $mesage $title=xscript*
   
   - *message* - 要显示的信息
   - *title* - 消息框的标题
@@ -11,7 +11,7 @@
 
 - - -
 
-*Button \#master\#*
+*Button &master*
   
   - *master* - 小部件要显示的窗口
 
@@ -19,7 +19,7 @@
 
 - - -
 
-*configure \#widget\# \#item\# \#value\#*
+*configure &widget $item &value*
   
   - *widget* - 要配置的小部件
   - *item* - 要配置的项目
@@ -29,7 +29,7 @@
 
 - - -
 
-*destroy \#widget\#*
+*destroy &widget*
   
   - *widhet* - 一个小部件
 
@@ -37,7 +37,7 @@
 
 - - -
 
-*grid \#widget\# \#col\# \#row\#*
+*grid &widget \#col \#row*
   
   - *widget* - 要显示的小部件
   - *col* - 要显示的列
@@ -47,7 +47,7 @@
   
 - - -
 
-*Label \#master\#*
+*Label &master*
 
   - *master* - 小部件要显示的窗口
 
@@ -55,7 +55,7 @@
 
 - - -
 
-*mainloop \#master\#*
+*mainloop &master*
 
   - *master* - 一个窗口对象
 
@@ -63,7 +63,7 @@
 
 - - -
 
-*showinfo \#message\# \#title=xscript\#*
+*showinfo $message $title=xscript*
   
   - *message* - 要显示的信息
   - *title* - 窗口的标题
@@ -72,7 +72,7 @@
 
 - - -
 
-*title \#widget\# \#title\#*
+*title &widget $title*
   
   - *widget* - 一个窗口对象
   - *title* - 窗口的标题

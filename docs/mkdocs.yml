@@ -8,8 +8,11 @@ nav:
           - 索引: lib/index.md
           - file: lib/file.md
           - random: lib/random.md
+          - table: lib/table.md
+          - time: lib/time.md
           - turtle: lib/turtle.md
           - ui: lib/ui.md
+          - util: lib/util.md
         - 报告BUG: bug.md
 
 theme: readthedocs
