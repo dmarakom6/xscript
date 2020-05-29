@@ -224,7 +224,7 @@ class XScriptInterpreter(object):
 
     def let(self, name, symbol, value):
         # let is just a assignment statement, it support 10 operators.
-        if testname(name):
+        if self.testname(name):
             if name not in self.var and symbol not in ['=', '#=', '.=']:
                 raise TypeError("Undefined name cannot use '%s'" % symbol)
             value = self.replacevar(value)
@@ -317,11 +317,11 @@ class XScriptInterpreter(object):
         self.program = string
         self.var = var
         self.itervar = {}
-        self.var['TRUE$'] = True
-        self.var['FALSE$'] = False
-        self.var['NULL$'] = None
-        self.var['ARGV$']= argv
-        self.const = ['TRUE$', 'FALSE$', 'ARGV$', 'NULL$']
+        self.var['true'] = True
+        self.var['false'] = False
+        self.var['null'] = None
+        self.var['argv']= argv
+        self.const = ['true', 'false', 'null', 'argv']
 
     def run(self):
         # run is a very import function, you understand
@@ -372,7 +372,20 @@ class XScriptInterpreter(object):
                 break
             else:
                 self.now += 1
-            
+
+    def testname(self, name):
+        if name[0] not in string.ascii_letters + '_':
+            return False
+        else:
+            for char in name[1:]:
+                if char not in string.ascii_letters  + string.digits + '_':
+                    return False
+            else:
+                if name in self.const:
+                    return False
+                else:
+                    return True
+
     def while_flag(self, left, symbol, right):
         # while is a flag, not function
         left = self.replacevar(left)
@@ -435,13 +448,3 @@ class XScriptInterpreter(object):
                 else:
                     raise TypeError("'%s' is not callable" % path)
 
-
-def testname(name):
-    if name[0] not in string.ascii_letters + string.digits + '_':
-        return False
-    else:
-        for char in name[1:]:
-            if char not in string.ascii_letters + '_':
-                return True
-        else:
-            return True
