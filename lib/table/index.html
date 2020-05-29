@@ -121,6 +121,7 @@
             <div class="section">
               
                 <h1 id="table-">table - 字符型表格</h1>
+<p>光在debug中用<code>prettytable</code>模块就太浪费了.</p>
 <p><em>addColum &amp;table $fieldname column...</em></p>
 <ul>
 <li><em>table</em> - 一个表格对象</li>
@@ -148,6 +149,30 @@
 </li>
 </ul>
 <hr />
+<p><em>clearRow &amp;table</em></p>
+<ul>
+<li><em>table</em> - 一个表格对象</li>
+</ul>
+<blockquote>
+<p>删除表格中所有的行, 但保留标题.</p>
+</blockquote>
+<hr />
+<p><em>delRow &amp;table #row_index</em></p>
+<ul>
+<li><em>table</em> - 一个表格对象</li>
+<li><em>row_index</em> - 要删除的行(从0开始)</li>
+</ul>
+<blockquote>
+<p>从表格中删除一行</p>
+</blockquote>
+<hr />
+<p><em>Table $field_names...</em></p>
+<ul>
+<li><em>field_names</em> - 列名</li>
+</ul>
+<blockquote>
+<p>创建一个表格</p>
+</blockquote>
               
             </div>
           </div>

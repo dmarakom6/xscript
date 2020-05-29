@@ -58,6 +58,18 @@
                 <ul class="current">
                     <li class="toctree-l1 current"><a class="reference internal current" href="./">xscript如何工作</a>
     <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#block">块(block)</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_1">变量的命名标准</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_2">变量代换符($, #, .)</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_3">命令替换符([...])</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#xscript_1">xscript.</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_4">特殊的变量</a>
+    </li>
     </ul>
                     </li>
                 </ul>
@@ -117,16 +129,18 @@
             <div class="section">
               
                 <h1 id="xscript">xscript如何工作</h1>
-<h1 id="_1">定义</h1>
-<p>xscript是一门类似于TCL的命令语言.</p>
-<hr />
-<p>下面的一些词在xscript中有特定的意思.</p>
 <blockquote>
 <p>以下所有的函数和变量都在<code>core.XScriptInterpreter</code>中</p>
 </blockquote>
 <h2 id="block">块(block)</h2>
 <p>块是一组代码, 以块开始符(如<code>for</code>)开始,以<code>end</code>命令结束.</p>
-<p>在<code>block</code>中记录了当前代码行所处的块.</p>
+<p>在<code>block</code>中记录了当前代码行所处的块, 以便能够更快遍历完块.</p>
+<h2 id="_1">变量的命名标准</h2>
+<p><code>testname</code>函数定义了xscript变量应怎样命名:</p>
+<blockquote>
+<p>第一个字符应该是<code>a-z</code>或<code>A-Z</code>或<code>_</code>.</p>
+<p>第二个字符在第一个字符的基础上允许<code>1-9</code>.</p>
+</blockquote>
 <h2 id="_2">变量代换符($, #, .)</h2>
 <p>美元符号(<code>$</code>), 井号(<code>#</code>), 和英文句号(<code>.</code>)都是变量代换符, 分别将变量转换为各种数据类型. 使用<code>replacevar</code>函数来替换在<code>var</code>中的变量.</p>
 <ul>
@@ -146,11 +160,25 @@
 <li>xscript.</li>
 </ul>
 <h2 id="xscript_1">xscript.</h2>
-<p><code>xscript.</code>命令使用xscript函数来支持函数通过路径获取的功能, 支持获得函数和变量.</p>
+<p><code>xscript.</code>(不要忘记<code>.</code>)命令使用xscript函数来支持函数通过路径获取的功能, 支持获得函数和变量.</p>
 <p>其间使用了一个<code>for</code>循环来遍历<code>lib</code>库的应用位置.</p>
-<blockquote>
+<div class="admonition warning">
+<p class="admonition-title">注意</p>
 <p>在获取变量值的时候不能向<code>xscript</code>传递参数, 以免引起<code>... is not callable</code>错误</p>
-</blockquote>
+</div>
+<h2 id="_4">特殊的变量</h2>
+<p>解释器启动时创建的变量, 不能通过<code>let</code>语句赋值, 也不能通过<code>delete</code>语句删除. 但是可以正常使用, 即常量.</p>
+<p>解释器定义的常量:</p>
+<ul>
+<li><code>true</code> - 逻辑值真</li>
+<li><code>false</code> - 逻辑值假</li>
+<li><code>null</code> - 等于<code>None</code></li>
+<li><code>argv</code> - 运行时传递的命令行参数</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">注意</p>
+<p><code>testname</code>函数也会检查一个字符串是否属于常量.</p>
+</div>
               
             </div>
           </div>
