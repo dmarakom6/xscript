@@ -1,4 +1,4 @@
-# table - 字符型表格
+# table - 字符型表格操作
 
 光在debug中用`prettytable`模块就太浪费了.
 

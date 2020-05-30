@@ -26,5 +26,5 @@ xscript是用python编写的一个非常小巧的编程语言, 它的核心(`cor
 xscript是一门开源编程语言, 它现在还处于开发阶段, 希望你能帮助改进xscript.
 
 - [报告一个BUG](bug.md)
-- [学习xscript](learn.md)
+- [学习xscript](learn/index.md)
 - [xscript如何工作](howto.md)
