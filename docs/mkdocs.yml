@@ -6,6 +6,7 @@ nav:
   - 报告BUG: bug.md
   - 学习xscript:
     - 目录: learn/index.md
+    - 安装xscript: learn/install.md
     - 基本输入输出: learn/basic-io.md
   - xscript标准库:
     - 索引: lib/index.md

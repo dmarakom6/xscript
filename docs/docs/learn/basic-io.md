@@ -5,6 +5,7 @@
 	xscript**很有可能**将这些东西从解释器核心中删除!
 
 用户输入命令: *gets $prompt=?*
+
   - *prompt* - 一个提示符
 
 > 提示用户输入
@@ -28,3 +29,4 @@ puts命令的本质是python的`print`函数.
 
 !!! tips "另请参阅"
 	[xscript.util](../lib/util.md)库中包涵了更方便的输入, 输出命令.
+

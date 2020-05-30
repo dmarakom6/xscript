@@ -7,5 +7,6 @@
   - 优化xscript
 
 - - -
-
+  
+  - [安装xscript](install.md)
   - [基本输入输出](basic-io.md)
