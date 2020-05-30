@@ -51,10 +51,6 @@
                     <li class="toctree-l1"><a class="reference internal" href="..">主页</a>
                     </li>
                 </ul>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../learn/">学习xscript</a>
-                    </li>
-                </ul>
                 <ul class="current">
                     <li class="toctree-l1 current"><a class="reference internal current" href="./">xscript如何工作</a>
     <ul class="current">
@@ -71,6 +67,17 @@
     <li class="toctree-l2"><a class="reference internal" href="#_4">特殊的变量</a>
     </li>
     </ul>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../bug/">报告BUG</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">学习xscript</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../learn/">目录</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../learn/basic-io/">基本输入输出</a>
                     </li>
                 </ul>
                 <p class="caption"><span class="caption-text">xscript标准库</span></p>
@@ -90,10 +97,6 @@
                     <li class="toctree-l1"><a class="reference internal" href="../lib/ui/">ui</a>
                     </li>
                     <li class="toctree-l1"><a class="reference internal" href="../lib/util/">util</a>
-                    </li>
-                </ul>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../bug/">报告BUG</a>
                     </li>
                 </ul>
       </div>
@@ -139,7 +142,7 @@
 <p><code>testname</code>函数定义了xscript变量应怎样命名:</p>
 <blockquote>
 <p>第一个字符应该是<code>a-z</code>或<code>A-Z</code>或<code>_</code>.</p>
-<p>第二个字符在第一个字符的基础上允许<code>1-9</code>.</p>
+<p>剩余的字符在第一个字符的基础上允许<code>1-9</code>.</p>
 </blockquote>
 <h2 id="_2">变量代换符($, #, .)</h2>
 <p>美元符号(<code>$</code>), 井号(<code>#</code>), 和英文句号(<code>.</code>)都是变量代换符, 分别将变量转换为各种数据类型. 使用<code>replacevar</code>函数来替换在<code>var</code>中的变量.</p>
@@ -149,9 +152,10 @@
 <li><code>#</code>: 转换为int类型</li>
 <li><code>.</code>: 转换为float类型</li>
 </ul>
-<blockquote>
+<div class="admonition tips">
+<p class="admonition-title">贴示</p>
 <p>当转换失败, 会返回<code>$NULL$</code>.</p>
-</blockquote>
+</div>
 <h2 id="_3">命令替换符([...])</h2>
 <p><code>[</code>和<code>]</code>是成对的命令替换符,使用<code>replacefunction</code>来替换.</p>
 <p>命令替换符<strong>仅仅</strong>支持如下命令:</p>
@@ -175,8 +179,8 @@
 <li><code>null</code> - 等于<code>None</code></li>
 <li><code>argv</code> - 运行时传递的命令行参数</li>
 </ul>
-<div class="admonition note">
-<p class="admonition-title">注意</p>
+<div class="admonition tips">
+<p class="admonition-title">贴示</p>
 <p><code>testname</code>函数也会检查一个字符串是否属于常量.</p>
 </div>
               
@@ -186,10 +190,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../lib/" class="btn btn-neutral float-right" title="索引">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../bug/" class="btn btn-neutral float-right" title="报告BUG">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../learn/" class="btn btn-neutral" title="学习xscript"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href=".." class="btn btn-neutral" title="主页"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -217,10 +221,10 @@
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../learn/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href=".." style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../lib/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../bug/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

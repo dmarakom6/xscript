@@ -9,7 +9,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>util - xscript</title>
+  <title>基本输入输出 - xscript</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
   <link rel="stylesheet" href="../../css/theme.css" />
@@ -18,8 +18,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "util";
-    var mkdocs_page_input_path = "lib/util.md";
+    var mkdocs_page_name = "\u57fa\u672c\u8f93\u5165\u8f93\u51fa";
+    var mkdocs_page_input_path = "learn/basic-io.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -60,31 +60,31 @@
                     </li>
                 </ul>
                 <p class="caption"><span class="caption-text">学习xscript</span></p>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../../learn/">目录</a>
+                <ul class="current">
+                    <li class="toctree-l1"><a class="reference internal" href="../">目录</a>
                     </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../learn/basic-io/">基本输入输出</a>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">基本输入输出</a>
+    <ul class="current">
+    </ul>
                     </li>
                 </ul>
                 <p class="caption"><span class="caption-text">xscript标准库</span></p>
-                <ul class="current">
-                    <li class="toctree-l1"><a class="reference internal" href="../">索引</a>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../lib/">索引</a>
                     </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../file/">file</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../../lib/file/">file</a>
                     </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../random/">random</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../../lib/random/">random</a>
                     </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../table/">table</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../../lib/table/">table</a>
                     </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../time/">time</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../../lib/time/">time</a>
                     </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../turtle/">turtle</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../../lib/turtle/">turtle</a>
                     </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../ui/">ui</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../../lib/ui/">ui</a>
                     </li>
-                    <li class="toctree-l1 current"><a class="reference internal current" href="./">util</a>
-    <ul class="current">
-    </ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../lib/util/">util</a>
                     </li>
                 </ul>
       </div>
@@ -108,11 +108,11 @@
     
       
         
-          <li>xscript标准库 &raquo;</li>
+          <li>学习xscript &raquo;</li>
         
       
     
-    <li>util</li>
+    <li>基本输入输出</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -123,26 +123,36 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="util-">util - 让简单的编程变得更简单</h1>
-<p><em>gets $prompt=?</em></p>
-<ul>
-<li><em>prompt</em> - 提示符</li>
-</ul>
+                <h1 id="_1">基本输入输出</h1>
+<p>基本输入输出是编程语言中最基本的东西, xscript包涵了内置的输入, 输出命令:</p>
+<div class="admonition warning">
+<p class="admonition-title">警告</p>
+<p>xscript<strong>很有可能</strong>将这些东西从解释器核心中删除!</p>
+</div>
+<p>用户输入命令: <em>gets $prompt=?</em>
+  - <em>prompt</em> - 一个提示符</p>
 <blockquote>
-<p>请求输入一个字符串</p>
+<p>提示用户输入</p>
 </blockquote>
+<p>gets命令的本质就是python的<code>input</code>函数, 所以应用起来很简单.</p>
 <hr />
-<p><em>getsInt $prompt=int?</em></p>
-<p><em>getFile $prompt=file? $mode=r</em></p>
-<p><em>getFloat $prompt=float?</em></p>
+<p>用户输出命令: <em>puts &amp;args...</em></p>
 <ul>
-<li><em>prompt</em> - 提示符</li>
-<li><em>mode</em> - 文件打开模式</li>
+<li><em>args</em> - 一些参数</li>
 </ul>
 <blockquote>
-<p>分别将输入转换为int类型, float类型, 以及按照文件名打开一个文件</p>
-<p>失败都会返回<code>&amp;null</code>.</p>
+<p>用户输出, 一般打印到控制台</p>
 </blockquote>
+<p>puts命令的本质是python的<code>print</code>函数.</p>
+<div class="admonition tips">
+<p class="admonition-title">贴示</p>
+<p><code>puts</code>命令会在每个打印的参数后面追加空格, 打印完毕之后换行.</p>
+</div>
+<hr />
+<div class="admonition tips">
+<p class="admonition-title">另请参阅</p>
+<p><a href="../../lib/util/">xscript.util</a>库中包涵了更方便的输入, 输出命令.</p>
+</div>
               
             </div>
           </div>
@@ -150,8 +160,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
+        <a href="../../lib/" class="btn btn-neutral float-right" title="索引">Next <span class="icon icon-circle-arrow-right"></span></a>
       
-        <a href="../ui/" class="btn btn-neutral" title="ui"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+        <a href="../" class="btn btn-neutral" title="目录"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -179,8 +191,10 @@
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../ui/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
+      
+        <span style="margin-left: 15px"><a href="../../lib/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
