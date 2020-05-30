@@ -9,7 +9,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>table - xscript</title>
+  <title>安装xscript - xscript</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
   <link rel="stylesheet" href="../../css/theme.css" />
@@ -18,8 +18,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "table";
-    var mkdocs_page_input_path = "lib/table.md";
+    var mkdocs_page_name = "\u5b89\u88c5xscript";
+    var mkdocs_page_input_path = "learn/install.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -60,33 +60,39 @@
                     </li>
                 </ul>
                 <p class="caption"><span class="caption-text">学习xscript</span></p>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../../learn/">目录</a>
+                <ul class="current">
+                    <li class="toctree-l1"><a class="reference internal" href="../">目录</a>
                     </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../learn/install/">安装xscript</a>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">安装xscript</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#linux">Linux下安装</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#windows">Windows下安装</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_1">简单一些</a>
+    </li>
+    </ul>
                     </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../learn/basic-io/">基本输入输出</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../basic-io/">基本输入输出</a>
                     </li>
                 </ul>
                 <p class="caption"><span class="caption-text">xscript标准库</span></p>
-                <ul class="current">
-                    <li class="toctree-l1"><a class="reference internal" href="../">索引</a>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../lib/">索引</a>
                     </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../file/">file</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../../lib/file/">file</a>
                     </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../random/">random</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../../lib/random/">random</a>
                     </li>
-                    <li class="toctree-l1 current"><a class="reference internal current" href="./">table</a>
-    <ul class="current">
-    </ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../lib/table/">table</a>
                     </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../time/">time</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../../lib/time/">time</a>
                     </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../turtle/">turtle</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../../lib/turtle/">turtle</a>
                     </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../ui/">ui</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../../lib/ui/">ui</a>
                     </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../util/">util</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../../lib/util/">util</a>
                     </li>
                 </ul>
       </div>
@@ -110,11 +116,11 @@
     
       
         
-          <li>xscript标准库 &raquo;</li>
+          <li>学习xscript &raquo;</li>
         
       
     
-    <li>table</li>
+    <li>安装xscript</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -125,59 +131,20 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="table-">table - 字符型表格操作</h1>
-<p>光在debug中用<code>prettytable</code>模块就太浪费了.</p>
-<p><em>addColum &amp;table $fieldname column...</em></p>
-<ul>
-<li><em>table</em> - 一个表格对象</li>
-<li><em>fieldname</em> - 列名</li>
-<li><em>colum</em> - 列数据</li>
-</ul>
-<blockquote>
-<p>在表格中添加一列</p>
-</blockquote>
+                <h1 id="xscript">安装xscript</h1>
+<p>xscript不需要安装, 但xscript是使用python编写的, 需要安装python.</p>
+<p>xscript在python3.8中可以很好的运行, 所以请安装python的最新版本.</p>
 <hr />
-<p><em>addRow &amp;table row...</em></p>
-<ul>
-<li><em>table</em> - 一个表格对象</li>
-<li><em>row</em> - 行数据</li>
-</ul>
-<blockquote>
-<p>在表格中添加一行数据</p>
-</blockquote>
-<hr />
-<p><em>clear &amp;table</em></p>
-<ul>
-<li><em>table</em> - 表格对象<blockquote>
-<p>删除整张表格</p>
-</blockquote>
-</li>
-</ul>
-<hr />
-<p><em>clearRow &amp;table</em></p>
-<ul>
-<li><em>table</em> - 一个表格对象</li>
-</ul>
-<blockquote>
-<p>删除表格中所有的行, 但保留标题.</p>
-</blockquote>
-<hr />
-<p><em>delRow &amp;table #row_index</em></p>
-<ul>
-<li><em>table</em> - 一个表格对象</li>
-<li><em>row_index</em> - 要删除的行(从0开始)</li>
-</ul>
-<blockquote>
-<p>从表格中删除一行</p>
-</blockquote>
-<hr />
-<p><em>Table $field_names...</em></p>
-<ul>
-<li><em>field_names</em> - 列名</li>
-</ul>
-<blockquote>
-<p>创建一个表格</p>
-</blockquote>
+<p>xscript的最新版本托管在Github上, 请先clone该git库.</p>
+<pre><code>git clone https://github.com/jason-bowen-zheng/xscript
+cd xscript
+</code></pre>
+
+<h2 id="linux">Linux下安装</h2>
+<p>clone好了就可以了, <code>xscript</code>目录下的<code>xscript.py</code>是主程序.</p>
+<h2 id="windows">Windows下安装</h2>
+<p>和Linux一样.</p>
+<h2 id="_1">简单一些</h2>
               
             </div>
           </div>
@@ -185,10 +152,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../time/" class="btn btn-neutral float-right" title="time">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../basic-io/" class="btn btn-neutral float-right" title="基本输入输出">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../random/" class="btn btn-neutral" title="random"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../" class="btn btn-neutral" title="目录"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -216,10 +183,10 @@
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../random/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../time/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../basic-io/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
