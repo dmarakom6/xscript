@@ -10,3 +10,4 @@
   
   - [安装xscript](install.md)
   - [基本输入输出](basic-io.md)
+  - [使用debug](use-debug.md)
