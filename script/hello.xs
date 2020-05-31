@@ -1,6 +1,6 @@
 # xscript/script/hello.xs
 
-let ans = $NULL$
+let ans = &null
 while $ans != bye
     let ans = ['gets ?']
     puts input: &ans

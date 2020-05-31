@@ -321,7 +321,8 @@ class XScriptInterpreter(object):
         self.var['false'] = False
         self.var['null'] = None
         self.var['argv']= argv
-        self.const = ['true', 'false', 'null', 'argv']
+        self.var['version'] = 0.0
+        self.const = ['true', 'false', 'null', 'argv', 'version']
 
     def run(self):
         # run is a very import function, you understand
