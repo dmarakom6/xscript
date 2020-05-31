@@ -33,6 +33,15 @@ class XScriptInterpreter(object):
                 pass
             elif cmd == 'now':
                 print('.'.join(self.block))
+            elif cmd == 'ls':
+                table = PrettyTable(['name', 'value', 'type'])
+                for k, v in self.var.items():
+                    if len(str(v)) >= 50:
+                        table.add_row([k, textwrap.shorten(str(v), 50, placeholder='...'), str(type(v))[8:-2]])
+                    else:
+                        table.add_row([k, str(v), str(type(v))[8:-2]])
+                else:
+                    print(table)
             elif cmd.startswith('show '):
                 if cmd[5:] in self.var:
                     table = PrettyTable(['name', 'value', 'type'])
@@ -45,15 +54,6 @@ class XScriptInterpreter(object):
                     print(table)
                 else:
                     print("ERROR: name '%s' is not defined" % cmd[5:])
-            elif cmd == 'vars':
-                table = PrettyTable(['name', 'value', 'type'])
-                for k, v in self.var.items():
-                    if len(str(v)) >= 50:
-                        table.add_row([k, textwrap.shorten(str(v), 50, placeholder='...'), str(type(v))[8:-2]])
-                    else:
-                        table.add_row([k, str(v), str(type(v))[8:-2]])
-                else:
-                    print(table)
             else:
                 print("ERROR: No debug command: '%s'" % cmd)
         else:
@@ -321,7 +321,7 @@ class XScriptInterpreter(object):
         self.var['false'] = False
         self.var['null'] = None
         self.var['argv']= argv
-        self.var['version'] = 0.0
+        self.var['version'] = 0x000000
         self.const = ['true', 'false', 'null', 'argv', 'version']
 
     def run(self):
