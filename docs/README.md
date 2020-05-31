@@ -1,5 +1,5 @@
 # 这里是xscript文档
-该文档由mkdocs创建, [mkdocs.yml](./mkdocs.yml)是配置文件, [docs/](./docs)是xscript的文档本身.
+[该文档](https://jason-bowen-zheng.github.io/xscript)由mkdocs创建, [mkdocs.yml](./mkdocs.yml)是配置文件, [docs/](./docs)是xscript的文档本身.
 
 文档内容:
 
