@@ -23,10 +23,9 @@ gets命令的本质就是python的`input`函数, 所以应用起来很简单.
 puts命令的本质是python的`print`函数.
 
 !!! tips "贴示"
-	`puts`命令会在每个打印的参数后面追加空格, 打印完毕之后换行.
+	`puts`命令会在每个打印的参数后面追加空格, 打印完毕之后换行
 
 - - -
 
 !!! tips "另请参阅"
-	[xscript.util](../lib/util.md)库中包涵了更方便的输入, 输出命令.
-
+	[xscript.util](../lib/util.md)库中包涵了更方便的输入, 输出命令
