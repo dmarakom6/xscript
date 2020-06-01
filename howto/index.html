@@ -81,6 +81,8 @@
                     </li>
                     <li class="toctree-l1"><a class="reference internal" href="../learn/basic-io/">基本输入输出</a>
                     </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../learn/use-debug/">使用debug</a>
+                    </li>
                 </ul>
                 <p class="caption"><span class="caption-text">xscript标准库</span></p>
                 <ul>
@@ -143,8 +145,8 @@
 <h2 id="_1">变量的命名标准</h2>
 <p><code>testname</code>函数定义了xscript变量应怎样命名:</p>
 <blockquote>
-<p>第一个字符应该是<code>a-z</code>或<code>A-Z</code>或<code>_</code>.</p>
-<p>剩余的字符在第一个字符的基础上允许<code>1-9</code>.</p>
+<p>第一个字符应该是<code>a-z</code>或<code>A-Z</code>或<code>_</code></p>
+<p>剩余的字符在第一个字符的基础上允许<code>1-9</code></p>
 </blockquote>
 <h2 id="_2">变量代换符($, #, .)</h2>
 <p>美元符号(<code>$</code>), 井号(<code>#</code>), 和英文句号(<code>.</code>)都是变量代换符, 分别将变量转换为各种数据类型. 使用<code>replacevar</code>函数来替换在<code>var</code>中的变量.</p>
@@ -156,7 +158,7 @@
 </ul>
 <div class="admonition tips">
 <p class="admonition-title">贴示</p>
-<p>当转换失败, 会返回<code>&amp;null</code>.</p>
+<p>当转换失败, 会返回<code>&amp;null</code></p>
 </div>
 <h2 id="_3">命令替换符([...])</h2>
 <p><code>[</code>和<code>]</code>是成对的命令替换符,使用<code>replacefunction</code>来替换.</p>
@@ -180,11 +182,11 @@
 <li><code>false</code> - 逻辑值假</li>
 <li><code>null</code> - 等于<code>None</code></li>
 <li><code>argv</code> - 运行时传递的命令行参数</li>
-<li><code>version</code> - xscript的版本号</li>
+<li><code>version</code> - xscript的版本号(十六进制)</li>
 </ul>
 <div class="admonition tips">
 <p class="admonition-title">贴示</p>
-<p><code>testname</code>函数也会检查一个字符串是否属于常量.</p>
+<p><code>testname</code>函数也会检查一个字符串是否属于常量</p>
 </div>
               
             </div>

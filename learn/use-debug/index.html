@@ -9,7 +9,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>ui - xscript</title>
+  <title>使用debug - xscript</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
   <link rel="stylesheet" href="../../css/theme.css" />
@@ -18,8 +18,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "ui";
-    var mkdocs_page_input_path = "lib/ui.md";
+    var mkdocs_page_name = "\u4f7f\u7528debug";
+    var mkdocs_page_input_path = "learn/use-debug.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -60,35 +60,39 @@
                     </li>
                 </ul>
                 <p class="caption"><span class="caption-text">学习xscript</span></p>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../../learn/">目录</a>
+                <ul class="current">
+                    <li class="toctree-l1"><a class="reference internal" href="../">目录</a>
                     </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../learn/install/">安装xscript</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../install/">安装xscript</a>
                     </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../learn/basic-io/">基本输入输出</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../basic-io/">基本输入输出</a>
                     </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../learn/use-debug/">使用debug</a>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">使用debug</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#debug_1">启动debug</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#debug_2">debug命令</a>
+    </li>
+    </ul>
                     </li>
                 </ul>
                 <p class="caption"><span class="caption-text">xscript标准库</span></p>
-                <ul class="current">
-                    <li class="toctree-l1"><a class="reference internal" href="../">索引</a>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../lib/">索引</a>
                     </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../file/">file</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../../lib/file/">file</a>
                     </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../random/">random</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../../lib/random/">random</a>
                     </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../table/">table</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../../lib/table/">table</a>
                     </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../time/">time</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../../lib/time/">time</a>
                     </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../turtle/">turtle</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../../lib/turtle/">turtle</a>
                     </li>
-                    <li class="toctree-l1 current"><a class="reference internal current" href="./">ui</a>
-    <ul class="current">
-    </ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../lib/ui/">ui</a>
                     </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../util/">util</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../../lib/util/">util</a>
                     </li>
                 </ul>
       </div>
@@ -112,11 +116,11 @@
     
       
         
-          <li>xscript标准库 &raquo;</li>
+          <li>学习xscript &raquo;</li>
         
       
     
-    <li>ui</li>
+    <li>使用debug</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -127,94 +131,30 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="tkgui">基于tk的GUI库</h1>
-<p>该标准库使用python的tkinter库编写, 去除了一些复杂的选项.</p>
-<p><em>askyesno $mesage $title=xscript</em></p>
-<ul>
-<li><em>message</em> - 要显示的信息</li>
-<li><em>title</em> - 消息框的标题</li>
-</ul>
+                <h1 id="debug">使用debug</h1>
 <blockquote>
-<p>显示一个消息框</p>
+<p>debug命令是内嵌在解释器核心中的简单调试器</p>
 </blockquote>
-<hr />
-<p><em>Button &amp;master</em></p>
+<h2 id="debug_1">启动debug</h2>
+<p>xscript有一独立命令<code>debug</code>来启动debug. 会以横跨终端两段的<code>=</code>字符以及在<code>=</code>中居中的<code>start debug</code>和<code>end debug</code>来区分程序运行输出和debug输出.</p>
+<div class="admonition tips">
+<p class="admonition-title">贴示</p>
+<p>在不支持<code>os.get_terminal_size</code>的平台上, 会以<code>xscript: start debug</code>和<code>xscript: end debug</code>来分隔</p>
+</div>
+<h2 id="debug_2">debug命令</h2>
 <ul>
-<li><em>master</em> - 小部件要显示的窗口</li>
-</ul>
+<li><em>exit</em> - 退出debug</li>
+<li>
+<p><em>now</em> - 显示现在位于的块</p>
 <blockquote>
-<p>返回一个在master上的按钮</p>
+<p><code>now</code>会读取<code>core.XScriptInterpreter.block</code>中的数据, 以<code>.</code>分隔</p>
 </blockquote>
-<hr />
-<p><em>configure &amp;widget $item &amp;value</em></p>
-<ul>
-<li><em>widget</em> - 要配置的小部件</li>
-<li><em>item</em> - 要配置的项目</li>
-<li><em>value</em> - item的值</li>
+</li>
+<li>
+<p><em>ls</em> - 显示所有变量</p>
+</li>
+<li><em>show $name</em> - 只显示名字为<code>name</code>的变量</li>
 </ul>
-<blockquote>
-<p>设置widget, 相当于<code>widget[item] = value</code></p>
-</blockquote>
-<hr />
-<p><em>destroy &amp;widget</em></p>
-<ul>
-<li><em>widhet</em> - 一个小部件</li>
-</ul>
-<blockquote>
-<p>从窗口删除一个小部件</p>
-</blockquote>
-<hr />
-<p><em>grid &amp;widget #col #row</em></p>
-<ul>
-<li><em>widget</em> - 要显示的小部件</li>
-<li><em>col</em> - 要显示的列</li>
-<li><em>row</em> - 要显示的行</li>
-</ul>
-<blockquote>
-<p>以网格形式来管理小部件</p>
-</blockquote>
-<hr />
-<p><em>Label &amp;master</em></p>
-<ul>
-<li><em>master</em> - 小部件要显示的窗口</li>
-</ul>
-<blockquote>
-<p>返回一个在master上的标签</p>
-</blockquote>
-<hr />
-<p><em>mainloop &amp;master</em></p>
-<ul>
-<li><em>master</em> - 一个窗口对象</li>
-</ul>
-<blockquote>
-<p>让master进入主循环</p>
-</blockquote>
-<hr />
-<p><em>showinfo $message $title=xscript</em></p>
-<ul>
-<li><em>message</em> - 要显示的信息</li>
-<li><em>title</em> - 窗口的标题</li>
-</ul>
-<blockquote>
-<p>显示一个消息框</p>
-</blockquote>
-<hr />
-<p><em>title &amp;widget $title</em></p>
-<ul>
-<li><em>widget</em> - 一个窗口对象</li>
-<li><em>title</em> - 窗口的标题</li>
-</ul>
-<blockquote>
-<p>设置或返回widget的标题</p>
-</blockquote>
-<hr />
-<p><em>Window</em></p>
-<ul>
-<li><em>没有参数</em></li>
-</ul>
-<blockquote>
-<p>创建并返回一个窗口对象用于后续操作</p>
-</blockquote>
               
             </div>
           </div>
@@ -222,10 +162,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../util/" class="btn btn-neutral float-right" title="util">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../../lib/" class="btn btn-neutral float-right" title="索引">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../turtle/" class="btn btn-neutral" title="turtle"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../basic-io/" class="btn btn-neutral" title="基本输入输出"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -253,10 +193,10 @@
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../turtle/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../basic-io/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../util/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../../lib/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
