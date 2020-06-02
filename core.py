@@ -18,6 +18,13 @@ class XScriptInterpreter(object):
     def __init__(self, string='', var={}, argv=[]):
         self.restart(string, var, argv)
 
+    def addr(self, name):
+        # return the address of vaiable
+        try:
+            return id(self.var[name])
+        except:
+            return 0
+
     def debug(self):
         # debug
         try:
@@ -34,23 +41,23 @@ class XScriptInterpreter(object):
             elif cmd == 'now':
                 print('.'.join(self.block))
             elif cmd == 'ls':
-                table = PrettyTable(['name', 'value', 'type'])
+                table = PrettyTable(['name', 'value', 'type', 'addrss'])
                 for k, v in self.var.items():
                     if len(str(v)) >= 50:
-                        table.add_row([k, textwrap.shorten(str(v), 50, placeholder='...'), str(type(v))[8:-2]])
+                        table.add_row([k, textwrap.shorten(str(v), 50, placeholder='...'), str(type(v))[8:-2], hex(id(v))])
                     else:
-                        table.add_row([k, str(v), str(type(v))[8:-2]])
+                        table.add_row([k, str(v), str(type(v))[8:-2], hex(id(v))])
                 else:
                     print(table)
             elif cmd.startswith('show '):
                 if cmd[5:] in self.var:
-                    table = PrettyTable(['name', 'value', 'type'])
+                    table = PrettyTable(['name', 'value', 'type', 'address'])
                     name = cmd[5:]
                     value = self.var[name]
                     if len(str(value)) >= 50:
-                        table.add_row([name, textwrap.shorten(str(value), 50, placeholder='...'), str(type(value))[8:-2]])
+                        table.add_row([name, textwrap.shorten(str(value), 50, placeholder='...'), str(type(value))[8:-2], hex(id(value))])
                     else:
-                        table.add_row([name, str(value), str(type(value))[8:-2]])
+                        table.add_row([name, str(value), str(type(value))[8:-2], hex(id(value))])
                     print(table)
                 else:
                     print("ERROR: name '%s' is not defined" % cmd[5:])
@@ -282,7 +289,9 @@ class XScriptInterpreter(object):
             else:
                 exp.append(item)
         else:
-            if exp[0] == 'gets':
+            if exp[0] == 'addr':
+                return self.addr(*exp[1:])
+            elif exp[0] == 'gets':
                 return self.gets(*exp[1:])
             elif exp[0][:8] == 'xscript.':
                 return self.xscript(*exp)
