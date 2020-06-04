@@ -3,6 +3,7 @@ site_name: xscript
 nav:
   - 主页: index.md
   - xscript如何工作: howto.md
+  - 是否应该选择xscript: choose-xscript.md
   - 报告BUG: bug.md
   - 学习xscript:
     - 目录: learn/index.md

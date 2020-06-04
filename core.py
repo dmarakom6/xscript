@@ -10,6 +10,7 @@ except:
     print("xscript: No 'readline'")
 import shlex
 import string
+import sys
 import textwrap
 
 
@@ -320,18 +321,21 @@ class XScriptInterpreter(object):
         else:
             return value
     
-    def restart(self, string='', var={}, argv=[]):
+    def restart(self, program, var={}, argv=[]):
         # you cannot call it in your script
         # it just set some global variable like variable
-        self.program = string
+        self.program = program
         self.var = var
         self.itervar = {}
         self.var['true'] = True
         self.var['false'] = False
         self.var['null'] = None
         self.var['argv']= argv
+        self.var['interpreter'] = self
+        self.var['platform'] = sys.platform
+        # don't edit the following version info
         self.var['version'] = 0x000000
-        self.const = ['true', 'false', 'null', 'argv', 'version']
+        self.const = ['true', 'false', 'null', 'argv', 'interpreter', 'platform', 'version']
 
     def run(self):
         # run is a very import function, you understand

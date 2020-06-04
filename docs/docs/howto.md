@@ -50,7 +50,12 @@
   - `false` - 逻辑值假
   - `null` - 等于`None`
   - `argv` - 运行时传递的命令行参数
+  - `interpreter` - xscript解释器本身
+  - `platform` - 操作系统的名称
   - `version` - xscript的版本号(十六进制)
 
 !!! tips "贴示"
 	`testname`函数也会检查一个字符串是否属于常量
+
+!!! warning "警告"
+	不在万不得已的情况下不要使用`interpreter`变量, 这可能会有风险
