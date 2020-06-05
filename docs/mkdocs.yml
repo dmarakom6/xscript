@@ -10,6 +10,7 @@ nav:
     - 安装xscript: learn/install.md
     - 基本输入输出: learn/basic-io.md
     - 使用debug: learn/use-debug.md
+    - 自定义标准库: learn/config-lib.md
   - xscript标准库:
     - 索引: lib/index.md
     - file: lib/file.md

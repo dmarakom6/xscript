@@ -12,7 +12,7 @@ xscript是用python编写的一个非常小巧的编程语言, 它的核心(`cor
 > 这门语言是设计为嵌入式的, 这样也可以保证安全以及运行时的效果
 
 ## 如何运行我的代码?
-你可以在xscript目录下, 通过终端输入`xscript.py [你的文件名]`来运行.
+你可以在xscript目录下, 通过终端输入`xscript.py [FILE]`来运行.
 
 当然, 你可以看看`xscript/script`目录下的例子.
 
@@ -31,3 +31,10 @@ xscript是一门开源编程语言, 它现在还处于开发阶段, 希望你能
 - [报告一个BUG](bug.md)
 - [学习xscript](learn/index.md)
 - [xscript如何工作](howto.md)
+
+- - -
+
+非常抱歉, xscript文档是全简体中文版的, 请大家谅解. 你可以使用Google Chrome的翻译功能来阅读文档.
+> 我是中国人
+
+xscript文档的多语种版本是有帮助的, 希望您能够将该文档翻译成相应的语言.
