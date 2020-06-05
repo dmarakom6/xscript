@@ -9,7 +9,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>random - xscript</title>
+  <title>自定义标准库 - xscript</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
   <link rel="stylesheet" href="../../css/theme.css" />
@@ -18,8 +18,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "random";
-    var mkdocs_page_input_path = "lib/random.md";
+    var mkdocs_page_name = "\u81ea\u5b9a\u4e49\u6807\u51c6\u5e93";
+    var mkdocs_page_input_path = "learn/config-lib.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -64,37 +64,41 @@
                     </li>
                 </ul>
                 <p class="caption"><span class="caption-text">学习xscript</span></p>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../../learn/">目录</a>
+                <ul class="current">
+                    <li class="toctree-l1"><a class="reference internal" href="../">目录</a>
                     </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../learn/install/">安装xscript</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../install/">安装xscript</a>
                     </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../learn/basic-io/">基本输入输出</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../basic-io/">基本输入输出</a>
                     </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../learn/use-debug/">使用debug</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../use-debug/">使用debug</a>
                     </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../learn/config-lib/">自定义标准库</a>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">自定义标准库</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#_2">编写文件</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_3">使用</a>
+    </li>
+    </ul>
                     </li>
                 </ul>
                 <p class="caption"><span class="caption-text">xscript标准库</span></p>
-                <ul class="current">
-                    <li class="toctree-l1"><a class="reference internal" href="../">索引</a>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../lib/">索引</a>
                     </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../file/">file</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../../lib/file/">file</a>
                     </li>
-                    <li class="toctree-l1 current"><a class="reference internal current" href="./">random</a>
-    <ul class="current">
-    </ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../lib/random/">random</a>
                     </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../table/">table</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../../lib/table/">table</a>
                     </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../time/">time</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../../lib/time/">time</a>
                     </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../turtle/">turtle</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../../lib/turtle/">turtle</a>
                     </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../ui/">ui</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../../lib/ui/">ui</a>
                     </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../util/">util</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../../lib/util/">util</a>
                     </li>
                 </ul>
       </div>
@@ -118,11 +122,11 @@
     
       
         
-          <li>xscript标准库 &raquo;</li>
+          <li>学习xscript &raquo;</li>
         
       
     
-    <li>random</li>
+    <li>自定义标准库</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -133,23 +137,33 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="random-">random - 随机数及相关操作</h1>
-<p><em>rand</em></p>
-<ul>
-<li><em>没有参数</em></li>
-</ul>
+                <h1 id="_1">自定义标准库</h1>
 <blockquote>
-<p>返回一个随机数(0到1之间)</p>
+<p>添加标准库源文件</p>
 </blockquote>
-<hr />
-<p><em>randint #a #b</em></p>
+<h2 id="_2">编写文件</h2>
+<p>xscript并不能很好使用python的源文件, 要适当重写.</p>
+<p>如何重写:</p>
 <ul>
-<li><em>a</em> - 随机数最小限制</li>
-<li><em>b</em> - 随机数最大限制</li>
+<li>重写函数调用</li>
+<li>xscript不能创建和调用python对象及其方法和变量, 请将创建对象的代码转换为一个返回该对象的函数, 添加函数以便使用对象的方法</li>
+<li>注意对传入参数的转换</li>
 </ul>
-<blockquote>
-<p>返回一个介于a和b的随机数</p>
-</blockquote>
+<div class="admonition tips">
+<p class="admonition-title">贴示</p>
+<p>在使用python库的时候应该对使用的库名进行更改:
+比如<code>os</code>换成<code>_os</code></p>
+</div>
+<h2 id="_3">使用</h2>
+<p>请在<code>lib/__init__.py</code>中添加一行来import刚刚编写的库.</p>
+<p>以一个<code>foo</code>为例子:</p>
+<ol>
+<li>编辑<code>lib/__init__.py</code></li>
+<li>输入<code>import lib.foo as foo</code></li>
+<li>重启解释器</li>
+<li>编写程序测试一下</li>
+<li>完成</li>
+</ol>
               
             </div>
           </div>
@@ -157,10 +171,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../table/" class="btn btn-neutral float-right" title="table">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../../lib/" class="btn btn-neutral float-right" title="索引">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../file/" class="btn btn-neutral" title="file"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../use-debug/" class="btn btn-neutral" title="使用debug"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -188,10 +202,10 @@
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../file/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../use-debug/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../table/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../../lib/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
