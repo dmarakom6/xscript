@@ -4,6 +4,7 @@
 import lib
 import os
 from prettytable import PrettyTable
+import re
 try:
     import readline
 except:
@@ -27,7 +28,7 @@ class XScriptInterpreter(object):
             return 0
 
     def debug(self):
-        # debug
+        # the debug system
         try:
             print('start debug'.center(os.get_terminal_size()[0], '='))
         except:
@@ -83,8 +84,7 @@ class XScriptInterpreter(object):
         exit(int(code))
 
     def end_flag(self, flag):
-	# end is a flag, not function, it's very complex
-	# BUG: on flag nesting like double for
+	# end is a flag
         if len(self.block) == 0:
             raise TypeError('Flag not find: %s' % flag)
         elif self.block[-1] == flag:
@@ -106,7 +106,7 @@ class XScriptInterpreter(object):
             raise TypeError('Flag not find: %s' % flag)
 
     def for_flag(self, name, fromnum, tonum, stepnum=None):
-	# for is a flag, not function, it's more complex than end_flag
+	# for is a loop flag
 	# for use built-in function iter() to start a loop
         if name[0] not in string.ascii_letters + string.digits + '_':
             raise TypeError('Invalid name: %s' % name)
@@ -171,7 +171,7 @@ class XScriptInterpreter(object):
                             raise TypeError('Loop without end')
 
     def foreach_flag(self, name, iterator):
-	# foreach is a flag, not function, it's easier than for
+	# foreach is a loop flag
         if name[0] not in string.ascii_letters + string.digits + '_':
             raise TypeError('Invalid name: %s' % name)
         else:
@@ -227,21 +227,17 @@ class XScriptInterpreter(object):
                             raise TypeError('Loop without end')
 
     def gets(self, prompt='?'):
-	# gets is very easy, read it!
+	# gets is a user input function
         return input(prompt)
 
     def let(self, name, symbol, value):
-        # let is just a assignment statement, it support 10 operators.
+        # let is just a assignment statement, it support 8 operators
         if self.testname(name):
-            if name not in self.var and symbol not in ['=', '#=', '.=']:
+            if name not in self.var and symbol != '=':
                 raise TypeError("Undefined name cannot use '%s'" % symbol)
             value = self.replacevar(value)
             if symbol == '=':
                 self.var[name] = value
-            elif symbol == '#=':
-                self.var[name] = int(value)
-            elif symbol == '.=':
-                self.var[name] = float(value)
             elif symbol == '+=':
                 self.var[name] += value
             elif symbol == '-=':
@@ -262,15 +258,14 @@ class XScriptInterpreter(object):
             raise TypeError("Invalid name: '%s'"% name)
 
     def puts(self, *args):
-	# puts just print something to the console
+	# puts is a user output function
         for item in args:
             print(self.replacevar(item), end=' ')
         else:
             print()
 
     def replacefunction(self, s):
-        # you cannot call it in your script
-        # you just can call 2 functions in []
+        # you just can call 3 functions in pairs of '[' and ']'
         exp = []
         for item in shlex.split(s):
             if item[0] == '&':
@@ -288,7 +283,12 @@ class XScriptInterpreter(object):
                 except:
                     exp.append(None)
             else:
-                exp.append(item)
+                if re.match(r'^(\+|-)?[0-9]*$', item):
+                    exp.append(int(item))
+                elif re.match(r'^(\+|-)?[0-9]*\.[0-9]*', item):
+                    exp.append(float(item))
+                else:
+                    exp.append(item)
         else:
             if exp[0] == 'addr':
                 return self.addr(*exp[1:])
@@ -300,7 +300,6 @@ class XScriptInterpreter(object):
                 raise TypeError('Unknow replace function command : %s' % ret[0])
 
     def replacevar(self, value):
-	# you cannot call it in your script
 	# it just replace name of variable to its value
         if value[0] == '[' and value[-1] == ']':
             return self.replacefunction(value[1:-1])
@@ -319,7 +318,12 @@ class XScriptInterpreter(object):
             except:
                 return None
         else:
-            return value
+            if re.match(r'^(\+|-)?[0-9]*$', value):
+                return int(value)
+            elif re.match(r'^(\+|-)?[0-9]*\.[0-9]*', value):
+                return float(value)
+            else:
+                return value
     
     def restart(self, program, var={}, argv=[]):
         # you cannot call it in your script
@@ -388,6 +392,7 @@ class XScriptInterpreter(object):
                 self.now += 1
 
     def testname(self, name):
+        # testname defines what name you can use
         if name[0] not in string.ascii_letters + '_':
             return False
         else:
@@ -401,7 +406,7 @@ class XScriptInterpreter(object):
                     return True
 
     def while_flag(self, left, symbol, right):
-        # while is a flag, not function
+        # while is a loop flag
         left = self.replacevar(left)
         right = self.replacevar(right)
         if symbol == '=':
@@ -435,7 +440,7 @@ class XScriptInterpreter(object):
                 raise TypeError('Loop without end')
 
     def xscript(self, path, *args):
-        # xscript is an important function that it can call outer function
+        # xscript is an important function that it can call outer function written by python
         arg = []
         for item in args:
             arg.append(self.replacevar(item))
