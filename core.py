@@ -265,13 +265,16 @@ class XScriptInterpreter(object):
             print()
 
     def replacefunction(self, s):
-        # you just can call 3 functions in pairs of '[' and ']'
+        # you can call functions in pairs of '[' and ']'
         exp = []
         for item in shlex.split(s):
             if item[0] == '&':
                 exp.append(self.var[item[1:]])
             elif item[0] == '$':
-                exp.append(str(self.var[item[1:]]))
+                if item[1:] in self.var:
+                    exp.append(str(self.var[item[1:]]))
+                elif re.match(r'^(\+|-)?[0-9]*$', item[1:]) or re.match(r'^(\+|-)?[0-9]*\.[0-9]*$', item[1:]):
+                    exp.append(item[1:])
             elif item[0] == '#':
                 try:
                     exp.append(int(self.var[item[1:]]))
@@ -306,7 +309,10 @@ class XScriptInterpreter(object):
         elif value[0] == '&':
             return self.var[value[1:]]
         elif value[0] == '$':
-            return str(self.var[value[1:]])
+            if value[1:] in self.var:
+                return str(self.var[value[1:]])
+            elif re.match(r'^(\+|-)?[0-9]*$', value[1:]) or re.match(r'^(\+|-)?[0-9]*\.[0-9]*$', value[1:]):
+                return value[1:]
         elif value[0] == '#':
             try:
                 return int(self.var[value[1:]])
