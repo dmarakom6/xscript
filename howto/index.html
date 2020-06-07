@@ -166,6 +166,11 @@
 <p class="admonition-title">贴示</p>
 <p>当转换失败, 会返回<code>&amp;null</code></p>
 </div>
+<p>在<code>2020-6-6</code>次提交中, 只要输入的参数符合如下正则表达式:</p>
+<ul>
+<li><code>^(\+|-)?[0-9]*$</code>强制转换成int类型</li>
+<li><code>^(\+|-)?[0-9]*\.[0-9]*$</code>强制转换成float类型</li>
+</ul>
 <h2 id="_3">命令替换符([...])</h2>
 <p><code>[</code>和<code>]</code>是成对的命令替换符,使用<code>replacefunction</code>来替换.</p>
 <p>命令替换符<strong>仅仅</strong>支持如下命令:</p>
