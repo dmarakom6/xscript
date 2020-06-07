@@ -8,3 +8,4 @@ for i 0 360
     xscript.turtle.left 1
 end for
 xscript.turtle.end_fill
+exit 0
