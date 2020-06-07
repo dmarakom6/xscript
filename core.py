@@ -285,7 +285,7 @@ class XScriptInterpreter(object):
             else:
                 if re.match(r'^(\+|-)?[0-9]*$', item):
                     exp.append(int(item))
-                elif re.match(r'^(\+|-)?[0-9]*\.[0-9]*', item):
+                elif re.match(r'^(\+|-)?[0-9]*\.[0-9]*$', item):
                     exp.append(float(item))
                 else:
                     exp.append(item)
