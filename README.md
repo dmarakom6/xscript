@@ -17,7 +17,7 @@ pip install -U prettytable
 这样才能确保使用xscript时不报错.
 
 # 如何运行我的代码?
-你可以在xscript目录下, 通过终端输入`xscript.py [你的文件名]`来运行.
+你可以在xscript目录下, 通过终端输入`xscript <file> [args...]`来运行.
 
 当然, 你可以看看`xscript/script`目录下的例子.
 
