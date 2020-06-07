@@ -12,8 +12,10 @@ git clone https://github.com/jason-bowen-zheng/xscript
 cd xscript
 ```
 
+或下载[zip文件](https://github.com/jason-bowen-zheng/xscript/archive/master.zip).
+
 ## Linux下安装
-clone好了就可以了, `xscript`目录下的`xscript.py`是主程序.
+clone好了就可以了, `xscript`目录下的`xscript`是主程序.
 
 ## Windows下安装
 和Linux一样.

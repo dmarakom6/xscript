@@ -1,8 +1,4 @@
 # xscript/script/hello.xs
 
-let ans = &null
-while $ans != bye
-    let ans = ['gets ?']
-    puts input: &ans
-end while
-puts bye
+let name = "[gets name:]"
+puts your name: $name
