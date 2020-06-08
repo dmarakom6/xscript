@@ -279,12 +279,12 @@ class XScriptInterpreter(object):
                 try:
                     exp.append(int(self.var[item[1:]]))
                 except:
-                    exp.append(None)
+                    exp.append(int())
             elif item[0] == '.':
                 try:
                     exp.append(float(self.var[item[1:]]))
                 except:
-                    exp.append(None)
+                    exp.append(float())
             else:
                 if re.match(r'^(\+|-)?[0-9]*$', item):
                     exp.append(int(item))
@@ -317,12 +317,12 @@ class XScriptInterpreter(object):
             try:
                 return int(self.var[value[1:]])
             except:
-                return None
+                return int()
         elif value[0] == '.':
             try:
                 return float(self.var[value[1:]])
             except:
-                return None
+                return float()
         else:
             if re.match(r'^(\+|-)?[0-9]*$', value):
                 return int(value)
@@ -332,7 +332,6 @@ class XScriptInterpreter(object):
                 return value
     
     def restart(self, program, var={}, argv=[]):
-        # you cannot call it in your script
         # it just set some global variable like variable
         self.program = program
         self.var = var
