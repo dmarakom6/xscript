@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>ui - xscript</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../../css/theme.css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "ui";
+    var mkdocs_page_input_path = "lib/ui.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> xscript</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../..">主页</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../howto/">xscript如何工作</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../choose-xscript/">是否应该选择xscript</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../bug/">报告BUG</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">学习xscript</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../learn/">目录</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../learn/install/">安装xscript</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../learn/basic-io/">基本输入输出</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../learn/use-debug/">使用debug</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../learn/config-lib/">自定义标准库</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">xscript标准库</span></p>
+                <ul class="current">
+                    <li class="toctree-l1"><a class="reference internal" href="../">索引</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../file/">file</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../random/">random</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../table/">table</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../time/">time</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../turtle/">turtle</a>
+                    </li>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">ui</a>
+    <ul class="current">
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../util/">util</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">xscript</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>xscript标准库 &raquo;</li>
+        
+      
+    
+    <li>ui</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="tkgui">基于tk的GUI库</h1>
+<p>该标准库使用python的tkinter库编写, 去除了一些复杂的选项.</p>
+<p><em>askyesno $mesage $title=xscript</em></p>
+<ul>
+<li><em>message</em> - 要显示的信息</li>
+<li><em>title</em> - 消息框的标题</li>
+</ul>
+<blockquote>
+<p>显示一个消息框</p>
+</blockquote>
+<hr />
+<p><em>Button &amp;master</em></p>
+<ul>
+<li><em>master</em> - 小部件要显示的窗口</li>
+</ul>
+<blockquote>
+<p>返回一个在master上的按钮</p>
+</blockquote>
+<hr />
+<p><em>configure &amp;widget $item &amp;value</em></p>
+<ul>
+<li><em>widget</em> - 要配置的小部件</li>
+<li><em>item</em> - 要配置的项目</li>
+<li><em>value</em> - item的值</li>
+</ul>
+<blockquote>
+<p>设置widget, 相当于<code>widget[item] = value</code></p>
+</blockquote>
+<hr />
+<p><em>destroy &amp;widget</em></p>
+<ul>
+<li><em>widhet</em> - 一个小部件</li>
+</ul>
+<blockquote>
+<p>从窗口删除一个小部件</p>
+</blockquote>
+<hr />
+<p><em>grid &amp;widget #col #row</em></p>
+<ul>
+<li><em>widget</em> - 要显示的小部件</li>
+<li><em>col</em> - 要显示的列</li>
+<li><em>row</em> - 要显示的行</li>
+</ul>
+<blockquote>
+<p>以网格形式来管理小部件</p>
+</blockquote>
+<hr />
+<p><em>Label &amp;master</em></p>
+<ul>
+<li><em>master</em> - 小部件要显示的窗口</li>
+</ul>
+<blockquote>
+<p>返回一个在master上的标签</p>
+</blockquote>
+<hr />
+<p><em>mainloop &amp;master</em></p>
+<ul>
+<li><em>master</em> - 一个窗口对象</li>
+</ul>
+<blockquote>
+<p>让master进入主循环</p>
+</blockquote>
+<hr />
+<p><em>showinfo $message $title=xscript</em></p>
+<ul>
+<li><em>message</em> - 要显示的信息</li>
+<li><em>title</em> - 窗口的标题</li>
+</ul>
+<blockquote>
+<p>显示一个消息框</p>
+</blockquote>
+<hr />
+<p><em>title &amp;widget $title</em></p>
+<ul>
+<li><em>widget</em> - 一个窗口对象</li>
+<li><em>title</em> - 窗口的标题</li>
+</ul>
+<blockquote>
+<p>设置或返回widget的标题</p>
+</blockquote>
+<hr />
+<p><em>Window</em></p>
+<ul>
+<li><em>没有参数</em></li>
+</ul>
+<blockquote>
+<p>创建并返回一个窗口对象用于后续操作</p>
+</blockquote>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../util/" class="btn btn-neutral float-right" title="util">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../turtle/" class="btn btn-neutral" title="turtle"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+      <p>Copyright &copy 2020 jason-bowen-zheng<br>All Right Reserved.</p>
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../turtle/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../util/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

@@ -387,8 +387,14 @@ class XScriptInterpreter(object):
                 else:
                     raise TypeError('Unknow command: %s' % lines[0])
             except Exception as err:
-                print('Traceback:')
-                print('line', self.now + 1)
+                print('      __')
+                print(' _   / /')
+                print('(_) | | ')
+                print(' _  | | ')
+                print('(_) | | ')
+                print('     \_\\')
+                print()
+                print('In line', self.now + 1)
                 print('-> ', line)
                 print('Error: %s' % str(err))
                 self.exit(1)
