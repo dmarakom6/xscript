@@ -33,9 +33,22 @@
 
 命令替换符**仅仅**支持如下命令:
 
-- addr
-- gets
-- xscript.
+- *addr $name*(仅命令替换符)
+> 返回name的内存地址
+
+- *environ $name*(仅命令替换符)
+> 返回系统变量name(没有返回`&null`)
+
+- *gets $prompt=?*
+> 返回用户输入
+
+- *has $path*(仅命令替换符)
+> 判断path路径是否在标准库中存在
+
+- *xscript.*
+
+!!! tips "贴示"
+	`仅命令替换符`表示只有在`[...]`中才能使用的命令
 
 ## xscript.
 `xscript.`(不要忘记`.`)命令使用xscript函数来支持函数通过路径获取的功能, 支持获得函数和变量.

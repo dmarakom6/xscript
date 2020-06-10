@@ -18,6 +18,7 @@ import textwrap
 class XScriptInterpreter(object):
     # xscript interpreter core
     def __init__(self, string='', var={}, argv=[]):
+        # see restart
         self.restart(string, var, argv)
 
     def addr(self, name):
@@ -72,7 +73,7 @@ class XScriptInterpreter(object):
                 print('xscript: end debug')
 
     def delete(self, *names):
-	# delete the name in self.var
+	# delete the names in self.var
         for name in names:
             if name not in self.const:
                 del self.var[name]
@@ -105,9 +106,16 @@ class XScriptInterpreter(object):
         else:
             raise TypeError('Flag not find: %s' % flag)
 
+    def environ(self, name):
+        # get the OS environ name
+        try:
+            return os.environ[name]
+        except:
+            return None
+
     def for_flag(self, name, fromnum, tonum, stepnum=None):
 	# for is a loop flag
-	# for use built-in function iter() to start a loop
+	# it use built-in function iter() to start a loop
         if name[0] not in string.ascii_letters + string.digits + '_':
             raise TypeError('Invalid name: %s' % name)
         else:
@@ -171,7 +179,7 @@ class XScriptInterpreter(object):
                             raise TypeError('Loop without end')
 
     def foreach_flag(self, name, iterator):
-	# foreach is a loop flag
+	# foreach is a loop flag like for
         if name[0] not in string.ascii_letters + string.digits + '_':
             raise TypeError('Invalid name: %s' % name)
         else:
@@ -229,6 +237,19 @@ class XScriptInterpreter(object):
     def gets(self, prompt='?'):
 	# gets is a user input function
         return input(prompt)
+
+    def has(self, path):
+        # has tests the path whether in lib or not
+        path = path.split('.')
+        obj = lib
+        for item in path:
+            if hasattr(obj, item):
+                obj = getattr(obj, item)
+            else:
+                return False
+        else:
+            return True
+
 
     def let(self, name, symbol, value):
         # let is just a assignment statement, it support 8 operators
@@ -295,8 +316,12 @@ class XScriptInterpreter(object):
         else:
             if exp[0] == 'addr':
                 return self.addr(*exp[1:])
+            elif exp[0] == 'environ':
+                return self.environ(*exp[1:])
             elif exp[0] == 'gets':
                 return self.gets(*exp[1:])
+            elif exp[0] == 'has':
+                return self.has(*exp[1:])
             elif exp[0][:8] == 'xscript.':
                 return self.xscript(*exp)
             else:
@@ -332,7 +357,7 @@ class XScriptInterpreter(object):
                 return value
     
     def restart(self, program, var={}, argv=[]):
-        # it just set some global variable like variable
+        # it just set some global variable like const variables
         self.program = program
         self.var = var
         self.itervar = {}
@@ -347,7 +372,7 @@ class XScriptInterpreter(object):
         self.const = ['true', 'false', 'null', 'argv', 'interpreter', 'platform', 'version']
 
     def run(self):
-        # run is a very import function, you understand
+        # run is a very import function, it runs code
         self.now = 0
         self.block = []
         while True:
@@ -387,7 +412,7 @@ class XScriptInterpreter(object):
                 else:
                     raise TypeError('Unknow command: %s' % lines[0])
             except Exception as err:
-                print('      __')
+                print('\n      __')
                 print(' _   / /')
                 print('(_) | | ')
                 print(' _  | | ')
