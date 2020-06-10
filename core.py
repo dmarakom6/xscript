@@ -289,30 +289,7 @@ class XScriptInterpreter(object):
         # you can call functions in pairs of '[' and ']'
         exp = []
         for item in shlex.split(s):
-            if item[0] == '&':
-                exp.append(self.var[item[1:]])
-            elif item[0] == '$':
-                if item[1:] in self.var:
-                    exp.append(str(self.var[item[1:]]))
-                elif re.match(r'^(\+|-)?[0-9]*$', item[1:]) or re.match(r'^(\+|-)?[0-9]*\.[0-9]*$', item[1:]):
-                    exp.append(item[1:])
-            elif item[0] == '#':
-                try:
-                    exp.append(int(self.var[item[1:]]))
-                except:
-                    exp.append(int())
-            elif item[0] == '.':
-                try:
-                    exp.append(float(self.var[item[1:]]))
-                except:
-                    exp.append(float())
-            else:
-                if re.match(r'^(\+|-)?[0-9]*$', item):
-                    exp.append(int(item))
-                elif re.match(r'^(\+|-)?[0-9]*\.[0-9]*$', item):
-                    exp.append(float(item))
-                else:
-                    exp.append(item)
+            exp.append(self.replacevar(item))
         else:
             if exp[0] == 'addr':
                 return self.addr(*exp[1:])
