@@ -302,19 +302,24 @@ class XScriptInterpreter(object):
             elif exp[0][:8] == 'xscript.':
                 return self.xscript(*exp)
             else:
-                raise TypeError('Unknow replace function command : %s' % ret[0])
+                raise TypeError('Unknow replace function command : %s' % exp[0])
 
     def replacevar(self, value):
 	# it just replace name of variable to its value
         if value[0] == '[' and value[-1] == ']':
             return self.replacefunction(value[1:-1])
         elif value[0] == '&':
-            return self.var[value[1:]]
+            if value[1:] in self.var:
+                return self.var[value[1:]]
+            else:
+                return None
         elif value[0] == '$':
             if value[1:] in self.var:
                 return str(self.var[value[1:]])
             elif re.match(r'^(\+|-)?[0-9]*$', value[1:]) or re.match(r'^(\+|-)?[0-9]*\.[0-9]*$', value[1:]):
                 return value[1:]
+            else:
+                return str()
         elif value[0] == '#':
             try:
                 return int(self.var[value[1:]])
@@ -349,7 +354,7 @@ class XScriptInterpreter(object):
         self.const = ['true', 'false', 'null', 'argv', 'interpreter', 'platform', 'version']
 
     def run(self):
-        # run is a very import function, it runs code
+        # run is a very import function, it runs codes
         self.now = 0
         self.block = []
         while True:
