@@ -250,7 +250,6 @@ class XScriptInterpreter(object):
         else:
             return True
 
-
     def let(self, name, symbol, value):
         # let is just a assignment statement, it support 8 operators
         if self.testname(name):
