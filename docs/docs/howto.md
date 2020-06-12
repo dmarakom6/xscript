@@ -1,5 +1,5 @@
 # xscript如何工作
-> 以下所有的函数和变量都在`core.XScriptInterpreter`中
+> 以下所有的函数和变量都在`xscriptcore.XScriptInterpreter`中
 
 ## 块(block)
 块是一组代码, 以块开始符(如`for`)开始,以`end`命令结束.

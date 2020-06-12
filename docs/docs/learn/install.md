@@ -21,3 +21,10 @@ clone好了就可以了, `xscript`目录下的`xscript`是主程序.
 和Linux一样.
 
 ## 简单一些
+运行:
+
+```
+./setup install
+```
+
+然后再把`xscript`文件复制到某一个`PATH`目录就可以了

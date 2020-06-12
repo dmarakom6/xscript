@@ -2,7 +2,7 @@
 > 这是一个好问题
 
 ## 当然应该选择xscript
-如果你是初学者, 不要使用Scratch, 用xscript练练手, 应该也是可以, xscript比Scratch简单许多.
+如果你是初学者, 可以在使用Scratch后, 用xscript练练手, 熟悉一下真正的编程. 应该也是可以, xscript比Scratch简单许多.
 
 我认为的xscript优点:
 
@@ -17,6 +17,9 @@
 
 ## 还是选择其他语言吧
 你的做法是明智的, xscript太年轻了. 还是使用python编写的, 应该去使用python才对.
+
+- 太简单了
+> 如果你粗略的阅读了一下xscript解释器的所有代码, 你一定会发现: xscript是根据源代码解释的, 而不像python一样, 得先
 
 - - -
 
