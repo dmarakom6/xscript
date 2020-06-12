@@ -15,11 +15,11 @@ xscript并不能很好使用python的源文件, 要适当重写.
 	比如`os`换成`_os`
 
 ## 使用
-请在`lib/__init__.py`中添加一行来import刚刚编写的库.
+请在`xscriptlib/__init__.py`中添加一行来import刚刚编写的库.
 
 以一个`foo`为例子:
 
-1. 编辑`lib/__init__.py`
+1. 编辑`xscriptlib/__init__.py`
 2. 输入`import lib.foo as foo`
 3. 重启解释器
 4. 编写程序测试一下
