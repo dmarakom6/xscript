@@ -21,7 +21,7 @@ install: Makefile setup.py
 
 test: Makefile script/hello.xs $(SOURCE)
 	@echo $(ECHO_COL)[Testing...]$(ECHO_END)
-	@-./xscript script/hello.xs
+	@-./xscript script/getver.xs
 	@echo $(ECHO_COL)[Testing completely]$(ECHO_END)
 
 upgrade: Makefile setup.py $(SOURCE)
@@ -31,4 +31,6 @@ upgrade: Makefile setup.py $(SOURCE)
 	@-pip3 install -U prettytable mkdocs
 	@python3 setup.py install
 	@-rm -rf build/
+	@echo $(ECHO_COL)[Testing...]$(ECHO_END)
+	@-./xscript script/getver.xs
 	@echo $(ECHO_COL)[Upgrading completely]$(ECHO_END)

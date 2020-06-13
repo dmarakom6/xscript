@@ -349,7 +349,7 @@ class XScriptInterpreter(object):
         self.var['interpreter'] = self
         self.var['platform'] = sys.platform
         # don't edit the following version info
-        self.var['version'] = 0x000000
+        self.var['version'] = '0.0'
         self.const = ['true', 'false', 'null', 'argv', 'interpreter', 'platform', 'version']
 
     def run(self):

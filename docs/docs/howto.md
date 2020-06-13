@@ -69,7 +69,7 @@
   - `argv` - 运行时传递的命令行参数
   - `interpreter` - xscript解释器本身
   - `platform` - 操作系统的名称
-  - `version` - xscript的版本号(十六进制)
+  - `version` - xscript的版本号(str)
 
 !!! tips "贴示"
 	`testname`函数也会检查一个字符串是否属于常量
