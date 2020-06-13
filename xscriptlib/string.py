@@ -1,5 +1,5 @@
 def center(s, width, fillchar=' '):
-    return s.center(int(width), fillchar)
+    return s.center(width, fillchar)
 
 def repeat(s, n):
     return s * n
