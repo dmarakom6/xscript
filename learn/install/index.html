@@ -73,7 +73,7 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#windows">Windows下安装</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#_1">简单一些</a>
+    <li class="toctree-l2"><a class="reference internal" href="#_1">更新</a>
     </li>
     </ul>
                     </li>
@@ -150,15 +150,20 @@ cd xscript
 
 <p>或下载<a href="https://github.com/jason-bowen-zheng/xscript/archive/master.zip">zip文件</a>.</p>
 <h2 id="linux">Linux下安装</h2>
-<p>clone好了就可以了, <code>xscript</code>目录下的<code>xscript</code>是主程序.</p>
-<h2 id="windows">Windows下安装</h2>
-<p>和Linux一样.</p>
-<h2 id="_1">简单一些</h2>
 <p>运行:</p>
-<pre><code>./setup install
+<pre><code class="shell">make install
 </code></pre>
 
-<p>然后再把<code>xscript</code>文件复制到某一个<code>PATH</code>目录就可以了</p>
+<h2 id="windows">Windows下安装</h2>
+<p>这个<code>Makefile</code>是为Linux写的, Windows用户请输入如下命令:</p>
+<pre><code class="shell">pip install -U prettytable mkdocs
+python setup.py install
+</code></pre>
+
+<h2 id="_1">更新</h2>
+<p>运行:</p>
+<pre><code class="shell">make upgrade
+</code></pre>
               
             </div>
           </div>
