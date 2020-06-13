@@ -21,7 +21,7 @@ install: Makefile setup.py
 	@echo $(ECHO_COL)[Installing completely]$(ECHO_END)
 
 test: Makefile script/hello.xs $(SOURCE)
-	@echo $(ECHO_COL)[Testing...]$(ECHO_END)
+	@echo $(ECHO_COL)[Testing xscript...]$(ECHO_END)
 	@-./xscript script/getver.xs
 	@echo $(ECHO_COL)[Testing completely]$(ECHO_END)
 
