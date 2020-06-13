@@ -13,8 +13,9 @@ help: Makefile
 	@echo "upgrade  upgrade xscript from Github and install"
 
 install: Makefile setup.py
-	@echo $(ECHO_COL)[Installing...]$(ECHO_END)
+	@echo $(ECHO_COL)[Installing packages...]$(ECHO_END)
 	@-pip3 install -U prettytable mkdocs
+	@echo $(ECHO_COL)[Installing xscript...]$(ECHO_END)
 	@python3 setup.py install
 	@-rm -rf build/
 	@echo $(ECHO_COL)[Installing completely]$(ECHO_END)
@@ -27,10 +28,11 @@ test: Makefile script/hello.xs $(SOURCE)
 upgrade: Makefile setup.py $(SOURCE)
 	@echo $(ECHO_COL)[Upgrading...]$(ECHO_END)
 	@git pull
-	@echo $(ECHO_COL)[Installing...]$(ECHO_END)
+	@echo $(ECHO_COL)[Installing packages...]$(ECHO_END)
 	@-pip3 install -U prettytable mkdocs
+	@echo $(ECHO_COL)[Installing xscript...]$(ECHO_END)
 	@python3 setup.py install
 	@-rm -rf build/
-	@echo $(ECHO_COL)[Testing...]$(ECHO_END)
+	@echo $(ECHO_COL)[Testing xscript...]$(ECHO_END)
 	@-./xscript script/getver.xs
 	@echo $(ECHO_COL)[Upgrading completely]$(ECHO_END)
