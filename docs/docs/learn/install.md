@@ -15,16 +15,20 @@ cd xscript
 或下载[zip文件](https://github.com/jason-bowen-zheng/xscript/archive/master.zip).
 
 ## Linux下安装
-clone好了就可以了, `xscript`目录下的`xscript`是主程序.
+运行:
+```shell
+make install
+```
 
 ## Windows下安装
-和Linux一样.
+这个`Makefile`是为Linux写的, Windows用户请输入如下命令:
+```shell
+pip install -U prettytable mkdocs
+python setup.py install
+```
 
-## 简单一些
+## 更新
 运行:
-
+```shell
+make upgrade
 ```
-./setup install
-```
-
-然后再把`xscript`文件复制到某一个`PATH`目录就可以了

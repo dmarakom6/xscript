@@ -10,19 +10,18 @@ git clone https://github.com/jason-bowen-zheng/xscript
 cd xscript/
 ```
 
-然后请先安装`prettytable`的python模块和xscript:
+然后请先安装xscript:
 ```shell
-pip install -U prettytable
-./setup install
+make install
 ```
 
 最后你可以测试一下xscript:
 ```shell
-xscript script/hello.xs
+./xscript script/hello.xs
 ```
 
 # 如何运行我的代码?
-你可以在xscript目录下, 通过终端输入`xscript <file> [args...]`来运行.
+你可以在xscript目录下, 通过终端输入`./xscript <file> [args...]`来运行.
 
 当然, 你可以看看`xscript/script`目录下的例子.
 

@@ -1,5 +1,5 @@
 # xscript文档
-> 这里是xscript0.0的文档
+> 这里是xscript 0.0 的文档
 
 ## 什么是xscript?
 xscript是用python编写的一个非常小巧的编程语言, 它的核心(`xscriptcore.py`)不会超过1000行.
