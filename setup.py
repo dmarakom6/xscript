@@ -7,6 +7,8 @@ setup(
     name='xscript',
     version=strftime('%Y-%m-%d'),
     license='GPLv3',
+    description='xscript programming language',
+    url='https://github.com/jason-bowen-zheng/xscript',
     packages=['xscriptlib'],
-    py_modules=['xscriptcore']
+    py_modules=['xscriptcore'],
 )

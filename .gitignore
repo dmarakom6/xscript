@@ -2,3 +2,5 @@ __pycache__/
 build/
 docs/site/
 .*.swp
+dist/
+*.egg-info/
