@@ -6,7 +6,7 @@ COLOR_COL := "\033[32m
 SOURCE := xscript xscriptcore.py xscriptlib/
 
 help: Makefile
-	@echo "Help for xscript 0.0 makefile\n"
+	@echo "Help for xscript 0.0 Makefile\n"
 	@echo "commit  commit changes and push"
 	@echo "help    show this help"
 	@echo "install install xscript"
