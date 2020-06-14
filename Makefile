@@ -19,6 +19,7 @@ commit: Makefile LICENSE README.md setup.py docs/ script/ $(SOURCE)
 	@git add .
 	@echo $(COLOR_COL)[Committing changes...]$(COLOR_END)
 	@git commit -m `date +%Y-%m-%d`
+	@sleep 3s
 	@echo $(COLOR_COL)[Pushing changes...]$(COLOR_END)
 	@git push -u origin master
 	@echo $(COLOR_COL)[Committing successfully]$(COLOR_END)

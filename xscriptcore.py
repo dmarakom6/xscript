@@ -1,7 +1,7 @@
 # xscript/xscriptcore.py
 # xscript core
 
-import xscriptlib
+import xscriptlib as lib
 import os
 from prettytable import PrettyTable
 import re
