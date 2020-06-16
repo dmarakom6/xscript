@@ -1,6 +1,7 @@
 # xscript/xscriptcore.py
 # xscript core
 
+import colorama as color
 import xscriptlib as lib
 import os
 from prettytable import PrettyTable
@@ -393,13 +394,6 @@ class XScriptInterpreter(object):
                 else:
                     raise TypeError('Unknow command: %s' % lines[0])
             except Exception as err:
-                print('\n      __')
-                print(' _   / /')
-                print('(_) | | ')
-                print(' _  | | ')
-                print('(_) | | ')
-                print('     \_\\')
-                print()
                 print('In line', self.now + 1)
                 print('-> ', line)
                 print('Error: %s' % str(err))
