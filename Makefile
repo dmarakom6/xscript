@@ -26,12 +26,12 @@ commit: Makefile LICENSE README.md setup.py docs/ script/ $(SOURCE)
 
 install: Makefile setup.py
 	@echo -n $(COLOR_START)[Checking packages... $(COLOR_END)
-	@-pip3 install -U colorama mkdocs prettytable >> .output
+	@-pip3 install -U colorama mkdocs prettytable >> /dev/null
 	@echo $(COLOR_START)Done]$(COLOR_END)
 	@echo -n $(COLOR_START)[Installing xscript... $(COLOR_END)
-	@python3 setup.py install >> .output
+	@python3 setup.py install >> /dev/null
 	@echo $(COLOR_START)Done]$(COLOR_END)
-	@-rm -rf .output build/
+	@-rm -rf build/
 	@echo $(COLOR_START)[Installing completely]$(COLOR_END)
 
 test: Makefile script/hello.xs $(SOURCE)
@@ -43,12 +43,12 @@ up: Makefile setup.py $(SOURCE)
 	@echo $(COLOR_START)[Upgrading...]$(COLOR_END)
 	@git pull
 	@echo -n $(COLOR_START)[Checking packages... $(COLOR_END)
-	@-pip3 install -U colorama mkdocs prettytable >> .output
+	@-pip3 install -U colorama mkdocs prettytable >> /dev/null
 	@echo $(COLOR_START)Done]$(COLOR_END)
 	@echo -n $(COLOR_START)[Installing xscript... $(COLOR_END)
-	@python3 setup.py install >> .output
+	@python3 setup.py install >> /dev/null
 	@echo $(COLOR_START)Done]$(COLOR_END)
-	@-rm -rf .output build/
+	@-rm -rf build/
 	@echo $(COLOR_START)[Testing xscript...]$(COLOR_END)
 	@-./xscript script/getver.xs
 	@echo $(COLOR_START)[Upgrading completely]$(COLOR_END)
