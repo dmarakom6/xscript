@@ -9,7 +9,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>自定义标准库 - xscript</title>
+  <title>更漂亮的界面 - xscript</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
   <link rel="stylesheet" href="../../css/theme.css" />
@@ -18,8 +18,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "\u81ea\u5b9a\u4e49\u6807\u51c6\u5e93";
-    var mkdocs_page_input_path = "learn/config-lib.md";
+    var mkdocs_page_name = "\u66f4\u6f02\u4eae\u7684\u754c\u9762";
+    var mkdocs_page_input_path = "learn/colorful.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -71,17 +71,17 @@
                     </li>
                     <li class="toctree-l1"><a class="reference internal" href="../basic-io/">基本输入输出</a>
                     </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../colorful/">更漂亮的界面</a>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">更漂亮的界面</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#_2">准备</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_3">语法</a>
+    </li>
+    </ul>
                     </li>
                     <li class="toctree-l1"><a class="reference internal" href="../use-debug/">使用debug</a>
                     </li>
-                    <li class="toctree-l1 current"><a class="reference internal current" href="./">自定义标准库</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#_2">编写文件</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#_3">使用</a>
-    </li>
-    </ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../config-lib/">自定义标准库</a>
                     </li>
                 </ul>
                 <p class="caption"><span class="caption-text">xscript标准库</span></p>
@@ -128,7 +128,7 @@
         
       
     
-    <li>自定义标准库</li>
+    <li>更漂亮的界面</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -139,33 +139,19 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="_1">自定义标准库</h1>
+                <h1 id="_1">更漂亮的界面</h1>
 <blockquote>
-<p>添加标准库源文件</p>
+<p>使用<code>color</code>命令(<code>commit:2020-06-17</code>)</p>
 </blockquote>
-<h2 id="_2">编写文件</h2>
-<p>xscript并不能很好使用python的源文件, 要适当重写.</p>
-<p>如何重写:</p>
+<h2 id="_2">准备</h2>
+<p>为了使用<code>color</code>命令, 应该先安装<code>colorama</code>模块, 已经在安装的时候安装好了, 不必重复安装.</p>
+<h2 id="_3">语法</h2>
+<p><em>color $action $args...</em></p>
+<p>所有的颜色和样式的控制都符合上述的语法:</p>
 <ul>
-<li>重写函数调用</li>
-<li>xscript不能创建和调用python对象及其方法和变量, 请将创建对象的代码转换为一个返回该对象的函数, 添加函数以便使用对象的方法</li>
-<li>注意对传入参数的转换</li>
+<li><code>action</code> - 子命令</li>
+<li><code>args</code> - 传递给子命令的参数(可选)</li>
 </ul>
-<div class="admonition tips">
-<p class="admonition-title">贴示</p>
-<p>在使用python库的时候应该对使用的库名进行更改:
-比如<code>os</code>换成<code>_os</code></p>
-</div>
-<h2 id="_3">使用</h2>
-<p>请在<code>xscriptlib/__init__.py</code>中添加一行来import刚刚编写的库.</p>
-<p>以一个<code>foo</code>为例子:</p>
-<ol>
-<li>编辑<code>xscriptlib/__init__.py</code></li>
-<li>输入<code>import lib.foo as foo</code></li>
-<li>重启解释器</li>
-<li>编写程序测试一下</li>
-<li>完成</li>
-</ol>
               
             </div>
           </div>
@@ -173,10 +159,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../../lib/" class="btn btn-neutral float-right" title="索引">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../use-debug/" class="btn btn-neutral float-right" title="使用debug">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../use-debug/" class="btn btn-neutral" title="使用debug"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../basic-io/" class="btn btn-neutral" title="基本输入输出"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -204,10 +190,10 @@
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../use-debug/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../basic-io/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../../lib/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../use-debug/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
