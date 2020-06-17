@@ -2,7 +2,7 @@
 
 let name = '[gets name:]'
 color init
-color set-fore GREEN
+color setfore GREEN
 puts your name: $name
-color set-fore RESET
+color reset
 exit 0

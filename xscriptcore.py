@@ -37,14 +37,36 @@ class XScriptInterpreter(object):
                 arg[item] = True
             else:
                 color.init(**arg)
-        elif action == 'set-fore':
+        elif action == 'reset':
+            if len(args) != 0:
+                raise TypeError('reset takes no argument but %d gave' % len(args))
+            else:
+                print(color.Style.RESET_ALL, end='')
+        elif action == 'setback':
             if len(args) != 1:
-                raise TypeError('set-fore takes 1argument but %d gave' % len(args))
+                raise TypeError('setback takes 1 argument but %d gave' % len(args))
+            else:
+                if getattr(color.Back, args[0]):
+                    print(getattr(color.Back, args[0]), end='')
+                else:
+                    raise TypeError("No back color '%s'" % args[1])
+        elif action == 'setfore':
+            if len(args) != 1:
+                raise TypeError('setfore takes 1 argument but %d gave' % len(args))
             else:
                 if getattr(color.Fore, args[0]):
                     print(getattr(color.Fore, args[0]), end='')
                 else:
                     raise TypeError("No fore color '%s'" % args[1])
+        elif action == 'setstyle':
+            if len(args) != 1:
+                raise TypeError('setstyle takes 1 argument but %d gave' % len(args))
+            else:
+                if getattr(color.Style, args[0]):
+                    print(getattr(color.Style, args[0]), end='')
+                else:
+                    raise TypeError("No style '%s'" % args[1])
+
         else:
             raise TypeError("No subcommand '%s'" % action)
 
