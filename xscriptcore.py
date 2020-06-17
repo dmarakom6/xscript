@@ -29,6 +29,25 @@ class XScriptInterpreter(object):
         except:
             return 0
 
+    def color(self, action, *args):
+        # xscript uses colorama to control color and style
+        if action == 'init':
+            arg = {}
+            for item in args:
+                arg[item] = True
+            else:
+                color.init(**arg)
+        elif action == 'set-fore':
+            if len(args) != 1:
+                raise TypeError('set-fore takes 1argument but %d gave' % len(args))
+            else:
+                if getattr(color.Fore, args[0]):
+                    print(getattr(color.Fore, args[0]), end='')
+                else:
+                    raise TypeError("No fore color '%s'" % args[1])
+        else:
+            raise TypeError("No subcommand '%s'" % action)
+
     def debug(self):
         # the debug system
         try:
@@ -201,7 +220,7 @@ class XScriptInterpreter(object):
                         for line in self.program[self.now - 1:]:
                             self.now += 1
                             line = line.lstrip()
-                            if line.startswitch('foreach '):
+                            if linestartswith('foreach '):
                                 inforeach += 1
                             elif line == 'end foreach':
                                 if inforeach == 0:
@@ -223,7 +242,7 @@ class XScriptInterpreter(object):
                         for line in self.program[self.now - 1:]:
                             self.now += 1
                             line = line.lstrip()
-                            if line.startswitch('foreach '):
+                            if linestartswith('foreach '):
                                 inforeach += 1
                             elif line == 'end foreach':
                                 if inforeach == 0:
@@ -281,7 +300,10 @@ class XScriptInterpreter(object):
     def puts(self, *args):
 	# puts is a user output function
         for item in args:
-            print(self.replacevar(item), end=' ')
+            if (item := self.replacevar(item)) != None:
+                print(item, end=' ')
+            else:
+                pass
         else:
             print()
 
@@ -369,6 +391,8 @@ class XScriptInterpreter(object):
                         pass
                 elif lines[0][0] == '#':
                     pass
+                elif lines[0] == 'color':
+                    self.color(*lines[1:])
                 elif lines[0] == 'debug':
                     self.debug(*lines[1:])
                 elif lines[0] == 'delete':
