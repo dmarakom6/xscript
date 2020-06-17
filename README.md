@@ -1,4 +1,4 @@
-# 什么是xscript?
+# xscript 0.0
 xscript是用python编写的一个非常小巧的编程语言, 它的核心(`xscriptcore.py`)会很小.
 
 没有函数, 没有判断结构. 它只有最基本的变量管理, 所有类型的循环结构, 可调用的外部函数(python实现), 没了!
