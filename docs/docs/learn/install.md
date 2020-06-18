@@ -30,5 +30,5 @@ python setup.py install
 ## 更新
 运行:
 ```shell
-make upgrade
+make up
 ```
