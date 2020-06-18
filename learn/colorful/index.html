@@ -77,6 +77,8 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#_3">语法</a>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_4">使用</a>
+    </li>
     </ul>
                     </li>
                     <li class="toctree-l1"><a class="reference internal" href="../use-debug/">使用debug</a>
@@ -151,6 +153,19 @@
 <ul>
 <li><code>action</code> - 子命令</li>
 <li><code>args</code> - 传递给子命令的参数(可选)</li>
+</ul>
+<h2 id="_4">使用</h2>
+<p>初始化: <em>color init $args...</em>
+  - <code>args</code> - <code>colorama.init</code>接收的参数, 会讲<code>args</code>中提供的参数都设置为<code>&amp;true</code></p>
+<p>改变前景颜色: <em>color setfore $color</em></p>
+<ul>
+<li><code>color</code> - 是一个颜色字符串, 对应<code>colorama.Fore</code>中的颜色(一定要全部大写)</li>
+</ul>
+<p>其他子命令:</p>
+<ul>
+<li><em>color setback $color</em> - 设置背景色</li>
+<li><em>color setstyle</em> - 设置样式</li>
+<li><em>color reset</em> - 将颜色和样式恢复正常(相当于<code>color setstyle RESET_ALL</code>)</li>
 </ul>
               
             </div>
