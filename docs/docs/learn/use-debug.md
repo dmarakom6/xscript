@@ -11,7 +11,7 @@ xscript有一独立命令`debug`来启动debug. 会以横跨终端两段的`=`�
 
 - *exit* - 退出debug
 - *now* - 显示现在位于的块
-  > `now`会读取`core.XScriptInterpreter.block`中的数据, 以`.`分隔
+> `now`会读取`core.XScriptInterpreter.block`中的数据, 以`.`分隔
 
 - *ls* - 显示所有变量
 - *show $name* - 只显示名字为`name`的变量

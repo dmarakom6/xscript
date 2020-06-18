@@ -9,5 +9,19 @@
 
 所有的颜色和样式的控制都符合上述的语法:
 
-- `action` - 子命令
-- `args` - 传递给子命令的参数(可选)
+  - `action` - 子命令
+  - `args` - 传递给子命令的参数(可选)
+
+## 使用
+初始化: *color init $args...*
+  - `args` - `colorama.init`接收的参数, 会讲`args`中提供的参数都设置为`&true`
+
+改变前景颜色: *color setfore $color*
+
+  - `color` - 是一个颜色字符串, 对应`colorama.Fore`中的颜色(一定要全部大写)
+
+其他子命令:
+
+  - *color setback $color* - 设置背景色
+  - *color setstyle* - 设置样式
+  - *color reset* - 将颜色和样式恢复正常(相当于`color setstyle RESET_ALL`)
