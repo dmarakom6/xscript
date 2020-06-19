@@ -62,7 +62,7 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#_3">命令替换符([...])</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#xscript_1">xscript.</a>
+    <li class="toctree-l2"><a class="reference internal" href="#call">call</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#_4">特殊的变量</a>
     </li>
@@ -183,6 +183,12 @@
 </blockquote>
 </li>
 <li>
+<p><em>call $path &amp;args...</em></p>
+<blockquote>
+<p>运行外部函数</p>
+</blockquote>
+</li>
+<li>
 <p><em>environ $name</em>(仅命令替换符)</p>
 <blockquote>
 <p>返回系统变量name(没有返回<code>&amp;null</code>)</p>
@@ -200,20 +206,16 @@
 <p>判断path路径是否在标准库中存在</p>
 </blockquote>
 </li>
-<li>
-<p><em>xscript.</em></p>
-</li>
 </ul>
 <div class="admonition tips">
 <p class="admonition-title">贴示</p>
 <p><code>仅命令替换符</code>表示只有在<code>[...]</code>中才能使用的命令</p>
 </div>
-<h2 id="xscript_1">xscript.</h2>
-<p><code>xscript.</code>(不要忘记<code>.</code>)命令使用xscript函数来支持函数通过路径获取的功能, 支持获得函数和变量.</p>
-<p>其间使用了一个<code>for</code>循环来遍历<code>lib</code>库的应用位置.</p>
+<h2 id="call">call</h2>
+<p>call可以运行外部函数和对象的方法, 也可以获取对象中的变量.</p>
 <div class="admonition warning">
 <p class="admonition-title">注意</p>
-<p>在获取变量值的时候不能向<code>xscript</code>传递参数, 以免引起<code>... is not callable</code>错误</p>
+<p>在获取变量值的时候不能向<code>call</code>传递参数, 以免引起<code>... is not callable</code>错误</p>
 </div>
 <h2 id="_4">特殊的变量</h2>
 <p>解释器启动时创建的变量, 不能通过<code>let</code>语句赋值, 也不能通过<code>delete</code>语句删除. 但是可以正常使用, 即常量.</p>
@@ -223,9 +225,10 @@
 <li><code>false</code> - 逻辑值假</li>
 <li><code>null</code> - 等于<code>None</code></li>
 <li><code>argv</code> - 运行时传递的命令行参数</li>
+<li><code>xscript</code> - xscript标准库</li>
 <li><code>interpreter</code> - xscript解释器本身</li>
 <li><code>platform</code> - 操作系统的名称</li>
-<li><code>version</code> - xscript的版本号(str)</li>
+<li><code>version</code> - xscript的版本号(字符串)</li>
 </ul>
 <div class="admonition tips">
 <p class="admonition-title">贴示</p>
@@ -233,7 +236,7 @@
 </div>
 <div class="admonition warning">
 <p class="admonition-title">警告</p>
-<p>不在万不得已的情况下不要使用<code>interpreter</code>变量, 这可能会有风险</p>
+<p>不在万不得已的情况下不要使用<code>call interpreter ...</code>, 这一定会产生风险!!!</p>
 </div>
               
             </div>
