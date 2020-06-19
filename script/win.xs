@@ -1,6 +1,6 @@
 # xscript/script/win.xs
 
-let win = [xscript.ui.Window]
-xscript.ui.title &win Hello
-xscript.ui.mainloop &win
+let win = '[call xscript.ui.Window]'
+call win.title Hello
+call win.mainloop
 exit 0

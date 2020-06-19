@@ -2,7 +2,6 @@
 # xscript core
 
 import colorama as color
-import xscriptlib as lib
 import os
 from prettytable import PrettyTable
 import re
@@ -28,6 +27,27 @@ class XScriptInterpreter(object):
             return id(self.var[name])
         except:
             return 0
+
+    def call(self, path, *args):
+        # call can call function
+        arg =[]
+        for item in args:
+            arg.append(self.replacevar(item))
+        path = path.split('.')
+        obj = self.var[path[0]]
+        for item in path[1:]:
+            if hasattr(obj, item):
+                obj = getattr(obj, item)
+            else:
+                raise TypeError("No attribute '%s'" % item)
+        else:
+            if type(obj) == type(lambda x: x) or type(''.capitalize):
+                return obj(*arg)
+            else:
+                if len(args) != 0:
+                    raise TypeError("'%s' is not callable" % '.'.join(path))
+                else:
+                    return obj
 
     def color(self, action, *args):
         # xscript uses colorama to control color and style
@@ -283,8 +303,8 @@ class XScriptInterpreter(object):
     def has(self, path):
         # has tests the path whether in lib or not
         path = path.split('.')
-        obj = lib
-        for item in path:
+        obj = self.var[path[0]]
+        for item in path[1:]:
             if hasattr(obj, item):
                 obj = getattr(obj, item)
             else:
@@ -337,6 +357,8 @@ class XScriptInterpreter(object):
         else:
             if exp[0] == 'addr':
                 return self.addr(*exp[1:])
+            elif exp[0] == 'call':
+                return self.call(*exp[1:])
             elif exp[0] == 'environ':
                 return self.environ(*exp[1:])
             elif exp[0] == 'gets':
@@ -381,7 +403,7 @@ class XScriptInterpreter(object):
                 return float(value)
             else:
                 return value
-    
+
     def restart(self, program, var={}, argv=[]):
         # it just set some global variable like const variables
         self.program = program
@@ -392,10 +414,11 @@ class XScriptInterpreter(object):
         self.var['null'] = None
         self.var['argv']= argv
         self.var['interpreter'] = self
+        self.var['xscript'] = __import__('xscriptlib')
         self.var['platform'] = sys.platform
         # don't edit the following version info
         self.var['version'] = '0.0'
-        self.const = ['true', 'false', 'null', 'argv', 'interpreter', 'platform', 'version']
+        self.const = ['true', 'false', 'null', 'argv', 'interpreter', 'xscript', 'platform', 'version']
 
     def run(self):
         # run is a very import function, it runs codes
@@ -413,6 +436,8 @@ class XScriptInterpreter(object):
                         pass
                 elif lines[0][0] == '#':
                     pass
+                elif lines[0] == 'call':
+                    self.call(*lines[1:])
                 elif lines[0] == 'color':
                     self.color(*lines[1:])
                 elif lines[0] == 'debug':
@@ -435,8 +460,6 @@ class XScriptInterpreter(object):
                     self.puts(*lines[1:])
                 elif lines[0] == 'while':
                     self.while_flag(*lines[1:])
-                elif lines[0][:8] == 'xscript.':
-                    self.xscript(*lines)
                 else:
                     raise TypeError('Unknow command: %s' % lines[0])
             except Exception as err:
@@ -495,32 +518,4 @@ class XScriptInterpreter(object):
                     pass
             else:
                 raise TypeError('Loop without end')
-
-    def xscript(self, path, *args):
-        # xscript is an important function that it can call outer function written by python
-        arg = []
-        for item in args:
-            arg.append(self.replacevar(item))
-        else:
-            path = path.split('.')
-            obj = lib
-            for item in path[1:]:
-                if hasattr(obj, item):
-                    obj = getattr(obj, item)
-                else:
-                    raise TypeError('No attribute: %s' % item)
-            else:
-                if type(obj) == type(lambda x: x):
-                    # >>> type(abs)
-                    # <class 'builtin_function_or_method'>
-                    # >>> type(lambda: 1)
-                    # <class 'function'>
-                    # >>> type(abs) == type(lambda: 1)
-                    # False
-                    # >>> # so we use `type(obj) == type(lambda x: x)` to compare function and variable
-                    return obj(*arg)
-                elif len(arg) == 0:
-                    return obj
-                else:
-                    raise TypeError("'%s' is not callable" % path)
 

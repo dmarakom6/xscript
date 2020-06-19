@@ -1,11 +1,11 @@
 # xscript/script/circle.xs
 
-xscript.turtle.color red yellow
-xscript.turtle.begin_fill
-xscript.turtle.speed 15
+call xscript.turtle.color red yellow
+call xscript.turtle.begin_fill
+call xscript.turtle.speed 15
 for i 0 360
-    xscript.turtle.forward 1
-    xscript.turtle.left 1
+    call xscript.turtle.forward 1
+    call xscript.turtle.left 1
 end for
-xscript.turtle.end_fill
+call xscript.turtle.end_fill
 exit 0

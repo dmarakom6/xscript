@@ -36,6 +36,9 @@
 - *addr $name*(仅命令替换符)
 > 返回name的内存地址
 
+- *call $path &args...*
+> 运行外部函数
+
 - *environ $name*(仅命令替换符)
 > 返回系统变量name(没有返回`&null`)
 
@@ -45,18 +48,14 @@
 - *has $path*(仅命令替换符)
 > 判断path路径是否在标准库中存在
 
-- *xscript.*
-
 !!! tips "贴示"
 	`仅命令替换符`表示只有在`[...]`中才能使用的命令
 
-## xscript.
-`xscript.`(不要忘记`.`)命令使用xscript函数来支持函数通过路径获取的功能, 支持获得函数和变量.
-
-其间使用了一个`for`循环来遍历`lib`库的应用位置.
+## call
+call可以运行外部函数和对象的方法, 也可以获取对象中的变量.
 
 !!! warning "注意"
-	在获取变量值的时候不能向`xscript`传递参数, 以免引起`... is not callable`错误
+	在获取变量值的时候不能向`call`传递参数, 以免引起`... is not callable`错误
 
 ## 特殊的变量
 解释器启动时创建的变量, 不能通过`let`语句赋值, 也不能通过`delete`语句删除. 但是可以正常使用, 即常量.
@@ -67,12 +66,13 @@
   - `false` - 逻辑值假
   - `null` - 等于`None`
   - `argv` - 运行时传递的命令行参数
+  - `xscript` - xscript标准库
   - `interpreter` - xscript解释器本身
   - `platform` - 操作系统的名称
-  - `version` - xscript的版本号(str)
+  - `version` - xscript的版本号(字符串)
 
 !!! tips "贴示"
 	`testname`函数也会检查一个字符串是否属于常量
 
 !!! warning "警告"
-	不在万不得已的情况下不要使用`interpreter`变量, 这可能会有风险
+	不在万不得已的情况下不要使用`call interpreter ...`, 这一定会产生风险!!!
