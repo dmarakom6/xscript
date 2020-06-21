@@ -31,7 +31,7 @@ deploy: Makefile LICENSE README.md setup.py docs/ script/ $(SOURCE)
 	@git push -u origin master
 	@echo $(COLOR_START)[Deploying successfully]$(COLOR_END)
 
-delpoy-docs: Makefile docs/ docs/mkdocs.yml docs/docs
+deploy-docs: Makefile docs/ docs/mkdocs.yml docs/docs
 	@echo $(COLOR_START)[Start deploying...]$(COLOR_END)
 	@cd docs/; mkdocs gh-deploy --message `date +%Y-%m-%d`
 	@echo $(COLOR_START)[Deploying successfully]$(COLOR_END)
