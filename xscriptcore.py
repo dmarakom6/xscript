@@ -101,6 +101,10 @@ class XScriptInterpreter(object):
             cmd = input('debug> ')
             if cmd == '':
                 pass
+            elif cmd == 'copyright':
+                print('xscript %s' % self.var['version'])
+                print('Copyright (c) 2020 jason-bowen-zheng.')
+                print('All Right Reserved.')
             elif cmd == 'exit':
                 pass
             elif cmd == 'now':
