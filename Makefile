@@ -48,6 +48,7 @@ install: Makefile setup.py
 	@echo -n $(COLOR_START)[Installing xscript... $(COLOR_END)
 	@python3 setup.py install >> /dev/null
 	@echo $(COLOR_START)Done]$(COLOR_END)
+	@cp xscript $(PREFIX)/bin/xscript
 	@-rm -rf build/
 	@echo $(COLOR_START)[Installing completely]$(COLOR_END)
 
@@ -61,6 +62,7 @@ upgrade: Makefile setup.py $(SOURCE)
 	@python3 setup.py install >> /dev/null
 	@echo $(COLOR_START)Done]$(COLOR_END)
 	@-rm -rf build/
+	@cp xscript $(PREFIX)/bin/xscript
 	@echo $(COLOR_START)[Testing xscript...]$(COLOR_END)
 	@-./xscript script/getver.xs
 	@echo $(COLOR_START)[Upgrading completely]$(COLOR_END)

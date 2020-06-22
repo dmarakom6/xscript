@@ -412,6 +412,8 @@ class XScriptInterpreter(object):
         # it just set some global variable like const variables
         self.program = program
         self.var = var
+        self.now = 0
+        self.block = []
         self.itervar = {}
         self.var['true'] = True
         self.var['false'] = False
@@ -424,10 +426,8 @@ class XScriptInterpreter(object):
         self.var['version'] = '0.0'
         self.const = ['true', 'false', 'null', 'argv', 'interpreter', 'xscript', 'platform', 'version']
 
-    def run(self):
-        # run is a very import function, it runs codes
-        self.now = 0
-        self.block = []
+    def runall(self):
+        # runall is a very import function, it runs all codes
         while True:
             if self.now + 1 <= len(self.program):
                 line = self.program[self.now].lstrip()

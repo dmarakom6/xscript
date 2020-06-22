@@ -28,7 +28,7 @@ def main():
     else:
         source = open(sys.argv[1], 'r+').readlines()
         interpreter = core.XScriptInterpreter(source, argv=sys.argv[1:])
-        interpreter.run()
+        interpreter.runall()
 
 if __name__ == '__main__':
     main()
