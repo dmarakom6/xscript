@@ -1,7 +1,7 @@
 from prettytable import PrettyTable as _PrettyTable
 
 def addColumn(table, fieldname, *column):
-    table.add_colum(fieldname, colum)
+    table.add_colum(fieldname, column)
 
 def addRow(table, *row):
     table.add_row(row)
