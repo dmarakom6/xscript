@@ -42,6 +42,7 @@ class XScriptInterpreter(object):
                 raise TypeError("No attribute '%s'" % item)
         else:
             if type(obj) == type(lambda x: x) or type(''.capitalize):
+                # function and method
                 return obj(*arg)
             else:
                 if len(args) != 0:
@@ -148,7 +149,7 @@ class XScriptInterpreter(object):
 
     def exit(self, code=0):
 	# raise exit code and exit
-        exit(code)
+        sys.exit(self.replacevar(code))
 
     def end_flag(self, flag):
 	# end is a flag
@@ -433,6 +434,7 @@ class XScriptInterpreter(object):
                 line = self.program[self.now].lstrip()
             else:
                 self.exit()
+                break
             lines = shlex.split(line)
             try:
                 if lines == []:
@@ -470,6 +472,7 @@ class XScriptInterpreter(object):
                 print('-> ', line)
                 print('Error: %s' % str(err))
                 self.exit(1)
+                break
             else:
                 self.now += 1
 
