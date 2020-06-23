@@ -12,8 +12,7 @@ class IDEWin():
         if len(argv) == 1:
             self.win.title('xIDE - [NEW]')
         elif self.isfile(argv[1]):
-            self.dirSideBar = False
-            self.win.title('xIDE - %s' % argv[1])
+			self.win.title('xIDE - %s' % argv[1])
         else:
             pass
         self.initUI()
