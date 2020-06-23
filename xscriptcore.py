@@ -148,7 +148,7 @@ class XScriptInterpreter(object):
 
     def exit(self, code=0):
 	# raise exit code and exit
-        exit(int(code))
+        exit(code)
 
     def end_flag(self, flag):
 	# end is a flag
@@ -426,14 +426,13 @@ class XScriptInterpreter(object):
         self.var['version'] = '0.0'
         self.const = ['true', 'false', 'null', 'argv', 'interpreter', 'xscript', 'platform', 'version']
 
-    def runall(self):
-        # runall is a very import function, it runs all codes
+    def run(self):
+        # run run all code
         while True:
             if self.now + 1 <= len(self.program):
                 line = self.program[self.now].lstrip()
             else:
                 self.exit()
-                break
             lines = shlex.split(line)
             try:
                 if lines == []:
@@ -471,7 +470,6 @@ class XScriptInterpreter(object):
                 print('-> ', line)
                 print('Error: %s' % str(err))
                 self.exit(1)
-                break
             else:
                 self.now += 1
 
