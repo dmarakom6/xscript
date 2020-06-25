@@ -325,7 +325,10 @@ class XScriptInterpreter(object):
             self.var[name] = __import__(name)
         elif name.find('.') != -1:
             path = name.split('.')
-            obj = self.var[path[0]]
+            if path[0] not in self.var:
+                obj = __import__(path[0])
+            else:
+                obj = self.var[path[0]]
             for item in path[1:]:
                 if hasattr(obj, item):
                     obj = getattr(obj, item)
