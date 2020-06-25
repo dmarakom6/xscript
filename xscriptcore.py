@@ -41,7 +41,7 @@ class XScriptInterpreter(object):
             else:
                 raise TypeError("No attribute '%s'" % item)
         else:
-            if type(obj) == type(lambda x: x) or type(''.capitalize):
+            if callable(obj):
                 # function and method
                 return obj(*arg)
             else:
@@ -99,7 +99,7 @@ class XScriptInterpreter(object):
             print('xscript: start debug')
         cmd = ''
         while cmd != 'exit':
-            cmd = input('debug> ')
+            cmd = self.gets('debug> ')
             if cmd == '':
                 pass
             elif cmd == 'copyright':
@@ -147,7 +147,7 @@ class XScriptInterpreter(object):
             else:
                 raise TypeError('%s is a const variable.' % name)
 
-    def exit(self, code=0):
+    def exit(self, code='0'):
 	# raise exit code and exit
         sys.exit(self.replacevar(code))
 
@@ -303,7 +303,10 @@ class XScriptInterpreter(object):
 
     def gets(self, prompt='?'):
 	# gets is a user input function
-        return input(prompt)
+        try:
+            return input(prompt)
+        except:
+            raise TypeError('User stopped')
 
     def has(self, path):
         # has tests the path whether in lib or not
@@ -316,6 +319,26 @@ class XScriptInterpreter(object):
                 return False
         else:
             return True
+
+    def import_(self, name):
+        if self.testname(name):
+            self.var[name] = __import__(name)
+        elif name.find('.') != -1:
+            path = name.split('.')
+            obj = self.var[path[0]]
+            for item in path[1:]:
+                if hasattr(obj, item):
+                    obj = getattr(obj, item)
+                else:
+                    raise TypeError('No attribute: %s' % item)
+            else:
+                if type(obj) == type(os):
+                    if self.testname(path[-1]):
+                        self.var[path[-1]] = obj
+                    else:
+                        raise TypeError("Invalid name: '%s'" path[-1])
+                else:
+                    raise TypeError('import import module, not %s' % str(type(obj))[8:-2])
 
     def let(self, name, symbol, value):
         # let is just a assignment statement, it support 8 operators
@@ -459,6 +482,8 @@ class XScriptInterpreter(object):
                     self.foreach_flag(*lines[1:])
                 elif lines[0] == 'gets':
                     self.gets(*lines[1:])
+                elif lines[0] == 'import':
+                    self.import_(*lines[1:])
                 elif lines[0] == 'let':
                     self.let(*lines[1:])
                 elif lines[0] == 'puts':
@@ -468,10 +493,10 @@ class XScriptInterpreter(object):
                 else:
                     raise TypeError('Unknow command: %s' % lines[0])
             except Exception as err:
-                print('In line', self.now + 1)
+                print('\nIn line', self.now + 1)
                 print('-> ', line)
                 print('Error: %s' % str(err))
-                self.exit(1)
+                self.exit('1')
                 break
             else:
                 self.now += 1

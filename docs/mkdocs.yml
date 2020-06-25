@@ -9,6 +9,7 @@ nav:
     - 目录: learn/index.md
     - 安装xscript: learn/install.md
     - 基本输入输出: learn/basic-io.md
+    - 变量: learn/var.md
     - 更漂亮的界面: learn/colorful.md
     - 使用debug: learn/use-debug.md
     - 自定义标准库: learn/config-lib.md

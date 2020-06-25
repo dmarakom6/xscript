@@ -3,7 +3,7 @@ xscript是用python编写的一个非常小巧的编程语言, 它的核心(`xsc
 
 没有函数, 没有判断结构. 它只有最基本的变量管理, 所有类型的循环结构, 可调用的外部函数(python实现), 没了!
 
-`xIDE`正在编写中, 请不要使用`xIDE`以及`xIDElib/`中的源代码.
+`xIDE`正在编写中, 估计在一个月里面完不成, 请不要使用`xIDE`以及`xIDElib/`中的任何源代码.
 
 # 安装
 先将该git库拷贝到线下:
@@ -19,7 +19,7 @@ make install
 
 最后你可以测试一下xscript:
 ```shell
-./xscript script/hello.xs
+make demo
 ```
 
 # 如何运行我的代码?

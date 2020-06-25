@@ -5,7 +5,7 @@
 为了使用`color`命令, 应该先安装`colorama`模块, 已经在安装的时候安装好了, 不必重复安装.
 
 ## 语法
-*color $action $args...*
+*color $action [$args...]*
 
 所有的颜色和样式的控制都符合上述的语法:
 
