@@ -93,6 +93,8 @@
                     </li>
                     <li class="toctree-l1"><a class="reference internal" href="../use-debug/">使用debug</a>
                     </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../import-lib/">更多功能</a>
+                    </li>
                     <li class="toctree-l1"><a class="reference internal" href="../config-lib/">自定义标准库</a>
                     </li>
                 </ul>
@@ -179,8 +181,7 @@
 <ul>
 <li><code>&amp;var</code> - 变量本身</li>
 <li><code>$var</code> - 字符形式的变量<ul>
-<li>如果<code>var</code>是符合<code>^(\+|-)?[0-9]*$</code>的正则表达式则会返回字符形式的<code>var</code></li>
-<li>如果<code>var</code>是符合<code>^(\+|-)?[0-9]*\.[0-9]*$</code>的正则表达式则会返回字符形式的<code>var</code></li>
+<li>如果<code>var</code>是一个整数如<code>123</code>, 那么<code>$123</code>并不是名为<code>123</code>的变量, 而是字符<code>123</code></li>
 </ul>
 </li>
 <li><code>#var</code> - 整数型的变量(失败返回<code>0</code>)</li>
