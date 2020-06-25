@@ -339,7 +339,7 @@ class XScriptInterpreter(object):
                     if self.testname(path[-1]):
                         self.var[path[-1]] = obj
                     else:
-                        raise TypeError("Invalid name: '%s'" path[-1])
+                        raise TypeError("Invalid name: '%s'" % path[-1])
                 else:
                     raise TypeError('import import module, not %s' % str(type(obj))[8:-2])
 
