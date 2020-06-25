@@ -9,7 +9,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>安装xscript - xscript</title>
+  <title>变量 - xscript</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
   <link rel="stylesheet" href="../../css/theme.css" />
@@ -18,8 +18,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "\u5b89\u88c5xscript";
-    var mkdocs_page_input_path = "learn/install.md";
+    var mkdocs_page_name = "\u53d8\u91cf";
+    var mkdocs_page_input_path = "learn/var.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -67,19 +67,27 @@
                 <ul class="current">
                     <li class="toctree-l1"><a class="reference internal" href="../">目录</a>
                     </li>
-                    <li class="toctree-l1 current"><a class="reference internal current" href="./">安装xscript</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#linux">Linux下安装</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#windows">Windows下安装</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#_1">更新</a>
-    </li>
-    </ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../install/">安装xscript</a>
                     </li>
                     <li class="toctree-l1"><a class="reference internal" href="../basic-io/">基本输入输出</a>
                     </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../var/">变量</a>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">变量</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#xscript">xscript变量</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#_2">全局变量</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_3">普通变量</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_4">创建一个变量</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_5">引用一个变量</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_6">删除一个变量</a>
+    </li>
+    </ul>
                     </li>
                     <li class="toctree-l1"><a class="reference internal" href="../colorful/">更漂亮的界面</a>
                     </li>
@@ -132,7 +140,7 @@
         
       
     
-    <li>安装xscript</li>
+    <li>变量</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -143,31 +151,47 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="xscript">安装xscript</h1>
-<p>xscript不需要安装, 但xscript是使用python编写的, 需要安装python.</p>
-<p>xscript在python3.8中可以很好的运行, 所以请安装python的最新版本.</p>
-<hr />
-<p>xscript的最新版本托管在Github上, 请先clone该git库.</p>
-<pre><code>git clone https://github.com/jason-bowen-zheng/xscript
-cd xscript
-</code></pre>
-
-<p>或下载<a href="https://github.com/jason-bowen-zheng/xscript/archive/master.zip">zip文件</a>.</p>
-<h2 id="linux">Linux下安装</h2>
-<p>运行:</p>
-<pre><code class="shell">make install
-</code></pre>
-
-<h2 id="windows">Windows下安装</h2>
-<p>这个<code>Makefile</code>是为Linux写的, Windows用户请输入如下命令:</p>
-<pre><code class="shell">pip install -U prettytable mkdocs
-python setup.py install
-</code></pre>
-
-<h2 id="_1">更新</h2>
-<p>运行:</p>
-<pre><code class="shell">make up
-</code></pre>
+                <h1 id="_1">变量</h1>
+<blockquote>
+<p>变量是个很重要的东西</p>
+</blockquote>
+<h2 id="xscript">xscript变量</h2>
+<p>现在, xscript只有全局变量和普通变量之分</p>
+<h3 id="_2">全局变量</h3>
+<p>美其名曰: <code>常量</code>. 如<code>version</code>, <code>args</code>等只能引用, 不能修改的变量.</p>
+<h3 id="_3">普通变量</h3>
+<p>这个吗, 就是运行脚本后才有的变量(全局变量在运行之前就定义了).</p>
+<h2 id="_4">创建一个变量</h2>
+<p>xscript有一唯一的命令来创建变量: <code>let</code></p>
+<p><em>let $name $symbol &amp;value</em></p>
+<ul>
+<li><em>name</em> - 是一个符合xscript命名规则的变量</li>
+<li><em>symbol</em> - 一个操作符, 最常用的是<code>=</code></li>
+<li><em>value</em> - 是一个将要赋值给<code>name</code>的值 </li>
+</ul>
+<div class="admonition tips">
+<p class="admonition-title">xscript命名规则</p>
+<p>第一个字符允许是大小写字母 + <code>_</code><br>
+第二个字符以后在第一个字符上 + <code>1~9</code></p>
+</div>
+<h2 id="_5">引用一个变量</h2>
+<p>引用变量有很多方法, 可以允许你将变量的值转换为不同类型:</p>
+<ul>
+<li><code>&amp;var</code> - 变量本身</li>
+<li><code>$var</code> - 字符形式的变量<ul>
+<li>如果<code>var</code>是符合<code>^(\+|-)?[0-9]*$</code>的正则表达式则会返回字符形式的<code>var</code></li>
+<li>如果<code>var</code>是符合<code>^(\+|-)?[0-9]*\.[0-9]*$</code>的正则表达式则会返回字符形式的<code>var</code></li>
+</ul>
+</li>
+<li><code>#var</code> - 整数型的变量(失败返回<code>0</code>)</li>
+<li><code>.var</code> - 浮点型的变量(失败返回<code>0.0</code>)</li>
+</ul>
+<h2 id="_6">删除一个变量</h2>
+<p><em>delete $name</em></p>
+<ul>
+<li><em>name</em> - 要删除的变量</li>
+</ul>
+<p><code>name</code>必须是一个变量的<strong>名字</strong>(如<code>a</code>, 不是<code>&amp;a</code>之类)</p>
               
             </div>
           </div>
@@ -175,10 +199,10 @@ python setup.py install
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../basic-io/" class="btn btn-neutral float-right" title="基本输入输出">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../colorful/" class="btn btn-neutral float-right" title="更漂亮的界面">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../" class="btn btn-neutral" title="目录"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../basic-io/" class="btn btn-neutral" title="基本输入输出"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -206,10 +230,10 @@ python setup.py install
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../basic-io/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../basic-io/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../colorful/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
