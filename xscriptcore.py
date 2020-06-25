@@ -447,11 +447,11 @@ class XScriptInterpreter(object):
         self.var['null'] = None
         self.var['argv']= argv
         self.var['interpreter'] = self
-        self.var['xscript'] = __import__('xscriptlib')
+        self.var['x'] = __import__('xscriptlib')
         self.var['platform'] = sys.platform
         # don't edit the following version info
-        self.var['version'] = '0.0'
-        self.const = ['true', 'false', 'null', 'argv', 'interpreter', 'xscript', 'platform', 'version']
+        self.var['version'] = '0.5'
+        self.const = ['true', 'false', 'null', 'argv', 'interpreter', 'x', 'platform', 'version']
 
     def run(self):
         # run run all code

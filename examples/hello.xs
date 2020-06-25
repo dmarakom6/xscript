@@ -1,4 +1,4 @@
-# xscript/script/hello.xs
+# xscript/examples/hello.xs
 
 let name = '[gets name:]'
 color init

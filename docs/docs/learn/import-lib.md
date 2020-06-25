@@ -2,7 +2,7 @@
 > 导入外部函数库
 
 ## 为什么?
-导入一个包能方便编写程序, 你肯定不希望写`call xscript.turtle.forward 100`, 而是喜欢`call turtle.forward 100`
+导入一个包能方便编写程序, 你肯定不希望写`call x.turtle.forward 100`, 而是喜欢`call turtle.forward 100`
 
 庆幸的是, xscript拥有这种功能
 

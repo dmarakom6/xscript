@@ -66,7 +66,7 @@ call可以运行外部函数和对象的方法, 也可以获取对象中的变�
   - `false` - 逻辑值假
   - `null` - 等于`None`
   - `argv` - 运行时传递的命令行参数
-  - `xscript` - xscript标准库
+  - `x` - xscript标准库
   - `interpreter` - xscript解释器本身
   - `platform` - 操作系统的名称
   - `version` - xscript的版本号(字符串)

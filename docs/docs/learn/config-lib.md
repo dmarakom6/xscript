@@ -2,7 +2,7 @@
 > 添加标准库源文件
 
 ## 编写文件
-xscript并不能很好使用python的源文件, 要适当重写.
+xscript可以但是不能完全使用python的源文件, 要适当重写.
 
 如何重写:
 
@@ -20,7 +20,7 @@ xscript并不能很好使用python的源文件, 要适当重写.
 以一个`foo`为例子:
 
   1. 编辑`xscriptlib/__init__.py`
-  2. 输入`import lib.foo as foo`
+  2. 输入`import xscriptlib.foo as foo`
   3. 重启解释器
   4. 编写程序测试一下
   5. 完成

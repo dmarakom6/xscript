@@ -6,7 +6,7 @@ COLOR_START := "\033[32m
 SOURCE := xscript xscriptcore.py xscriptlib/
 
 help: Makefile
-	@echo "Help for xscript 0.0 Makefile\n"
+	@echo "Help for xscript 0.5 Makefile\n"
 	@echo "demo        run xscript demo"
 	@echo "deploy      commit source and push"
 	@echo "deploy-docs commit docs and push"
@@ -15,9 +15,9 @@ help: Makefile
 	@echo "install     install xscript"
 	@echo "upgrade     upgrade xscript from Github and install"
 
-demo: Makefile script/hello.xs $(SOURCE)
+demo: Makefile $(SOURCE)
 	@echo $(COLOR_START)[Running demo...]$(COLOR_END)
-	@-./xscript script/getver.xs
+	@-./xscript examples/getver.xs
 	@echo $(COLOR_START)[Done]$(COLOR_END)
 
 deploy: Makefile LICENSE README.md setup.py docs/ script/ $(SOURCE)
@@ -64,5 +64,5 @@ upgrade: Makefile setup.py $(SOURCE)
 	@-rm -rf build/
 	@cp xscript $(PREFIX)/bin/xscript
 	@echo $(COLOR_START)[Testing xscript...]$(COLOR_END)
-	@-./xscript script/getver.xs
+	@-./xscript examples/getver.xs
 	@echo $(COLOR_START)[Upgrading completely]$(COLOR_END)

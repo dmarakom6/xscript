@@ -1,5 +1,5 @@
 # xscript文档
-> 这里是xscript 0.0 的文档
+> 这里是xscript 0.5 的文档
 
 ## 什么是xscript?
 xscript是用python编写的一个非常小巧的编程语言, 它的核心(`xscriptcore.py`)不会超过1000行.
@@ -21,9 +21,10 @@ xscript是用python编写的一个非常小巧的编程语言, 它的核心(`xsc
 
 现在允许你与debug交互.
 
+请参阅[使用debug](learn/use-debug.md).
+
 ## 它有多快?
-求xscript运行时有多快是一件麻烦的事情, 我们不高兴做这些没有意义的事情.
-> 经过对比: python比xscript快了一秒左右(`script/circle.xs`和基本上相同的python代码)
+经过多次对比: python比xscript快了一秒左右(`script/circle.xs`和基本上相同的python代码)
 
 ## 学习, 改进xscript
 xscript是一门开源编程语言, 它现在还处于开发阶段, 希望你能帮助改进xscript.
@@ -31,6 +32,9 @@ xscript是一门开源编程语言, 它现在还处于开发阶段, 希望你能
   - [报告一个BUG](bug.md)
   - [学习xscript](learn/index.md)
   - [xscript如何工作](howto.md)
+
+!!! warning "特别注意"
+	xscript 0.5 只是测试版本, 有很多问题没有上传到issues, 请慎重使用xscript.
 
 - - -
 
