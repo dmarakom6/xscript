@@ -148,7 +148,7 @@
 <p>添加标准库源文件</p>
 </blockquote>
 <h2 id="_2">编写文件</h2>
-<p>xscript并不能很好使用python的源文件, 要适当重写.</p>
+<p>xscript可以但是不能完全使用python的源文件, 要适当重写.</p>
 <p>如何重写:</p>
 <ul>
 <li>重写函数调用</li>
@@ -165,7 +165,7 @@
 <p>以一个<code>foo</code>为例子:</p>
 <ol>
 <li>编辑<code>xscriptlib/__init__.py</code></li>
-<li>输入<code>import lib.foo as foo</code></li>
+<li>输入<code>import xscriptlib.foo as foo</code></li>
 <li>重启解释器</li>
 <li>编写程序测试一下</li>
 <li>完成</li>
