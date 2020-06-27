@@ -16,7 +16,7 @@ nav:
     - 自定义标准库: learn/config-lib.md
   - xscript标准库:
     - 索引: lib/index.md
-    - file: lib/file.md
+    - fs: lib/fs.md
     - random: lib/random.md
     - table: lib/table.md
     - time: lib/time.md

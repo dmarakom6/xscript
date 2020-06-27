@@ -20,7 +20,7 @@ demo: Makefile $(SOURCE)
 	@-./xscript examples/getver.xs
 	@echo $(COLOR_START)[Done]$(COLOR_END)
 
-deploy: Makefile LICENSE README.md setup.py docs/ script/ $(SOURCE)
+deploy: Makefile LICENSE README.md setup.py docs/ examples/ $(SOURCE)
 	@echo $(COLOR_START)[Start deploying...]$(COLOR_END)
 	@echo $(COLOR_START)[Adding changes...]$(COLOR_END)
 	@git add .

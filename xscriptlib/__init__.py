@@ -1,4 +1,4 @@
-import xscriptlib.file as file
+import xscriptlib.fs as fs
 import xscriptlib.math as math
 import xscriptlib.random as random
 import xscriptlib.string as string

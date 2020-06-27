@@ -1,4 +1,4 @@
-# file - 文件相关操作
+# file - 文件系统操作
 
 *fileClose &fileobj*
 
@@ -13,6 +13,14 @@
   - *fileobj* - 一个文件对象
 
 > 刷新一个文件
+
+- - -
+
+*fileNo &fileobj*
+
+ - *fileobj* - 一个文件对象
+
+> 返回文件的fd
 
 - - -
 

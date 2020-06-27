@@ -14,7 +14,7 @@ xscript是用python编写的一个非常小巧的编程语言, 它的核心(`xsc
 ## 如何运行我的代码?
 你可以在xscript目录下, 通过终端输入`xscript <file> [args...]`来运行.
 
-当然, 你可以看看`xscript/script`目录下的例子.
+当然, 你可以看看`xscript/examples`目录下的例子.
 
 ## 如何调试我的代码?
 在`2020-5-10`次提交中更新了debug的用法.

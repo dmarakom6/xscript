@@ -4,7 +4,7 @@ xscript为了方便, 定义了一些使用python编写的标准接口, 可以在
 - - -
 
 # 库索引
-  - [file](file.md) - 文件相关操作
+  - [fs](fs.md) - 文件系统操作
   - [random](random.md) - 随机数及相关操作
   - [table](table.md) - 字符型表格操作
   - [time](time.md) - 时间操作

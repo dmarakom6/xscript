@@ -4,6 +4,9 @@ def fileClose(fileobj):
 def fileFlush(fileobj):
     fileobj.flush()
 
+def fileNo(fileobj):
+    return fileobj.fileno()
+
 def fileOpen(name, mode='r'):
     try:
         return open(name, mode)
