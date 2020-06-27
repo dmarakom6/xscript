@@ -9,7 +9,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>file - xscript</title>
+  <title>fs - xscript</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
   <link rel="stylesheet" href="../../css/theme.css" />
@@ -18,8 +18,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "file";
-    var mkdocs_page_input_path = "lib/file.md";
+    var mkdocs_page_name = "fs";
+    var mkdocs_page_input_path = "lib/fs.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -86,7 +86,7 @@
                 <ul class="current">
                     <li class="toctree-l1"><a class="reference internal" href="../">索引</a>
                     </li>
-                    <li class="toctree-l1 current"><a class="reference internal current" href="./">file</a>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">fs</a>
     <ul class="current">
     </ul>
                     </li>
@@ -128,7 +128,7 @@
         
       
     
-    <li>file</li>
+    <li>fs</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -139,7 +139,7 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="file-">file - 文件相关操作</h1>
+                <h1 id="file-">file - 文件系统操作</h1>
 <p><em>fileClose &amp;fileobj</em></p>
 <ul>
 <li><em>fileobj</em> - 一个文件对象</li>
@@ -154,6 +154,14 @@
 </ul>
 <blockquote>
 <p>刷新一个文件</p>
+</blockquote>
+<hr />
+<p><em>fileNo &amp;fileobj</em></p>
+<ul>
+<li><em>fileobj</em> - 一个文件对象</li>
+</ul>
+<blockquote>
+<p>返回文件的fd</p>
 </blockquote>
 <hr />
 <p><em>fileOpen &amp;name $mode=r</em></p>
