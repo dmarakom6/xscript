@@ -23,12 +23,13 @@ def main():
     if len(sys.argv) < 2:
         print('xscript: Not enough argument')
         print('Usage  : xscript <file> [args...]')
-        exit(1)
+        sys.exit(1)
     elif path.isdir(sys.argv[1]):
         print('xscript: Is a directory: %s' % sys.argv[1])
-        exit(1)
+        sys.exit(1)
     elif not path.isfile(sys.argv[1]):
         print('xscript: No such file or directory: %s' % sys.argv[1])
+        sys.exit(1)
     else:
         source = open(sys.argv[1], 'r+').readlines()
         interpreter = core.XScriptInterpreter(source, argv=sys.argv[1:])

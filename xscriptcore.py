@@ -306,6 +306,7 @@ class XScriptInterpreter(object):
         try:
             return input(prompt)
         except:
+            print()
             raise TypeError('User stopped')
 
     def has(self, path):
@@ -335,13 +336,10 @@ class XScriptInterpreter(object):
                 else:
                     raise TypeError('No attribute: %s' % item)
             else:
-                if type(obj) == type(os):
-                    if self.testname(path[-1]):
-                        self.var[path[-1]] = obj
-                    else:
-                        raise TypeError("Invalid name: '%s'" % path[-1])
+                if self.testname(path[-1]):
+                    self.var[path[-1]] = obj
                 else:
-                    raise TypeError('import import module, not %s' % str(type(obj))[8:-2])
+                    raise TypeError("Invalid name: '%s'" % path[-1])
 
     def let(self, name, symbol, value):
         # let is just a assignment statement, it support 8 operators
@@ -381,9 +379,10 @@ class XScriptInterpreter(object):
             print()
 
     def replacefunction(self, s):
-        # you can call functions in pairs of '[' and ']'
-        exp = []
-        for item in shlex.split(s):
+        # you can call functions in pairs of '[' and  ']'
+        split = shlex.split(s)[1:]
+        exp = [shlex.split(s)[0]]
+        for item in split:
             exp.append(self.replacevar(item))
         else:
             if exp[0] == 'addr':
@@ -496,7 +495,7 @@ class XScriptInterpreter(object):
                 else:
                     raise TypeError('Unknow command: %s' % lines[0])
             except Exception as err:
-                print('\nIn line', self.now + 1)
+                print('In line', self.now + 1)
                 print('-> ', line)
                 print('Error: %s' % str(err))
                 self.exit('1')
