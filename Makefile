@@ -1,8 +1,6 @@
 # xscript/Makefile
 # xscript makefile
 
-COLOR_END := \033[0m"
-COLOR_START := "\033[32m
 SOURCE := xscript xscriptcore.py xscriptlib/
 
 help: Makefile
@@ -16,53 +14,53 @@ help: Makefile
 	@echo "upgrade     upgrade xscript from Github and install"
 
 demo: Makefile $(SOURCE)
-	@echo $(COLOR_START)[Running demo...]$(COLOR_END)
+	@echo [Running demo...]
 	@-./xscript examples/getver.xs
-	@echo $(COLOR_START)[Done]$(COLOR_END)
+	@echo [Done]
 
 deploy: Makefile LICENSE README.md setup.py docs/ examples/ $(SOURCE)
-	@echo $(COLOR_START)[Start deploying...]$(COLOR_END)
-	@echo $(COLOR_START)[Adding changes...]$(COLOR_END)
+	@echo [Start deploying...]
+	@echo [Adding changes...]
 	@git add .
-	@echo $(COLOR_START)[Committing changes...]$(COLOR_END)
+	@echo [Committing changes...]
 	@git commit -m `date +%Y-%m-%d`
 	@sleep 1s
-	@echo $(COLOR_START)[Pushing changes...]$(COLOR_END)
+	@echo [Pushing changes...]
 	@git push -u origin master
-	@echo $(COLOR_START)[Deploying successfully]$(COLOR_END)
+	@echo [Deploying successfully]
 
 deploy-docs: Makefile docs/ docs/mkdocs.yml docs/docs
-	@echo $(COLOR_START)[Start deploying...]$(COLOR_END)
+	@echo Start deploying...]
 	@cd docs/; mkdocs gh-deploy --message `date +%Y-%m-%d`
-	@echo $(COLOR_START)[Deploying successfully]$(COLOR_END)
+	@echo [Deploying successfully]
 
 docs: Makefile docs/ docs/mkdocs.yml docs/docs/
-	@echo $(COLOR_START)[Running mkdocs...]$(COLOR_END)
+	@echo [Running mkdocs...]
 	@cd docs/; mkdocs serve
-	@echo $(COLOR_START)[Done]$(COLOR_END)
+	@echo [Done]
 
 install: Makefile setup.py
-	@echo -n $(COLOR_START)[Checking packages... $(COLOR_END)
+	@echo -n [Checking packages... 
 	@-pip3 install -U colorama mkdocs prettytable >> /dev/null
-	@echo $(COLOR_START)Done]$(COLOR_END)
-	@echo -n $(COLOR_START)[Installing xscript... $(COLOR_END)
+	@echo Done]
+	@echo -n [Installing xscript... 
 	@python3 setup.py install >> /dev/null
-	@echo $(COLOR_START)Done]$(COLOR_END)
-	@cp xscript $(PREFIX)/bin/xscript
+	@echo Done]
+	@cp xscript /usr/bin/xscript
 	@-rm -rf build/
-	@echo $(COLOR_START)[Installing completely]$(COLOR_END)
+	@echo [Installing completely]
 
 upgrade: Makefile setup.py $(SOURCE)
-	@echo $(COLOR_START)[Upgrading...]$(COLOR_END)
+	@echo [Upgrading...]
 	@git pull
-	@echo -n $(COLOR_START)[Checking packages... $(COLOR_END)
+	@echo -n [Checking packages... 
 	@-pip3 install -U colorama mkdocs prettytable >> /dev/null
-	@echo $(COLOR_START)Done]$(COLOR_END)
-	@echo -n $(COLOR_START)[Installing xscript... $(COLOR_END)
+	@echo Done]
+	@echo -n [Installing xscript... 
 	@python3 setup.py install >> /dev/null
-	@echo $(COLOR_START)Done]$(COLOR_END)
+	@echo Done]
 	@-rm -rf build/
-	@cp xscript $(PREFIX)/bin/xscript
-	@echo $(COLOR_START)[Testing xscript...]$(COLOR_END)
+	@cp xscript /usr/bin/xscript
+	@echo [Testing xscript...]
 	@-./xscript examples/getver.xs
-	@echo $(COLOR_START)[Upgrading completely]$(COLOR_END)
+	@echo [Upgrading completely]
