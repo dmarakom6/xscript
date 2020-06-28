@@ -89,8 +89,6 @@
     </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#_6">特别注意!</a>
-    </li>
     </ul>
                     </li>
                     <li class="toctree-l1"><a class="reference internal" href="../config-lib/">自定义标准库</a>
@@ -168,13 +166,13 @@
 <p>如果<code>foo</code>是符合xscript命名规则的字符串, 那么xscript会直接导入<code>foo</code></p>
 <h3 id="_5">导入包中的包</h3>
 <p><code>import foo.bar</code></p>
+<p>如果有<code>.</code>, 那么xscript会寻找最终指向的包.</p>
 <p>这里包及其附属的包必须使用<code>.</code>来分割, 不支持<code>*</code>, 以最终包的名字为变量(这里是<code>bar</code>)</p>
 <div class="admonition tips">
 <p class="admonition-title">注意</p>
-<p>像<code>import 图像.Image</code>这样的包是允许导入的, xscript只检查最后一个名字(这里是<code>Image</code>)是否符合命名规则</p>
+<p>像<code>import 图像.Image</code>这样的包是允许导入的, xscript只检查最后一个名字(这里是<code>Image</code>)是否符合命名规则<br>
+另外, xscript支持导入所有类型的对象</p>
 </div>
-<h2 id="_6">特别注意!</h2>
-<p><code>import</code>会在创建变量之前检查改要导入之物是否为一个包, 而不是函数, 类.</p>
               
             </div>
           </div>
