@@ -9,7 +9,7 @@
   
   
   <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>xscript如何工作 - xscript</title>
+  <title>目录 - xscript</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
   <link rel="stylesheet" href="../css/theme.css" />
@@ -18,8 +18,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "xscript\u5982\u4f55\u5de5\u4f5c";
-    var mkdocs_page_input_path = "howto.md";
+    var mkdocs_page_name = "\u76ee\u5f55";
+    var mkdocs_page_input_path = "xscript-in-detail/index.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -49,24 +49,6 @@
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
                 <ul>
                     <li class="toctree-l1"><a class="reference internal" href="..">主页</a>
-                    </li>
-                </ul>
-                <ul class="current">
-                    <li class="toctree-l1 current"><a class="reference internal current" href="./">xscript如何工作</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#block">块(block)</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#_1">变量的命名标准</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#_2">变量代换符($, #, .)</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#_3">命令替换符([...])</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#call">call</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#_4">特殊的变量</a>
-    </li>
-    </ul>
                     </li>
                 </ul>
                 <ul>
@@ -115,6 +97,15 @@
                     <li class="toctree-l1"><a class="reference internal" href="../lib/util/">util</a>
                     </li>
                 </ul>
+                <p class="caption"><span class="caption-text">xscript实现细节</span></p>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">目录</a>
+    <ul class="current">
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="before-run/">运行前</a>
+                    </li>
+                </ul>
       </div>
     </div>
     </nav>
@@ -135,8 +126,12 @@
     <li><a href="..">Docs</a> &raquo;</li>
     
       
+        
+          <li>xscript实现细节 &raquo;</li>
+        
+      
     
-    <li>xscript如何工作</li>
+    <li>目录</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -147,101 +142,18 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="xscript">xscript如何工作</h1>
-<blockquote>
-<p>以下所有的函数和变量都在<code>xscriptcore.XScriptInterpreter</code>中</p>
-</blockquote>
-<h2 id="block">块(block)</h2>
-<p>块是一组代码, 以块开始符(如<code>for</code>)开始,以<code>end</code>命令结束.</p>
-<p>在<code>block</code>中记录了当前代码行所处的块, 以便能够更快遍历完块.</p>
-<h2 id="_1">变量的命名标准</h2>
-<p><code>testname</code>函数定义了xscript变量应怎样命名:</p>
-<blockquote>
-<p>第一个字符应该是<code>a-z</code>或<code>A-Z</code>或<code>_</code></p>
-<p>剩余的字符在第一个字符的基础上允许<code>1-9</code></p>
-</blockquote>
-<h2 id="_2">变量代换符(<code>$</code>, <code>#</code>, <code>.</code>)</h2>
-<p>美元符号(<code>$</code>), 井号(<code>#</code>), 和英文句号(<code>.</code>)都是变量代换符, 分别将变量转换为各种数据类型. 使用<code>replacevar</code>函数来替换在<code>var</code>中的变量.</p>
+                <h1 id="xscript">xscript实现细节</h1>
+<p>这里讲述的是xscript源码级的细节.</p>
+<p>阅读该节有助于:</p>
 <ul>
-<li><code>&amp;</code>: 保持原来变量类型</li>
-<li><code>$</code>: 转换为str类型</li>
-<li><code>#</code>: 转换为int类型</li>
-<li><code>.</code>: 转换为float类型</li>
+<li>使xscript更快</li>
+<li>优化xscript</li>
+<li>编写xscript多语言实现</li>
 </ul>
-<blockquote>
-<p>使用<code>$</code>加数字如<code>$123</code>会返回str类型的123, 而不是数字123</p>
-</blockquote>
-<p>在<code>2020-6-6</code>次提交中, 只要输入的参数符合如下正则表达式:</p>
+<hr />
 <ul>
-<li><code>^(\+|-)?[0-9]*$</code>强制转换成int类型</li>
-<li><code>^(\+|-)?[0-9]*\.[0-9]*$</code>强制转换成float类型</li>
+<li><a href="before-run/">运行前</a></li>
 </ul>
-<h2 id="_3">命令替换符(<code>[...]</code>)</h2>
-<p><code>[</code>和<code>]</code>是成对的命令替换符,使用<code>replacefunction</code>来替换.</p>
-<p>命令替换符<strong>仅仅</strong>支持如下命令:</p>
-<ul>
-<li>
-<p><em>addr $name</em>(仅命令替换符)</p>
-<blockquote>
-<p>返回name的内存地址</p>
-</blockquote>
-</li>
-<li>
-<p><em>call $path &amp;args...</em></p>
-<blockquote>
-<p>运行外部函数</p>
-</blockquote>
-</li>
-<li>
-<p><em>environ $name</em>(仅命令替换符)</p>
-<blockquote>
-<p>返回系统变量name(没有返回<code>&amp;null</code>)</p>
-</blockquote>
-</li>
-<li>
-<p><em>gets $prompt=?</em></p>
-<blockquote>
-<p>返回用户输入</p>
-</blockquote>
-</li>
-<li>
-<p><em>has $path</em>(仅命令替换符)</p>
-<blockquote>
-<p>判断path路径是否在标准库中存在</p>
-</blockquote>
-</li>
-</ul>
-<div class="admonition tips">
-<p class="admonition-title">贴示</p>
-<p><code>仅命令替换符</code>表示只有在<code>[...]</code>中才能使用的命令</p>
-</div>
-<h2 id="call">call</h2>
-<p>call可以运行外部函数和对象的方法, 也可以获取对象中的变量.</p>
-<div class="admonition warning">
-<p class="admonition-title">注意</p>
-<p>在获取变量值的时候不能向<code>call</code>传递参数, 以免引起<code>... is not callable</code>错误</p>
-</div>
-<h2 id="_4">特殊的变量</h2>
-<p>解释器启动时创建的变量, 不能通过<code>let</code>语句赋值, 也不能通过<code>delete</code>语句删除. 但是可以正常使用, 即常量.</p>
-<p>解释器定义的常量:</p>
-<ul>
-<li><code>true</code> - 逻辑值真</li>
-<li><code>false</code> - 逻辑值假</li>
-<li><code>null</code> - 等于<code>None</code></li>
-<li><code>argv</code> - 运行时传递的命令行参数</li>
-<li><code>x</code> - xscript标准库</li>
-<li><code>interpreter</code> - xscript解释器本身</li>
-<li><code>platform</code> - 操作系统的名称</li>
-<li><code>version</code> - xscript的版本号(字符串)</li>
-</ul>
-<div class="admonition tips">
-<p class="admonition-title">贴示</p>
-<p><code>testname</code>函数也会检查一个字符串是否属于常量</p>
-</div>
-<div class="admonition warning">
-<p class="admonition-title">警告</p>
-<p>不在万不得已的情况下不要使用<code>call interpreter ...</code>, 这<strong>一定会产生风险!!!</strong></p>
-</div>
               
             </div>
           </div>
@@ -249,10 +161,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../choose-xscript/" class="btn btn-neutral float-right" title="是否应该选择xscript">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="before-run/" class="btn btn-neutral float-right" title="运行前">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href=".." class="btn btn-neutral" title="主页"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../lib/util/" class="btn btn-neutral" title="util"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -280,10 +192,10 @@
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href=".." style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../lib/util/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../choose-xscript/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="before-run/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
