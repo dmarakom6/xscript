@@ -2,7 +2,6 @@ site_name: xscript
 
 nav:
   - 主页: index.md
-  - xscript如何工作: howto.md
   - 是否应该选择xscript: choose-xscript.md
   - 报告BUG: bug.md
   - 学习xscript:
@@ -23,6 +22,9 @@ nav:
     - turtle: lib/turtle.md
     - ui: lib/ui.md
     - util: lib/util.md
+  - xscript实现细节:
+    - 目录: xscript-in-detail/index.md
+    - 运行前: xscript-in-detail/before-run.md
 
 theme: readthedocs
 

@@ -46,7 +46,7 @@ install: Makefile setup.py
 	@echo -n [Installing xscript... 
 	@python3 setup.py install >> /dev/null
 	@echo Done]
-	@cp xscript /usr/bin/xscript
+	@-cp xscript /usr/bin/xscript
 	@-rm -rf build/
 	@echo [Installing completely]
 
@@ -60,7 +60,7 @@ upgrade: Makefile setup.py $(SOURCE)
 	@python3 setup.py install >> /dev/null
 	@echo Done]
 	@-rm -rf build/
-	@cp xscript /usr/bin/xscript
+	@-cp xscript /usr/bin/xscript
 	@echo [Testing xscript...]
 	@-./xscript examples/getver.xs
 	@echo [Upgrading completely]
