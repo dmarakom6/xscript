@@ -155,9 +155,9 @@ class XScriptInterpreter(object):
     def exit(self, code='0'):
 	# raise exit code and exit
         if self.profile.get('show-run-time') == 'true':
-            print('xscript: program runs %fs' % (time.time() - self.starttime))
+            print('xscript: info: program runs %fs' % (time.time() - self.starttime))
         if self.profile.get('show-exit-num') == 'true':
-            print('xscript: program raise exit code:', self.replacevar(code))
+            print('xscript: info: program raise exit code:', self.replacevar(code))
         sys.exit(self.replacevar(code))
 
     def end_flag(self, flag):
