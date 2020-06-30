@@ -103,6 +103,10 @@
                     </li>
                     <li class="toctree-l1 current"><a class="reference internal current" href="./">运行前</a>
     <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#xscriptmain">xscript.main()</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#xscrptcore__init__-xscriptcorerestart">xscrptcore.__init__(), xscriptcore.restart()</a>
+    </li>
     </ul>
                     </li>
                 </ul>
@@ -143,6 +147,16 @@
             <div class="section">
               
                 <h1 id="_1">运行前</h1>
+<blockquote>
+<p>xscript 运行前准备</p>
+</blockquote>
+<h2 id="xscriptmain">xscript.main()</h2>
+<p><code>main</code>函数是 xscript 的主函数, 它负责解析命令行和启动解释器.</p>
+<blockquote>
+<p><code>xscript</code>命令仅仅需提供最简单的运行脚本的 xscript 脚本路径及其参数, 不提供返回 xscript 版本号的参数, 请自行查看 <code>xscriptcore.py</code>, 或运行: <code>xscript examples/getver.xs</code>查询.</p>
+</blockquote>
+<h2 id="xscrptcore__init__-xscriptcorerestart">xscrptcore.__init__(), xscriptcore.restart()</h2>
+<p>这两个函数是一样的, <code>xscriptcore.__init__</code>会调用<code>xscriptcore.restart</code>函数, 它主要设置一些解释器运行时变量, 但是不启动解释器.</p>
               
             </div>
           </div>
