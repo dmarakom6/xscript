@@ -19,14 +19,12 @@ git clone https://github.com/jason-bowen-zheng/xscript
 cd xscript/
 ```
 
-然后请先安装xscript:
+然后请先安装xscript和它的依赖项:
 ```shell
 # 需要使用root权限
-# 并不是所有Linux发行版都支持
+pip install -U colorama mkdocs prettytable
 sudo make install
 ```
-> 如上`make`在 Android 下的 Termux 是正常运行的, 但在我的 Arch Linux 上就会出现问题
-
 
 最后你可以测试一下 xscript:
 ```shell

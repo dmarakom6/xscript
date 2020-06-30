@@ -1,11 +1,11 @@
-# 安装xscript
-xscript不需要安装, 但xscript是使用python编写的, 需要安装python.
+# 安装 xscript
+xscript 不需要安装, 但 xscript是 使用 python 编写的, 需要安装 python.
 
-xscript在python3.8中可以很好的运行, 所以请安装python的最新版本.
+xscript 在 python3.8 中可以很好的运行, 所以请安装 python 的最新版本.
 
 - - -
 
-xscript的最新版本托管在Github上, 请先clone该git库.
+xscript 的最新版本托管在 Github 上, 请先 clone 该 git 库.
 
 ```
 git clone https://github.com/jason-bowen-zheng/xscript
@@ -17,13 +17,15 @@ cd xscript
 ## Linux下安装
 运行:
 ```shell
+pip install -U colorama mkdocs prettytable
 make install
 ```
 
-## Windows下安装
-这个`Makefile`是为Linux写的, Windows用户请输入如下命令:
+## Windows 下安装
+这个`Makefile`是为 Linux 写的, Windows 用户请输入如下命令:
 ```shell
-pip install -U prettytable mkdocs
+# 如果 Windows 上有 make 命令可直接输入 make install
+pip install -U colorama mkdocs prettytable
 python setup.py install
 ```
 

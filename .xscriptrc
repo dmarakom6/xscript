@@ -1,0 +1,5 @@
+# xscript profile
+
+debug:true
+show-exit-num:true
+show-run-time:true

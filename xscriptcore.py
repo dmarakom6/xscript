@@ -2,6 +2,7 @@
 # xscript core
 
 import colorama as color
+import kvfile
 import os
 from prettytable import PrettyTable
 import re
@@ -13,6 +14,7 @@ import shlex
 import string
 import sys
 import textwrap
+import time
 
 
 class XScriptInterpreter(object):
@@ -93,51 +95,54 @@ class XScriptInterpreter(object):
 
     def debug(self):
         # the debug system
-        try:
-            print('start debug'.center(os.get_terminal_size()[0], '='))
-        except:
-            print('xscript: start debug')
-        cmd = ''
-        while cmd != 'exit':
-            cmd = self.gets('debug> ')
-            if cmd == '':
-                pass
-            elif cmd == 'copyright':
-                print('xscript %s' % self.var['version'])
-                print('Copyright (c) 2020 jason-bowen-zheng.')
-                print('All Right Reserved.')
-            elif cmd == 'exit':
-                pass
-            elif cmd == 'now':
-                print('.'.join(self.block))
-            elif cmd == 'ls':
-                table = PrettyTable(['name', 'value', 'type', 'addrss'])
-                for k, v in self.var.items():
-                    if len(str(v)) >= 50:
-                        table.add_row([k, textwrap.shorten(str(v), 50, placeholder='...'), str(type(v))[8:-2], hex(id(v))])
-                    else:
-                        table.add_row([k, str(v), str(type(v))[8:-2], hex(id(v))])
-                else:
-                    print(table)
-            elif cmd.startswith('show '):
-                if cmd[5:] in self.var:
-                    table = PrettyTable(['name', 'value', 'type', 'address'])
-                    name = cmd[5:]
-                    value = self.var[name]
-                    if len(str(value)) >= 50:
-                        table.add_row([name, textwrap.shorten(str(value), 50, placeholder='...'), str(type(value))[8:-2], hex(id(value))])
-                    else:
-                        table.add_row([name, str(value), str(type(value))[8:-2], hex(id(value))])
-                    print(table)
-                else:
-                    print("ERROR: name '%s' is not defined" % cmd[5:])
-            else:
-                print("ERROR: No debug command: '%s'" % cmd)
+        if self.profile.get('debug') != 'true':
+            return
         else:
             try:
-                print('end debug'.center(os.get_terminal_size()[0], '='))
+                print('start debug'.center(os.get_terminal_size()[0], '='))
             except:
-                print('xscript: end debug')
+                print('xscript: start debug')
+            cmd = ''
+            while cmd != 'exit':
+                cmd = self.gets('debug> ')
+                if cmd == '':
+                    pass
+                elif cmd == 'copyright':
+                    print('xscript %s' % self.var['version'])
+                    print('Copyright (c) 2020 jason-bowen-zheng.')
+                    print('All Right Reserved.')
+                elif cmd == 'exit':
+                    pass
+                elif cmd == 'now':
+                    print('.'.join(self.block))
+                elif cmd == 'ls':
+                    table = PrettyTable(['name', 'value', 'type', 'addrss'])
+                    for k, v in self.var.items():
+                        if len(str(v)) >= 50:
+                            table.add_row([k, textwrap.shorten(str(v), 50, placeholder='...'), str(type(v))[8:-2], hex(id(v))])
+                        else:
+                            table.add_row([k, str(v), str(type(v))[8:-2], hex(id(v))])
+                    else:
+                        print(table)
+                elif cmd.startswith('show '):
+                    if cmd[5:] in self.var:
+                        table = PrettyTable(['name', 'value', 'type', 'address'])
+                        name = cmd[5:]
+                        value = self.var[name]
+                        if len(str(value)) >= 50:
+                            table.add_row([name, textwrap.shorten(str(value), 50, placeholder='...'), str(type(value))[8:-2], hex(id(value))])
+                        else:
+                            table.add_row([name, str(value), str(type(value))[8:-2], hex(id(value))])
+                        print(table)
+                    else:
+                        print("ERROR: name '%s' is not defined" % cmd[5:])
+                else:
+                    print("ERROR: No debug command: '%s'" % cmd)
+            else:
+                try:
+                    print('end debug'.center(os.get_terminal_size()[0], '='))
+                except:
+                    print('xscript: end debug')
 
     def delete(self, *names):
 	# delete the names in self.var
@@ -149,6 +154,10 @@ class XScriptInterpreter(object):
 
     def exit(self, code='0'):
 	# raise exit code and exit
+        if self.profile.get('show-run-time') == 'true':
+            print('xscript: program runs %fs' % (time.time() - self.starttime))
+        if self.profile.get('show-exit-num') == 'true':
+            print('xscript: program raise exit code:', self.replacevar(code))
         sys.exit(self.replacevar(code))
 
     def end_flag(self, flag):
@@ -451,9 +460,21 @@ class XScriptInterpreter(object):
         # don't edit the following version info
         self.var['version'] = '0.5'
         self.const = ['true', 'false', 'null', 'argv', 'interpreter', 'x', 'platform', 'version']
+        try:
+            self.profile = kvfile.KVFile(os.environ.get('HOME') + os.sep + '.xscriptrc')
+            self.profile.read()
+            self.profile.close()
+            self.profile = self.profile.kv
+        except:
+            print("xscript: No profile '$HOME/.xscriptrc' found")
+            self.profile = {}
 
     def run(self):
         # run run all code
+        if self.profile.get('show-run-time') == 'true':
+            self.starttime = time.time()
+        else:
+            pass
         while True:
             if self.now + 1 <= len(self.program):
                 line = self.program[self.now].lstrip()

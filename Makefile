@@ -5,13 +5,14 @@ SOURCE := xscript xscriptcore.py xscriptlib/
 
 help: Makefile
 	@echo "Help for xscript 0.5 Makefile\n"
-	@echo "demo        run xscript demo"
-	@echo "deploy      commit source and push"
-	@echo "deploy-docs commit docs and push"
-	@echo "docs        show xscript docs"
-	@echo "help        show this help"
-	@echo "install     install xscript"
-	@echo "upgrade     upgrade xscript from Github and install"
+	@echo "demo            run xscript demo"
+	@echo "deploy          commit source and push"
+	@echo "deploy-docs     commit docs and push"
+	@echo "docs            show xscript docs"
+	@echo "help            show this help"
+	@echo "install         install xscript"
+	@echo "install-profile copy profile to HOME directory"
+	@echo "upgrade         upgrade xscript from Github and install"
 
 demo: Makefile $(SOURCE)
 	@echo [Running demo...]
@@ -30,7 +31,7 @@ deploy: Makefile LICENSE README.md setup.py docs/ examples/ $(SOURCE)
 	@echo [Deploying successfully]
 
 deploy-docs: Makefile docs/ docs/mkdocs.yml docs/docs
-	@echo Start deploying...]
+	@echo [Start deploying...]
 	@cd docs/; mkdocs gh-deploy --message `date +%Y-%m-%d`
 	@echo [Deploying successfully]
 
@@ -40,9 +41,6 @@ docs: Makefile docs/ docs/mkdocs.yml docs/docs/
 	@echo [Done]
 
 install: Makefile setup.py
-	@echo -n [Checking packages... 
-	@-pip3 install -U colorama mkdocs prettytable >> /dev/null
-	@echo Done]
 	@echo -n [Installing xscript... 
 	@python3 setup.py install >> /dev/null
 	@echo Done]
@@ -50,17 +48,17 @@ install: Makefile setup.py
 	@-rm -rf build/
 	@echo [Installing completely]
 
+install-profile: Makefile .xscriptrc
+	@cp .xscriptrc $(HOME)/.xscriptrc
+
 upgrade: Makefile setup.py $(SOURCE)
 	@echo [Upgrading...]
 	@git pull
-	@echo -n [Checking packages... 
-	@-pip3 install -U colorama mkdocs prettytable >> /dev/null
-	@echo Done]
 	@echo -n [Installing xscript... 
 	@python3 setup.py install >> /dev/null
 	@echo Done]
-	@-rm -rf build/
 	@-cp xscript /usr/bin/xscript
+	@-rm -rf build/
 	@echo [Testing xscript...]
 	@-./xscript examples/getver.xs
 	@echo [Upgrading completely]
