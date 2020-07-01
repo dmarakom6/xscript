@@ -461,7 +461,7 @@ class XScriptInterpreter(object):
         self.var['version'] = '0.5'
         self.const = ['true', 'false', 'null', 'argv', 'interpreter', 'x', 'platform', 'version']
         try:
-            self.profile = kvfile.KVFile(os.environ.get('HOME') + os.sep + '.xscriptrc')
+            self.profile = kvfile.ReadKVFile(os.environ.get('HOME') + os.sep + '.xscriptrc')
             self.profile.read()
             self.profile.close()
             self.profile = self.profile.kv
@@ -516,11 +516,16 @@ class XScriptInterpreter(object):
                 else:
                     raise TypeError('Unknow command: %s' % lines[0])
             except Exception as err:
-                print('In line', self.now + 1)
-                print('-> ', line)
-                print('Error: %s' % str(err))
-                self.exit('1')
-                break
+                if self.profile.get('show-detail-err') == 'true':
+                    print('In line', self.now + 1)
+                    print('-> ', line)
+                    print('Error: %s' % str(err))
+                    self.exit('1')
+                    break
+                else:
+                    print('xscript: error: %s' % str(err))
+                    self.exit('1')
+                    break
             else:
                 self.now += 1
 
