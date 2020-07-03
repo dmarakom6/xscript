@@ -25,6 +25,8 @@ nav:
   - xscript实现细节:
     - 目录: xscript-in-detail/index.md
     - 运行前: xscript-in-detail/before-run.md
+    - 运行完毕: xscript-in-detail/after-run.md
+
 
 theme: readthedocs
 

@@ -11,7 +11,7 @@ help: Makefile
 	@echo "docs            show xscript docs"
 	@echo "help            show this help"
 	@echo "install         install xscript"
-	@echo "install-profile copy profile to HOME directory"
+	@echo "restore-profile copy profile to HOME directory"
 	@echo "upgrade         upgrade xscript from Github and install"
 
 demo: Makefile $(SOURCE)
@@ -48,7 +48,7 @@ install: Makefile setup.py
 	@-rm -rf build/
 	@echo [Installing completely]
 
-install-profile: Makefile .xscriptrc
+restore-profile: Makefile .xscriptrc
 	@cp .xscriptrc $(HOME)/.xscriptrc
 
 upgrade: Makefile setup.py $(SOURCE)

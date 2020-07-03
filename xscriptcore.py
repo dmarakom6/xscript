@@ -523,7 +523,7 @@ class XScriptInterpreter(object):
                     self.exit('1')
                     break
                 else:
-                    print('xscript: error: %s' % str(err))
+                    print('xscript: %d: error: %s' % (self.now + 1, str(err)))
                     self.exit('1')
                     break
             else:
