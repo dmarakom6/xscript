@@ -1,8 +1,6 @@
 # xscript/kvfile.py
 # key-value file read and write
 
-from os import linesep
-
 class ReadKVFile():
 
     def __init__(self, name):
@@ -12,7 +10,7 @@ class ReadKVFile():
     def read(self):
         self.kv = {}
         for line in self.kvfile.readlines():
-            if line == linesep:
+            if line == '\n':
                 pass
             elif line[0] == '#':
                 pass
