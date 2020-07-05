@@ -30,6 +30,13 @@ class XScriptInterpreter(object):
         except:
             return 0
 
+    def assert_(self, left, symbol, right):
+        relation = self.compare(left, symbol, right)
+        if relation:
+            pass
+        else:
+            raise TypeError('Assertion')
+
     def call(self, path, *args):
         # call can call function
         arg =[]
@@ -143,6 +150,33 @@ class XScriptInterpreter(object):
                     print('end debug'.center(os.get_terminal_size()[0], '='))
                 except:
                     print('xscript: end debug')
+
+    def compare(self, left, symbol, right):
+        # compare compares var
+        left = self.replacevar(left)
+        right = self.replacevar(right)
+        if symbol == '=':
+            return (left == right)
+        elif symbol == '!=':
+            return (left != right)
+        elif symbol == '>':
+            return (left > right)
+        elif symbol == '>=':
+            return (left >= right)
+        elif symbol == '<':
+            return (left < right)
+        elif symbol == '<=':
+            return (left <= right)
+        elif symbol == 'in':
+            return (left in right)
+        elif symbol == '!in':
+            return (left not in right)
+        elif symbol == 'is':
+            return (left is right)
+        elif symbol == '!is':
+            return (left is not right)
+        else:
+            raise TypeError('Unsupported operate: %s' % symbol)
 
     def delete(self, *names):
 	# delete the names in self.var
@@ -487,6 +521,8 @@ class XScriptInterpreter(object):
                         pass
                 elif lines[0][0] == '#':
                     pass
+                elif lines[0] == 'assert':
+                    self.assert_(*lines[1:])
                 elif lines[0] == 'call':
                     self.call(*lines[1:])
                 elif lines[0] == 'color':
@@ -545,22 +581,7 @@ class XScriptInterpreter(object):
 
     def while_flag(self, left, symbol, right):
         # while is a loop flag
-        left = self.replacevar(left)
-        right = self.replacevar(right)
-        if symbol == '=':
-            relation = (left == right)
-        elif symbol == '!=':
-            relation = (left != right)
-        elif symbol == '>':
-            relation = (left > right)
-        elif symbol == '>=':
-            relation = (left >= right)
-        elif symbol == '<':
-            relation = (left < right)
-        elif symbol == '<=':
-            relation = (left <= right)
-        else:
-            raise TypeError('Unsupported operate: %s' % symbol)
+        relation = self.compare(left, symbol, right)
         if relation:
             self.block.append('while')
         else:
