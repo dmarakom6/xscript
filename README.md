@@ -1,42 +1,39 @@
-> 这里是 xscript0.5, xIDE0.0 的 Github 仓库
-# xscript 0.5
-xscript 是用 python 编写的一个非常小巧的编程语言, 它的核心(`xscriptcore.py`)会很小.
+> This is xscript v0.5, xIDE v0.0 Github repo
 
-没有函数, 没有判断结构. 它只有最基本的变量管理, 所有类型的循环结构, 可调用的外部函数(python 实现), 没了!
+> English | [简体中文](./README-zh_cn.md)
 
-`xIDE`是xscript配套的IDE
+# xscript v0.5
+xscript is a tiny programming language written in python. Its core(`xscriptcore.py`) is very small.
 
-> `xIDE`正在编写中, 请不要使用`xIDE`以及`xIDElib/`中的任何源代码.
+`xIDE` is a xscript development toolkit
 
-xscript 的 python代码从来没有遵守 python 代码规范, xscript 的 xscript 代码不需要代码规范.
+Visit [xscript Home page](https://jason-bowen-zheng.github.io/xscript) for more information.
 
-访问[xscript主页](https://jason-bowen-zheng.github.io/xscript)获取更多信息。
-
-# 安装
-先将该git库拷贝到线下:
+# Install
+1. Clone:
 ```shell
 git clone https://github.com/jason-bowen-zheng/xscript
-cd xscript/
+cd xscript
 ```
 
-然后请先安装xscript和它的依赖项:
+2. Download xscript and dependencies:
 ```shell
-# 需要使用root权限
+# May need root privileges
 pip install -U colorama mkdocs prettytable
 sudo make install
 ```
 
-最后你可以测试一下 xscript:
+3. Test xscript:
 ```shell
-make demo
+make test
 ```
 
-如果想要更新 xscript, 请输入:
+4. Upgrade xscript:
 ```shell
 sudo make upgrade
 ```
 
-# 如何运行我的代码?
-你可以在xscript目录下, 通过终端输入`./xscript <file> [args...]`来运行.
+# How to run my code?
+On the directory `xscript`, input `./xscript <file> [args...]`
 
-当然, 你可以看看`xscript/examples`目录下的 xscript 脚本的例子.
+You can also read examples on `xscript/examples`.
