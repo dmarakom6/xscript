@@ -9,7 +9,7 @@ import re
 try:
     import readline
 except:
-    print("xscript: No 'readline'")
+    print("xscript: warning: No 'readline'")
 import shlex
 import string
 import sys
@@ -35,7 +35,10 @@ class XScriptInterpreter(object):
         if relation:
             pass
         else:
-            raise TypeError('Assertion')
+            if self.profile.get('assert-raise-err') == 'true':
+                raise TypeError('Assertion')
+            else:
+                print('xscript: %d: warning: Assertion' % self.now)
 
     def call(self, path, *args):
         # call can call function
@@ -186,14 +189,6 @@ class XScriptInterpreter(object):
             else:
                 raise TypeError('%s is a const variable.' % name)
 
-    def exit(self, code='0'):
-	# raise exit code and exit
-        if self.profile.get('show-run-time') == 'true':
-            print('xscript: info: program runs %fs' % (time.time() - self.starttime))
-        if self.profile.get('show-exit-num') == 'true':
-            print('xscript: info: program raise exit code:', self.replacevar(code))
-        sys.exit(self.replacevar(code))
-
     def end_flag(self, flag):
 	# end is a flag
         if len(self.block) == 0:
@@ -222,6 +217,14 @@ class XScriptInterpreter(object):
             return os.environ[name]
         except:
             return None
+
+    def exit(self, code='0'):
+	# raise exit code and exit
+        if self.profile.get('show-run-time') == 'true':
+            print('xscript: info: program runs %fs' % (time.time() - self.starttime))
+        if self.profile.get('show-exit-num') == 'true':
+            print('xscript: info: program raise exit code:', self.replacevar(code))
+        sys.exit(self.replacevar(code))
 
     def for_flag(self, name, fromnum, tonum, stepnum=None):
 	# for is a loop flag
@@ -350,7 +353,7 @@ class XScriptInterpreter(object):
             return input(prompt)
         except:
             print()
-            raise TypeError('User stopped')
+            raise TypeError('User interrupt')
 
     def has(self, path):
         # has tests the path whether in lib or not
@@ -500,7 +503,10 @@ class XScriptInterpreter(object):
             self.profile.close()
             self.profile = self.profile.kv
         except:
-            print("xscript: No profile '$HOME/.xscriptrc' found")
+            if sys.platform.startswith('win'):
+                print("xscript: warning: No profile '%HOME%\.xscriptrc' found")
+            else:
+                print("xscript: warning: No profile '~/.xscriptrc' found")
             self.profile = {}
 
     def run(self):

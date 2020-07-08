@@ -1,5 +1,6 @@
 # xscript profile
 
+assert-raise-err: true
 debug: true
 show-detail-err: true
 show-exit-num: false

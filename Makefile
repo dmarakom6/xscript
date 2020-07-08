@@ -21,13 +21,11 @@ demo: Makefile $(SOURCE)
 
 deploy: Makefile LICENSE README.md setup.py docs/ examples/ $(SOURCE)
 	@echo [Start deploying...]
-	@echo [Adding changes...]
-	@git add .
 	@echo [Committing changes...]
-	@git commit -m `date +%Y-%m-%d`
+	@git commit -am `date +%Y-%m-%d`
 	@sleep 1s
 	@echo [Pushing changes...]
-	@git push -u origin master
+	@git push
 	@echo [Deploying successfully]
 
 deploy-docs: Makefile docs/ docs/mkdocs.yml docs/docs
