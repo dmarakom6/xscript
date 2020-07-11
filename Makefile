@@ -4,13 +4,15 @@
 SOURCE := xscript xscriptcore.py xscriptlib/
 
 help: Makefile
-	@echo "Help for xscript 0.5 Makefile\n"
+	@echo "Help for xscript 0.5 Makefile"
+	@echo ""
 	@echo "demo            run xscript demo"
 	@echo "deploy          commit source and push"
 	@echo "deploy-docs     commit docs and push"
 	@echo "docs            show xscript docs"
 	@echo "help            show this help"
 	@echo "install         install xscript"
+	@echo "install-plugin  install plugin"
 	@echo "restore-profile copy profile to HOME directory"
 	@echo "upgrade         upgrade xscript from Github and install"
 
@@ -46,6 +48,10 @@ install: Makefile setup.py
 	@-cp xscript /usr/bin/xscript
 	@-rm -rf build/
 	@echo [Installing completely]
+
+install-plugin: Makefile plugin/ plugin/ftdetect/xscript.vim plugin/syntax/xscript.vim
+	@-cp plugin/ftdetect/xscript.vim ~/.vim/ftdetect/xscript.vim
+	@-cp plugin/syntax/xscript.vim ~/.vim/syntax/xscript.vim
 
 restore-profile: Makefile .xscriptrc
 	@cp .xscriptrc $(HOME)/.xscriptrc

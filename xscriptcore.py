@@ -411,6 +411,38 @@ class XScriptInterpreter(object):
                 self.var[name] <<= value
             else:
                 raise TypeError('Unsupported operate: %s' % symbol)
+        elif name.find('.') != -1:
+            path = name.split('.')
+            if path[0] not in self.var:
+                raise TypeError("Name '%s' is not defined" % path[0])
+            else:
+                obj = self.var[path[0]]
+                for item in path[1:]:
+                    if hasattr(obj, item):
+                        obj = getattr(obj, item)
+                    else:
+                        raise TypeError("No attribute '%s'" % item)
+                else:
+                    value = self.replacevar(value)
+                    if symbol == '=':
+                        obj = value
+                    elif symbol == '+=':
+                        obj += value
+                    elif symbol == '-=':
+                        obj -= value
+                    elif symbol == '*=':
+                        obj *= value
+                    elif symbol == '/=':
+                        obj /= value
+                    elif symbol == '**=':
+                        obj **= value
+                    elif symbol == '>>=':
+                        obj >>= value
+                    elif symbol == '<<=':
+                        obj <<= value
+                    else:
+                        raise TypeError('Unsupported operate: %s' % symbol)
+
         else:
             raise TypeError("Invalid name: '%s'"% name)
 
