@@ -22,7 +22,7 @@ xscript 是用 python 编写的一个非常小巧的编程语言, 它的核心(`
 请参阅[使用debug](learn/use-debug.md).
 
 ## 它有多快?
-经过多次对比: python 比 xscript 快了一秒左右(`script/circle.xs`和基本上相同的python代码)
+经过多次对比: python 比 xscript 快了一秒左右(`script/circle.xs`和基本上相同的 python 代码)
 
 ## 学习, 改进 xscript
 xscript是一门开源编程语言, 它现在还处于开发阶段, 希望你能帮助改进xscript.

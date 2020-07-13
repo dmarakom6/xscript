@@ -5,4 +5,4 @@ xscript 始终在不断的完善, 改进. 在这过程中一定会有BUG发生.
 
 但也有一些 BUG 我力所不及, 希望你能帮助我解决BUG, 这对大家都有好处.
 
-找到了一个 BUG, [报告BUG](https://github.com/jason-bowen-zheng/xscript/issues).
+找到了一个 BUG, [报告 BUG](https://github.com/jason-bowen-zheng/xscript/issues).
