@@ -36,7 +36,7 @@ deploy-docs: Makefile docs/ docs/mkdocs.yml docs/docs
 	@cd docs/; mkdocs gh-deploy --message `date +%Y-%m-%d`
 	@echo [Deploying successfully]
 
-docs: Makefile docs/ docs/mkdocs.yml docs/docs/
+docs: Makefile docs/
 	@echo [Running mkdocs...]
 	@cd docs/; mkdocs serve
 	@echo [Done]
