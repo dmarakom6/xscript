@@ -9,7 +9,7 @@ import re
 try:
     import readline
 except:
-    print("xscript: warning: No 'readline'")
+    print("xscript: init: warning: No 'readline' modules")
 import shlex
 import string
 import sys
@@ -356,7 +356,7 @@ class XScriptInterpreter(object):
             raise TypeError('User interrupt')
 
     def has(self, path):
-        # has tests the path whether in lib or not
+        # has tests the path whether in module or not
         path = path.split('.')
         obj = self.var[path[0]]
         for item in path[1:]:
@@ -389,29 +389,30 @@ class XScriptInterpreter(object):
 
     def let(self, name, symbol, value):
         # let is just a assignment statement, it support 8 operators
-        if self.testname(name):
+        if self.testname(name) and name.find('.') == -1:
             if name not in self.var and symbol != '=':
                 raise TypeError("Undefined name cannot use '%s'" % symbol)
-            value = self.replacevar(value)
-            if symbol == '=':
-                self.var[name] = value
-            elif symbol == '+=':
-                self.var[name] += value
-            elif symbol == '-=':
-                self.var[name] -= value
-            elif symbol == '*=':
-                self.var[name] *= value
-            elif symbol == '/=':
-                self.var[name] /= value
-            elif symbol == '**=':
-                self.var[name] **= value
-            elif symbol == '>>=':
-                self.var[name] >>= value
-            elif symbol == '<<=':
-                self.var[name] <<= value
             else:
-                raise TypeError('Unsupported operate: %s' % symbol)
-        elif name.find('.') != -1:
+                value = self.replacevar(value)
+                if symbol == '=':
+                    self.var[name] = value
+                elif symbol == '+=':
+                    self.var[name] += value
+                elif symbol == '-=':
+                    self.var[name] -= value
+                elif symbol == '*=':
+                    self.var[name] *= value
+                elif symbol == '/=':
+                    self.var[name] /= value
+                elif symbol == '**=':
+                    self.var[name] **= value
+                elif symbol == '>>=':
+                    self.var[name] >>= value
+                elif symbol == '<<=':
+                    self.var[name] <<= value
+                else:
+                    raise TypeError('Unsupported operate: %s' % symbol)
+        elif self.testname(name) and name.find('.') != -1:
             path = name.split('.')
             if path[0] not in self.var:
                 raise TypeError("Name '%s' is not defined" % path[0])
@@ -473,8 +474,6 @@ class XScriptInterpreter(object):
                 return self.gets(*exp[1:])
             elif exp[0] == 'has':
                 return self.has(*exp[1:])
-            elif exp[0][:8] == 'xscript.':
-                return self.xscript(*exp)
             else:
                 raise TypeError('Unknow replace function command : %s' % exp[0])
 
