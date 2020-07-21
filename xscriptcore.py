@@ -221,122 +221,114 @@ class XScriptInterpreter(object):
         sys.exit(self.replacevar(code))
 
     def for_flag(self, name, fromnum, tonum, stepnum=None):
-        if name[0] not in string.ascii_letters + string.digits + '_':
-            raise TypeError('Invalid name: %s' % name)
+        if not self.testname(name):
+            raise TypeError("Invalid name :'%s'" % name)
         else:
-            for char in name[1:]:
-                if char not in string.ascii_letters + '_':
-                    raise TypeError('Invalid name: %s' % name)
-            else:
-                nextvar = None
-                if name not in self.itervar:
-                    if stepnum == None:
-                        fromnum = int(self.replacevar(fromnum))
-                        tonum = int(self.replacevar(tonum))
-                        stepnum = 1
-                    else:
-                        fromnum = int(self.replacevar(fromnum))
-                        tonum = int(self.replacevar(tonum))
-                        stepnum = int(self.replacevar(stepnum))
-                    self.itervar[name] = iter(range(fromnum, tonum, stepnum))
-                    nextvar = next(self.itervar[name], None)
-                    if nextvar != None:
-                        self.block.append('for')
-                        self.var[name] = nextvar
-                    else:
-                        del self.itervar[name]
-                        infor = 0
-                        for line in self.program[self.now - 1:]:
-                            self.now += 1
-                            line = line.lstrip()
-                            if line.startswith('for '):
-                                infor += 1
-                            if line == 'end for':
-                                if infor == 0:
-                                    return
-                                else:
-                                    infor -= 1
-                            else:
-                                pass
-                        else:
-                            raise TypeError('Loop without end')
+            nextvar = None
+            if name not in self.itervar:
+                if stepnum == None:
+                    fromnum = int(self.replacevar(fromnum))
+                    tonum = int(self.replacevar(tonum))
+                    stepnum = 1
                 else:
-                    nextvar = next(self.itervar[name], None)
-                    if nextvar != None:
-                        self.block.append('for')
-                        self.var[name] = nextvar
-                    else:
-                        del self.itervar[name]
-                        infor = 0
-                        for line in self.program[self.now - 1:]:
-                            self.now += 1
-                            line = line.lstrip()
-                            if line.startswith('for '):
-                                infor += 1
-                            elif line == 'end for':
-                                if infor == 0:
-                                    return
-                                else:
-                                    infor -= 1
+                    fromnum = int(self.replacevar(fromnum))
+                    tonum = int(self.replacevar(tonum))
+                    stepnum = int(self.replacevar(stepnum))
+                self.itervar[name] = iter(range(fromnum, tonum, stepnum))
+                nextvar = next(self.itervar[name], None)
+                if nextvar != None:
+                    self.block.append('for')
+                    self.var[name] = nextvar
+                else:
+                    del self.itervar[name]
+                    infor = 0
+                    for line in self.program[self.now - 1:]:
+                        self.now += 1
+                        line = line.lstrip()
+                        if line.startswith('for '):
+                            infor += 1
+                        if line == 'end for':
+                            if infor == 0:
+                                return
                             else:
-                                pass
+                                infor -= 1
                         else:
-                            raise TypeError('Loop without end')
+                            pass
+                    else:
+                        raise TypeError('Loop without end')
+            else:
+                nextvar = next(self.itervar[name], None)
+                if nextvar != None:
+                    self.block.append('for')
+                    self.var[name] = nextvar
+                else:
+                    del self.itervar[name]
+                    infor = 0
+                    for line in self.program[self.now - 1:]:
+                        self.now += 1
+                        line = line.lstrip()
+                        if line.startswith('for '):
+                            infor += 1
+                        elif line == 'end for':
+                            if infor == 0:
+                                return
+                            else:
+                                infor -= 1
+                        else:
+                            pass
+                    else:
+                        raise TypeError('Loop without end')
 
     def foreach_flag(self, name, iterator):
-        if name[0] not in string.ascii_letters + string.digits + '_':
-            raise TypeError('Invalid name: %s' % name)
+        if not self.testname(name):
+            raise TypeError("Invalid name: '%s'" % name)
         else:
-            for char in name[1:]:
-                if char not in string.ascii_letters + '_':
-                    raise TypeError('Invalid name: %s' % name)
-            else:
-                nextvar = None
-                if name not in self.itervar:
-                    self.itervar[name] = iter(self.replacevar(iterator))
-                    nextvar = next(self.itervar[name])
-                    if nextvar != None:
-                        self.block.append('foreach')
-                        self.var[name] = nextvar
-                    else:
-                        del self.itervar[name]
-                        inforeach = 0
-                        for line in self.program[self.now - 1:]:
-                            self.now += 1
-                            line = line.lstrip()
-                            if linestartswith('foreach '):
-                                inforeach += 1
-                            elif line == 'end foreach':
-                                if inforeach == 0:
-                                    return
-                                else:
-                                    inforeach -= 1
-                            else:
-                                pass
-                        else:
-                            raise TypeError('Loop without end')
+            nextvar = None
+            if name not in self.itervar:
+                self.itervar[name] = iter(self.replacevar(iterator))
+                nextvar = next(self.itervar[name])
+                if nextvar != None:
+                    self.block.append('foreach')
+                    self.var[name] = nextvar
                 else:
-                    nextvar = next(self.itervar[name], None)
-                    if nextvar != None:
-                        self.block.append('foreach')
-                        self.var[name] = nextvar
-                    else:
-                        del self.itervar[name]
-                        inforeach = 0
-                        for line in self.program[self.now - 1:]:
-                            self.now += 1
-                            line = line.lstrip()
-                            if linestartswith('foreach '):
-                                inforeach += 1
-                            elif line == 'end foreach':
-                                if inforeach == 0:
-                                    return
-                                else:
-                                    inforeach -= 1
+                    del self.itervar[name]
+                    inforeach = 0
+                    for line in self.program[self.now - 1:]:
+                        self.now += 1
+                        line = line.lstrip()
+                        if linestartswith('foreach '):
+                            inforeach += 1
+                        elif line == 'end foreach':
+                            if inforeach == 0:
+                                return
                             else:
-                                pass
+                                inforeach -= 1
                         else:
-                            raise TypeError('Loop without end')
+                            pass
+                    else:
+                        raise TypeError('Loop without end')
+            else:
+                nextvar = next(self.itervar[name], None)
+                if nextvar != None:
+                    self.block.append('foreach')
+                    self.var[name] = nextvar
+                else:
+                    del self.itervar[name]
+                    inforeach = 0
+                    for line in self.program[self.now - 1:]:
+                        self.now += 1
+                        line = line.lstrip()
+                        if linestartswith('foreach '):
+                            inforeach += 1
+                        elif line == 'end foreach':
+                            if inforeach == 0:
+                                return
+                            else:
+                                inforeach -= 1
+                        else:
+                            pass
+                    else:
+                        raise TypeError('Loop without end')
 
     def get(self, path):
         if path.find('.') != -1:
@@ -348,7 +340,7 @@ class XScriptInterpreter(object):
                 if hasattr(obj, item):
                     obj = getattr(obj, item)
                 else:
-                    raise TypeError('No attribute: %s' % item)
+                    raise TypeError("No attribute: '%s'" % item)
             else:
                 return obj
 
@@ -389,7 +381,7 @@ class XScriptInterpreter(object):
                 if hasattr(obj, item):
                     obj = getattr(obj, item)
                 else:
-                    raise TypeError('No attribute: %s' % item)
+                    raise TypeError("No attribute: '%s'" % item)
             else:
                 if self.testname(path[-1]):
                     self.var[path[-1]] = obj
