@@ -15,16 +15,15 @@ import string
 import sys
 import textwrap
 import time
+import xscriptutils as utils
 
 
 class XScriptInterpreter(object):
-    # xscript interpreter core
     def __init__(self, string='', var={}, argv=[]):
         # see restart
         self.restart(string, var, argv)
 
     def addr(self, name):
-        # return the address of vaiable
         try:
             return id(self.var[name])
         except:
@@ -41,29 +40,30 @@ class XScriptInterpreter(object):
                 print('xscript: %d: warning: Assertion' % self.now)
 
     def call(self, path, *args):
-        # call can call function
-        arg =[]
-        for item in args:
-            arg.append(self.replacevar(item))
-        path = path.split('.')
-        obj = self.var[path[0]]
-        for item in path[1:]:
-            if hasattr(obj, item):
-                obj = getattr(obj, item)
-            else:
-                raise TypeError("No attribute '%s'" % item)
+        if self.isfunction(path):
+            pass
         else:
-            if callable(obj):
-                # function and method
-                return obj(*arg)
-            else:
-                if len(args) != 0:
-                    raise TypeError("'%s' is not callable" % '.'.join(path))
+            arg =[]
+            for item in args:
+                arg.append(self.replacevar(item))
+            path = path.split('.')
+            obj = self.var[path[0]]
+            for item in path[1:]:
+                if hasattr(obj, item):
+                    obj = getattr(obj, item)
                 else:
-                    return obj
+                    raise TypeError("No attribute '%s'" % item)
+            else:
+                if callable(obj):
+                    # function and method
+                    return obj(*arg)
+                else:
+                    if len(args) != 0:
+                        raise TypeError("'%s' is not callable" % '.'.join(path))
+                    else:
+                        return obj
 
     def color(self, action, *args):
-        # xscript uses colorama to control color and style
         if action == 'init':
             arg = {}
             for item in args:
@@ -104,7 +104,6 @@ class XScriptInterpreter(object):
             raise TypeError("No subcommand '%s'" % action)
 
     def debug(self):
-        # the debug system
         if self.profile.get('debug') != 'true':
             return
         else:
@@ -155,10 +154,9 @@ class XScriptInterpreter(object):
                     print('xscript: end debug')
 
     def compare(self, left, symbol, right):
-        # compare compares var
         left = self.replacevar(left)
         right = self.replacevar(right)
-        if symbol == '=':
+        if symbol == '==':
             return (left == right)
         elif symbol == '!=':
             return (left != right)
@@ -182,7 +180,6 @@ class XScriptInterpreter(object):
             raise TypeError('Unsupported operate: %s' % symbol)
 
     def delete(self, *names):
-	# delete the names in self.var
         for name in names:
             if name not in self.const:
                 del self.var[name]
@@ -190,7 +187,6 @@ class XScriptInterpreter(object):
                 raise TypeError('%s is a const variable.' % name)
 
     def end_flag(self, flag):
-	# end is a flag
         if len(self.block) == 0:
             raise TypeError('Flag not find: %s' % flag)
         elif self.block[-1] == flag:
@@ -212,14 +208,12 @@ class XScriptInterpreter(object):
             raise TypeError('Flag not find: %s' % flag)
 
     def environ(self, name):
-        # get the OS environ name
         try:
             return os.environ[name]
         except:
             return None
 
     def exit(self, code='0'):
-	# raise exit code and exit
         if self.profile.get('show-run-time') == 'true':
             print('xscript: info: program runs %fs' % (time.time() - self.starttime))
         if self.profile.get('show-exit-num') == 'true':
@@ -227,8 +221,6 @@ class XScriptInterpreter(object):
         sys.exit(self.replacevar(code))
 
     def for_flag(self, name, fromnum, tonum, stepnum=None):
-	# for is a loop flag
-	# it use built-in function iter() to start a loop
         if name[0] not in string.ascii_letters + string.digits + '_':
             raise TypeError('Invalid name: %s' % name)
         else:
@@ -292,7 +284,6 @@ class XScriptInterpreter(object):
                             raise TypeError('Loop without end')
 
     def foreach_flag(self, name, iterator):
-	# foreach is a loop flag like for
         if name[0] not in string.ascii_letters + string.digits + '_':
             raise TypeError('Invalid name: %s' % name)
         else:
@@ -347,8 +338,21 @@ class XScriptInterpreter(object):
                         else:
                             raise TypeError('Loop without end')
 
+    def get(self, path):
+        if path.find('.') != -1:
+            return self.var[path]
+        else:
+            path = path.split('.')
+            obj = self.var[path[0]]
+            for item in path[1:]:
+                if hasattr(obj, item):
+                    obj = getattr(obj, item)
+                else:
+                    raise TypeError('No attribute: %s' % item)
+            else:
+                return obj
+
     def gets(self, prompt='?'):
-	# gets is a user input function
         try:
             return input(prompt)
         except:
@@ -356,16 +360,21 @@ class XScriptInterpreter(object):
             raise TypeError('User interrupt')
 
     def has(self, path):
-        # has tests the path whether in module or not
-        path = path.split('.')
-        obj = self.var[path[0]]
-        for item in path[1:]:
-            if hasattr(obj, item):
-                obj = getattr(obj, item)
+        if path.find('.') != -1:
+            if path in self.var:
+                return True
             else:
                 return False
         else:
-            return True
+            path = path.split('.')
+            obj = self.var[path[0]]
+            for item in path[1:]:
+                if hasattr(obj, item):
+                    obj = getattr(obj, item)
+                else:
+                    return False
+            else:
+                return True
 
     def import_(self, name):
         if self.testname(name):
@@ -387,8 +396,10 @@ class XScriptInterpreter(object):
                 else:
                     raise TypeError("Invalid name: '%s'" % path[-1])
 
+    def isfunction(self, name):
+        return False
+
     def let(self, name, symbol, value):
-        # let is just a assignment statement, it support 8 operators
         if self.testname(name) and name.find('.') == -1:
             if name not in self.var and symbol != '=':
                 raise TypeError("Undefined name cannot use '%s'" % symbol)
@@ -448,7 +459,6 @@ class XScriptInterpreter(object):
             raise TypeError("Invalid name: '%s'"% name)
 
     def puts(self, *args):
-	# puts is a user output function
         for item in args:
             if (item := self.replacevar(item)) != None:
                 print(item, end=' ')
@@ -458,7 +468,6 @@ class XScriptInterpreter(object):
             print()
 
     def replacefunction(self, s):
-        # you can call functions in pairs of '[' and  ']'
         split = shlex.split(s)[1:]
         exp = [shlex.split(s)[0]]
         for item in split:
@@ -478,29 +487,28 @@ class XScriptInterpreter(object):
                 raise TypeError('Unknow replace function command : %s' % exp[0])
 
     def replacevar(self, value):
-	# it just replace name of variable to its value
         if value[0] == '[' and value[-1] == ']':
             return self.replacefunction(value[1:-1])
         elif value[0] == '&':
-            if value[1:] in self.var:
-                return self.var[value[1:]]
+            if self.has(value[1:]):
+                return self.get(value[1:])
             else:
                 return None
         elif value[0] == '$':
-            if value[1:] in self.var:
-                return str(self.var[value[1:]])
+            if self.has(value[1:]):
+                return str(self.get(value[1:]))
             elif re.match(r'^(\+|-)?[0-9]*$', value[1:]) or re.match(r'^(\+|-)?[0-9]*\.[0-9]*$', value[1:]):
                 return value[1:]
             else:
                 return str()
         elif value[0] == '#':
             try:
-                return int(self.var[value[1:]])
+                return int(self.get(value[1:]))
             except:
                 return int()
         elif value[0] == '.':
             try:
-                return float(self.var[value[1:]])
+                return float(self.get(value[1:]))
             except:
                 return float()
         else:
@@ -512,7 +520,6 @@ class XScriptInterpreter(object):
                 return value
 
     def restart(self, program, var={}, argv=[]):
-        # it just set some global variable like const variables
         self.program = program
         self.var = var
         self.now = 0
@@ -521,7 +528,7 @@ class XScriptInterpreter(object):
         self.var['true'] = True
         self.var['false'] = False
         self.var['null'] = None
-        self.var['argv']= argv
+        self.var['arg'] = None 
         self.var['interpreter'] = self
         self.var['x'] = __import__('xscriptlib')
         self.var['platform'] = sys.platform
@@ -541,7 +548,6 @@ class XScriptInterpreter(object):
             self.profile = {}
 
     def run(self):
-        # run run all code
         if self.profile.get('show-run-time') == 'true':
             self.starttime = time.time()
         else:
@@ -603,7 +609,6 @@ class XScriptInterpreter(object):
                 self.now += 1
 
     def testname(self, name):
-        # testname defines what name you can use
         if name[0] not in string.ascii_letters + '_':
             return False
         else:
@@ -617,7 +622,6 @@ class XScriptInterpreter(object):
                     return True
 
     def while_flag(self, left, symbol, right):
-        # while is a loop flag
         relation = self.compare(left, symbol, right)
         if relation:
             self.block.append('while')
