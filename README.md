@@ -3,7 +3,7 @@
 > English | [简体中文](./README-zh_cn.md)
 
 # xscript v0.5
-xscript is a tiny programming language written in python. Its core(`xscriptcore.py`) is very small.
+xscript is a tiny programming language written in python3. Its core(`xscriptcore.py`) is very small.
 
 `xIDE` is a xscript development toolkit
 
@@ -23,9 +23,9 @@ pip install -U colorama mkdocs prettytable
 sudo make install
 ```
 
-3. Test xscript:
+3. See xscript demo:
 ```shell
-make test
+make demo
 ```
 
 4. Upgrade xscript:

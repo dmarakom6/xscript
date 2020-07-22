@@ -242,12 +242,12 @@ class XScriptInterpreter(object):
                 else:
                     del self.itervar[name]
                     infor = 0
-                    for line in self.program[self.now - 1:]:
+                    for line in self.program[self.now + 1:]:
                         self.now += 1
                         line = line.lstrip()
                         if line.startswith('for '):
                             infor += 1
-                        if line == 'end for':
+                        if line == self.strwithlinesep('end for'):
                             if infor == 0:
                                 return
                             else:
@@ -264,12 +264,12 @@ class XScriptInterpreter(object):
                 else:
                     del self.itervar[name]
                     infor = 0
-                    for line in self.program[self.now - 1:]:
+                    for line in self.program[self.now + 1:]:
                         self.now += 1
                         line = line.lstrip()
                         if line.startswith('for '):
                             infor += 1
-                        elif line == 'end for':
+                        elif line in self.strwithlinesep('end for'):
                             if infor == 0:
                                 return
                             else:
@@ -296,9 +296,9 @@ class XScriptInterpreter(object):
                     for line in self.program[self.now - 1:]:
                         self.now += 1
                         line = line.lstrip()
-                        if linestartswith('foreach '):
+                        if line.startswith('foreach '):
                             inforeach += 1
-                        elif line == 'end foreach':
+                        elif line in self.strwithlinesep('end foreach'):
                             if inforeach == 0:
                                 return
                             else:
@@ -318,9 +318,9 @@ class XScriptInterpreter(object):
                     for line in self.program[self.now - 1:]:
                         self.now += 1
                         line = line.lstrip()
-                        if linestartswith('foreach '):
+                        if line.startswith('foreach '):
                             inforeach += 1
-                        elif line == 'end foreach':
+                        elif line in self.strwithlinesep('end foreach'):
                             if inforeach == 0:
                                 return
                             else:
@@ -489,7 +489,7 @@ class XScriptInterpreter(object):
         elif value[0] == '$':
             if self.has(value[1:]):
                 return str(self.get(value[1:]))
-            elif re.match(r'^(\+|-)?[0-9]*$', value[1:]) or re.match(r'^(\+|-)?[0-9]*\.[0-9]*$', value[1:]):
+            elif re.match(r'^(\+|-)?[0-9]+$', value[1:]) or re.match(r'^(\+|-)?[0-9]*\.[0-9]+$', value[1:]):
                 return value[1:]
             else:
                 return str()
@@ -504,9 +504,9 @@ class XScriptInterpreter(object):
             except:
                 return float()
         else:
-            if re.match(r'^(\+|-)?[0-9]*$', value):
+            if re.match(r'^(\+|-)?[0-9]+$', value):
                 return int(value)
-            elif re.match(r'^(\+|-)?[0-9]*\.[0-9]*', value):
+            elif re.match(r'^(\+|-)?[0-9]+\.[0-9]*', value):
                 return float(value)
             else:
                 return value
@@ -600,6 +600,9 @@ class XScriptInterpreter(object):
             else:
                 self.now += 1
 
+    def strwithlinesep(self, s):
+        return [s, s + '\n', s + '\r', s + '\r\n']
+
     def testname(self, name):
         if name[0] not in string.ascii_letters + '_':
             return False
@@ -624,7 +627,7 @@ class XScriptInterpreter(object):
                 line = line.lstrip()
                 if line.startswith('while '):
                     inwhile += 1
-                elif line == 'end while':
+                elif line in self.strwithlinesep('end while'):
                     inwhile -= 1
                 else:
                     pass
