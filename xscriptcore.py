@@ -110,7 +110,7 @@ class XScriptInterpreter(object):
             try:
                 print('start debug'.center(os.get_terminal_size()[0], '='))
             except:
-                print('xscript: start debug')
+                print('xscript: %d: info: start debug' % self.now)
             cmd = ''
             while cmd != 'exit':
                 cmd = self.gets('debug> ')
@@ -151,12 +151,12 @@ class XScriptInterpreter(object):
                 try:
                     print('end debug'.center(os.get_terminal_size()[0], '='))
                 except:
-                    print('xscript: end debug')
+                    print('xscript: %d: info: end debug' % self.now)
 
     def compare(self, left, symbol, right):
         left = self.replacevar(left)
         right = self.replacevar(right)
-        if symbol == '==':
+        if symbol == '=':
             return (left == right)
         elif symbol == '!=':
             return (left != right)
@@ -181,10 +181,10 @@ class XScriptInterpreter(object):
 
     def delete(self, *names):
         for name in names:
-            if name not in self.const:
+            if self.testname(name) and (name in self.var):
                 del self.var[name]
             else:
-                raise TypeError('%s is a const variable.' % name)
+                raise TypeError("Cannot delete variable: '%s'." % name)
 
     def end_flag(self, flag):
         if len(self.block) == 0:
@@ -192,7 +192,7 @@ class XScriptInterpreter(object):
         elif self.block[-1] == flag:
             inblock = 0
             for line in self.program[self.now::-1]:
-                line = line.lstrip()
+                line = line.strip()
                 if line == 'end ' + flag:
                     inblock += 1
                 if line.startswith(flag + ' '):
@@ -244,10 +244,10 @@ class XScriptInterpreter(object):
                     infor = 0
                     for line in self.program[self.now + 1:]:
                         self.now += 1
-                        line = line.lstrip()
+                        line = line.strip()
                         if line.startswith('for '):
                             infor += 1
-                        if line == self.strwithlinesep('end for'):
+                        if line == 'end for':
                             if infor == 0:
                                 return
                             else:
@@ -266,10 +266,10 @@ class XScriptInterpreter(object):
                     infor = 0
                     for line in self.program[self.now + 1:]:
                         self.now += 1
-                        line = line.lstrip()
+                        line = line.strip()
                         if line.startswith('for '):
                             infor += 1
-                        elif line in self.strwithlinesep('end for'):
+                        elif line == 'end for':
                             if infor == 0:
                                 return
                             else:
@@ -295,10 +295,10 @@ class XScriptInterpreter(object):
                     inforeach = 0
                     for line in self.program[self.now - 1:]:
                         self.now += 1
-                        line = line.lstrip()
+                        line = line.strip()
                         if line.startswith('foreach '):
                             inforeach += 1
-                        elif line in self.strwithlinesep('end foreach'):
+                        elif line == 'end foreach':
                             if inforeach == 0:
                                 return
                             else:
@@ -317,10 +317,10 @@ class XScriptInterpreter(object):
                     inforeach = 0
                     for line in self.program[self.now - 1:]:
                         self.now += 1
-                        line = line.lstrip()
+                        line = line.strip()
                         if line.startswith('foreach '):
                             inforeach += 1
-                        elif line in self.strwithlinesep('end foreach'):
+                        elif line == 'end foreach':
                             if inforeach == 0:
                                 return
                             else:
@@ -546,7 +546,7 @@ class XScriptInterpreter(object):
             pass
         while True:
             if self.now + 1 <= len(self.program):
-                line = self.program[self.now].lstrip()
+                line = self.program[self.now].strip()
             else:
                 self.exit()
                 break
@@ -600,9 +600,6 @@ class XScriptInterpreter(object):
             else:
                 self.now += 1
 
-    def strwithlinesep(self, s):
-        return [s, s + '\n', s + '\r', s + '\r\n']
-
     def testname(self, name):
         if name[0] not in string.ascii_letters + '_':
             return False
@@ -624,10 +621,10 @@ class XScriptInterpreter(object):
             inwhile = 0
             for line in self.program[self.now - 1:]:
                 self.now += 1
-                line = line.lstrip()
+                line = line.strip()
                 if line.startswith('while '):
                     inwhile += 1
-                elif line in self.strwithlinesep('end while'):
+                elif line == 'end while':
                     inwhile -= 1
                 else:
                     pass

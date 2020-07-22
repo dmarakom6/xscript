@@ -10,5 +10,5 @@ for i 0 360
     call turtle.left 1
 end for
 call turtle.end_fill
-gets :
+gets
 exit 0
