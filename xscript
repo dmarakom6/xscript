@@ -25,13 +25,16 @@ def main():
         print('Usage  : xscript <file> [args...]')
         sys.exit(1)
     elif path.isdir(sys.argv[1]):
-        print('xscript: Is a directory: %s' % sys.argv[1])
+        print("xscript: Is a directory: '%s'" % sys.argv[1])
         sys.exit(1)
     elif not path.isfile(sys.argv[1]):
-        print('xscript: No such file or directory: %s' % sys.argv[1])
+        print("xscript: No such file or directory: '%s'" % sys.argv[1])
         sys.exit(1)
     else:
-        source = open(sys.argv[1], 'r+').readlines()
+        try:
+            source = open(sys.argv[1], 'r+').readlines()
+        except PermissionError:
+            print("xscript: Permission denied: '%s'" % sys.argv[1])
         interpreter = core.XScriptInterpreter(source, argv=sys.argv[1:])
         interpreter.run()
 
