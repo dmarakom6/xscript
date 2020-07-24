@@ -329,10 +329,10 @@ class XScriptInterpreter(object):
     def function(self, name, *args):
         if self.testname(name):
             pass
-        for line in self.program[self.now - 1]:
-            self.now += 1
-            if line == 'end function':
-                return
+            for line in self.program[self.now - 1]:
+                self.now += 1
+                if line == 'end function':
+                    return
         else:
             raise TypeError("Invalid name: '%s'" % name)
 
