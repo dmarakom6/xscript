@@ -244,7 +244,6 @@ class XScriptInterpreter(object):
                     infor = 0
                     for line in self.program[self.now + 1:]:
                         self.now += 1
-                        line = line.strip()
                         if line.startswith('for '):
                             infor += 1
                         if line == 'end for':
@@ -266,7 +265,6 @@ class XScriptInterpreter(object):
                     infor = 0
                     for line in self.program[self.now + 1:]:
                         self.now += 1
-                        line = line.strip()
                         if line.startswith('for '):
                             infor += 1
                         elif line == 'end for':
@@ -295,7 +293,6 @@ class XScriptInterpreter(object):
                     inforeach = 0
                     for line in self.program[self.now - 1:]:
                         self.now += 1
-                        line = line.strip()
                         if line.startswith('foreach '):
                             inforeach += 1
                         elif line == 'end foreach':
@@ -317,7 +314,6 @@ class XScriptInterpreter(object):
                     inforeach = 0
                     for line in self.program[self.now - 1:]:
                         self.now += 1
-                        line = line.strip()
                         if line.startswith('foreach '):
                             inforeach += 1
                         elif line == 'end foreach':
@@ -329,6 +325,16 @@ class XScriptInterpreter(object):
                             pass
                     else:
                         raise TypeError('Loop without end')
+
+    def function(self, name, *args):
+        if self.testname(name):
+            pass
+        for line in self.program[self.now - 1]:
+            self.now += 1
+            if line == 'end function':
+                return
+        else:
+            raise TypeError("Invalid name: '%s'" % name)
 
     def get(self, path):
         if path.find('.') != -1:
@@ -574,6 +580,8 @@ class XScriptInterpreter(object):
                     self.for_flag(*lines[1:])
                 elif lines[0] == 'foreach':
                     self.foreach_flag(*lines[1:])
+                elif lines[0] == 'function':
+                    self.function(*lines[1:])
                 elif lines[0] == 'gets':
                     self.gets(*lines[1:])
                 elif lines[0] == 'import':
@@ -621,7 +629,6 @@ class XScriptInterpreter(object):
             inwhile = 0
             for line in self.program[self.now - 1:]:
                 self.now += 1
-                line = line.strip()
                 if line.startswith('while '):
                     inwhile += 1
                 elif line == 'end while':
