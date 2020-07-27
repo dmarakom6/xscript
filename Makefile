@@ -31,7 +31,7 @@ deploy: Makefile LICENSE README.md setup.py docs/ examples/ $(SOURCE)
 	@git push
 	@echo [Deploying successfully]
 
-deploy-docs: Makefile docs/ docs/mkdocs.yml docs/docs
+deploy-docs: Makefile docs/ docs/mkdocs.yml
 	@echo [Start deploying...]
 	@cd docs/; mkdocs gh-deploy --message `date +%Y-%m-%d`
 	@echo [Deploying successfully]
