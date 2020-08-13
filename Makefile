@@ -42,6 +42,9 @@ docs: Makefile docs/
 	@echo [Done]
 
 install: Makefile setup.py
+	@echo -n [Installing dependencies... 
+	@pip install -r requirements.txt >> /dev/null
+	@echo Done]
 	@echo -n [Installing xscript... 
 	@python3 setup.py install >> /dev/null
 	@echo Done]

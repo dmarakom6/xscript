@@ -16,10 +16,9 @@ git clone https://github.com/jason-bowen-zheng/xscript
 cd xscript
 ```
 
-2. Download xscript and dependencies:
+2. Install xscript and dependencies:
 ```shell
 # May need root privileges
-pip install -U colorama mkdocs prettytable
 sudo make install
 ```
 

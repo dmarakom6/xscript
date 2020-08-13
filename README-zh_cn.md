@@ -18,7 +18,6 @@ cd xscript/
 2. 然后请先安装xscript和它的依赖项:
 ```shell
 # 或许需要使用root权限
-pip install -U colorama mkdocs prettytable
 sudo make install
 ```
 

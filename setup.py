@@ -1,4 +1,4 @@
-# xscript/setup.py
+#!/usr/bin/python3
 
 from distutils.core import setup
 from time import strftime
