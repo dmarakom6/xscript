@@ -10,7 +10,8 @@ class ReadKVFile():
     def read(self):
         self.kv = {}
         for line in self.kvfile.readlines():
-            if line == '\n':
+            line = line.strip()
+            if line == '':
                 pass
             elif line[0] == '#':
                 pass
