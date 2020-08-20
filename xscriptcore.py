@@ -43,7 +43,7 @@ class XScriptInterpreter(object):
         if self.isfunction(path):
             pass
         else:
-            arg =[]
+            arg = []
             for item in args:
                 arg.append(self.replacevar(item))
             path = path.split('.')
