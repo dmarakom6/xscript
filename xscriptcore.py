@@ -2,7 +2,6 @@
 # xscript core
 
 import colorama as color
-import kvfile
 import os
 from prettytable import PrettyTable
 import re
@@ -534,7 +533,7 @@ class XScriptInterpreter(object):
         self.var['version'] = '0.5'
         self.const = ['true', 'false', 'null', 'argv', 'interpreter', 'x', 'platform', 'version']
         try:
-            self.profile = kvfile.ReadKVFile(os.environ.get('HOME') + os.sep + '.xscriptrc')
+            self.profile = KVFile(os.environ.get('HOME') + os.sep + '.xscriptrc')
             self.profile.read()
             self.profile.close()
             self.profile = self.profile.kv
@@ -638,3 +637,25 @@ class XScriptInterpreter(object):
             else:
                 raise TypeError('Loop without end')
 
+
+class KVFile():
+
+    def __init__(self, name):
+        self.kvfile = open(name, 'r+')
+        self.kv = {}
+
+    def read(self):
+        self.kv = {}
+        for line in self.kvfile.readlines():
+            line = line.strip()
+            if line == '':
+                pass
+            elif line[0] == '#':
+                pass
+            else:
+                k, v = line.split(':', 1)
+                k, v = k.strip(), v.strip()
+                self.kv[k] = v
+
+    def close(self):
+        self.kvfile.close()

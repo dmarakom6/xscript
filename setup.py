@@ -11,5 +11,5 @@ setup(
     description='xscript programming language',
     url='https://github.com/jason-bowen-zheng/xscript',
     packages=['xscriptlib'],
-    py_modules=['xscriptcore', 'xscriptutils', 'kvfile'],
+    py_modules=['xscriptcore'],
 )
