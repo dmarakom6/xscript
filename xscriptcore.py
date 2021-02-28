@@ -14,7 +14,6 @@ import string
 import sys
 import textwrap
 import time
-import xscriptutils as utils
 
 
 class XScriptInterpreter(object):
@@ -375,11 +374,17 @@ class XScriptInterpreter(object):
 
     def import_(self, name):
         if self.testname(name):
-            self.var[name] = __import__(name)
+            try:
+                self.var[name] = __import__(name)
+            except:
+                    raise TypeError("No module named: '%s'" % name)
         elif name.find('.') != -1:
             path = name.split('.')
             if path[0] not in self.var:
-                obj = __import__(path[0])
+                try:
+                    obj = __import__(path[0])
+                except:
+                    raise TypeError("No module named: '%s'" % path[0])
             else:
                 obj = self.var[path[0]]
             for item in path[1:]:
